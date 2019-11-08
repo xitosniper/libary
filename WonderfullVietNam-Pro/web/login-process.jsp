@@ -1,11 +1,21 @@
-<%-- 
-    Document   : login-process
-    Created on : Nov 7, 2019, 9:53:52 AM
-    Author     : haumqce130436@fpt.edu.vn
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%--<%@page import="Model.UserModel"%>--%>
 <%
+
+//    String username = "";
+//    String password = "";
+//    if (request.getParameter("username") != null) {
+//        username = request.getParameter("username");
+//    }
+//    if (request.getParameter("password") != null) {
+//        password = request.getParameter("password");
+//    }
+//    UserModel um = new UserModel();
+//    if (username.equals(password) && username != null && password != null) {
+//        session.setAttribute("username", username);
+//    } else if (session.getAttribute("username") == null) {
+//        session.removeAttribute("username");
+//    }
     String username = request.getParameter("username");
     String password = request.getParameter("password");
 

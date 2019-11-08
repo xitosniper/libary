@@ -1,0 +1,22 @@
+SMAP
+index_jsp.java
+JSP
+*S JSP
+*F
++ 0 index.jsp
+dashboard/index.jsp
++ 1 home.html
+dashboard/../home/home.html
++ 2 dashboard.html
+dashboard/dashboard.html
+*L
+1:50
+3,2:52
+4:54
+1#1,770:55
+5#0,4:825
+8:829
+1#2,452:830
+9#0,4:1282
+12,2:1286
+*E
