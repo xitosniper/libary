@@ -7,6 +7,8 @@
         <title>FatMan | Home Page</title>
     </head>
     <body>
+        
+        
         <%
             if (session.getAttribute("username") == null) {
         %>

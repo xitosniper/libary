@@ -25,13 +25,11 @@ public class PostModel {
     private ResultSet resultSet;
     private final Connection connection;
 
-    ConnectionLib con = new ConnectionLib();
-
     /**
      * Create PostModel constructor  to connect this application with database on mysql
      */
-    public PostModel() {
-        connection = con.getConnection();
+    public PostModel(Connection connection) {
+        this.connection = connection;
     }
 
     /**

@@ -41,25 +41,33 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\n");
-      out.write("\n");
+      out.write('\n');
+      out.write('\n');
+
+    int id = -1;
+    if (request.getParameter("id")!=null) {
+            id = Integer.parseInt(request.getParameter("id"));
+        }
+    
+
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-      out.write("        <title>JSP Page</title>\n");
+      out.write("        <title>FatMan | Home Page</title>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
+      out.write("        <input type=\"hidden\" name=\"id\" value=\"");
+      out.print(id);
+      out.write("\"/>\n");
       out.write("        ");
 
             if (session.getAttribute("username") == null) {
-
-
         
       out.write("\n");
       out.write("        ");
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "home.html", out, false);
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "home.jsp", out, false);
       out.write("\n");
       out.write("\n");
       out.write("        ");
@@ -67,7 +75,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
         
       out.write("\n");
       out.write("        ");
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "dashboard.html", out, false);
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "dashboard.jsp", out, false);
       out.write("\n");
       out.write("        ");
 }

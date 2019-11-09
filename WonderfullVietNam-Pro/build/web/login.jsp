@@ -4,6 +4,9 @@
     Author     : haumqce130436@fpt.edu.vn
 --%>
 
+<%@page import="DBLib.ConnectionLib"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="Model.UserModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

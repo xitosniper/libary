@@ -50,7 +50,6 @@ public final class login_002dprocess_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("\n");
       out.write('\n');
 
-    
     String username = request.getParameter("username");
     String password = request.getParameter("password");
     Connection con = ConnectionLib.getConnection();
@@ -58,9 +57,13 @@ public final class login_002dprocess_jsp extends org.apache.jasper.runtime.HttpJ
     if (um.checkAccount(username, password)) {
         session.setAttribute("username", username);
     } else {
-        session.removeAttribute(username);
+        session.removeAttribute("username");
     }
-//    response.sendRedirect("index.jsp");
+//    int id = -1;
+//    if (um.checkAccount(username, password)) {
+//        id = um.searchUserName(username);
+//    }
+    response.sendRedirect("index.jsp?username=" + username);
 
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
@@ -70,15 +73,6 @@ public final class login_002dprocess_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("        <title></title>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
-      out.write("        ");
-
-            if (um.checkAccount(username, password)) {
-      out.write("\n");
-      out.write("            <p>True</p>      \n");
-      out.write("                ");
-}
-        
-      out.write("\n");
       out.write("    </body>\n");
       out.write("</html>");
     } catch (Throwable t) {

@@ -2,18 +2,19 @@
 <%@page import="DBLib.ConnectionLib"%>
 <%@page import="Model.UserModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%--<%@page import="Model.UserModel"%>--%>
 <%
     String username = request.getParameter("username");
     String password = request.getParameter("password");
     Connection con = ConnectionLib.getConnection();
     UserModel um = new UserModel(con);
+    
     if (um.checkAccount(username, password)) {
         session.setAttribute("username", username);
     } else {
         session.removeAttribute("username");
     }
-    response.sendRedirect("index.jsp");
+
+    response.sendRedirect("index.jsp?username="+username);
 %>
 <!DOCTYPE html>
 <html>

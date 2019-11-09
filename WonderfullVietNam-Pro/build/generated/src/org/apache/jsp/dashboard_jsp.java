@@ -59,27 +59,30 @@ public final class dashboard_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
 
-    String username = request.getParameter("username");
-    String user_name = "null";
+    String username = "null";
     int role_id = -1;
+    int user_id = -1;
     String role_name = "null";
-    
+    if (request.getParameter("username") != null) {
+        username = request.getParameter("username");
+    }
     Connection con = ConnectionLib.getConnection();
     UserModel um = new UserModel(con);
     RoleModel rm = new RoleModel(con);
-
     
-
-    int user_id = um.searchUserName(username);
-
-    ArrayList<UserInfo> uis = um.GetUser();
+    ArrayList<UserInfo> uis = um.getUser();
     for (UserInfo elem : uis) {
-        if (elem.getUser_id() == user_id) {
-            user_name = elem.getUser_name();
-        }
+        if (username.equals(elem.getUser_username())) {
+            username = elem.getUser_name();
+            role_id = elem.getRole_id();
+        } 
     }
-
-
+    ArrayList<RoleInfo> ris = rm.getRole();
+    for (RoleInfo elem : ris) {
+            if (role_id == elem.getRole_id()) {
+                    role_name = elem.getRole_name();
+                }
+        }
 
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
@@ -153,9 +156,9 @@ public final class dashboard_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    </li>\n");
       out.write("                    <li class=\"nav-item dropdown ml-auto\"><a id=\"userInfo\" href=\"http://example.com\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" class=\"nav-link dropdown-toggle\"><img src=\"img/avatar-6.jpg\" alt=\"Jason Doe\" style=\"max-width: 2.5rem;\" class=\"img-fluid rounded-circle shadow\"></a>\n");
       out.write("                        <div aria-labelledby=\"userInfo\" class=\"dropdown-menu\"><a href=\"#\" class=\"dropdown-item\"><strong class=\"d-block text-uppercase headings-font-family\">");
-      out.print(user_name);
+      out.print(username);
       out.write("</strong><small>");
-      out.print(role_id);
+      out.print(role_name);
       out.write("</small></a>\n");
       out.write("                            <div class=\"dropdown-divider\"></div><a href=\"#\" class=\"dropdown-item\">Settings</a><a href=\"#\" class=\"dropdown-item\">Activity log</a>\n");
       out.write("                            <div class=\"dropdown-divider\"></div><a href=\"logout.jsp\" class=\"dropdown-item\">Logout</a>\n");

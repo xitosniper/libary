@@ -43,10 +43,10 @@ public class RoleModel {
      * @return
      * @throws SQLException 
      */
-    public ArrayList<RoleInfo> GetRole() throws SQLException {
+    public ArrayList<RoleInfo> getRole() throws SQLException {
         roleList = new ArrayList<>();
         statement = connection.createStatement();
-        String sqlStr = "SELECT * FROM user WHERE status = 1";
+        String sqlStr = "SELECT * FROM `role` WHERE status = 1";
         resultSet = statement.executeQuery(sqlStr);
         while(resultSet.next()) {
             roleList.add(new RoleInfo(resultSet.getInt("role_id"),resultSet.getString("role_name"),resultSet.getString("role_description"), resultSet.getInt("status")));

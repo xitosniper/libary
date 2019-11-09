@@ -51,10 +51,10 @@ public class UserModel {
      * @return
      * @throws SQLException
      */
-    public ArrayList<UserInfo> GetUser() throws SQLException {
+    public ArrayList<UserInfo> getUser() throws SQLException {
         userList = new ArrayList<>();
         statement = connection.createStatement();
-        String sqlStr = "SELECT * FROM user WHERE status = 1";
+        String sqlStr = "SELECT * FROM `user` WHERE status = 1";
         resultSet = statement.executeQuery(sqlStr);
         while (resultSet.next()) {
             userList.add(new UserInfo(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getInt("user_gender"), resultSet.getString("user_img"), resultSet.getString("user_phone"), resultSet.getString("user_address"), resultSet.getString("user_username"), resultSet.getString("user_password"), resultSet.getInt("status"), resultSet.getInt("role_id")));
@@ -141,7 +141,7 @@ public class UserModel {
      * @throws SQLException
      */
     public UserInfo searchUser(String username) throws SQLException {
-        userList = GetUser();
+        userList = getUser();
         for (UserInfo userInfo : userList) {
             if (userInfo.getUser_username().equals(username)) {
                 return userInfo;
@@ -155,14 +155,14 @@ public class UserModel {
      * @return
      * @throws SQLException 
      */
-    public int searchUserName(String username) throws SQLException {
-        ArrayList<UserInfo> userList = GetUser();
-        for (UserInfo userInfo : userList) {
-            if (userInfo.getUser_username().equals(username)) {
+    public int searchUse_idByUsername(String username) throws SQLException {
+        ArrayList<UserInfo> list = getUser();
+        for (UserInfo userInfo : list) {
+            if (username.equals(userInfo.getUser_username())) {
                 return userInfo.getUser_id();
             }
         }
-        return -1;        
+        return -1;     
     }
 
     /**
@@ -202,7 +202,7 @@ public class UserModel {
     }
     
     public boolean checkAccount(String username, String password) throws SQLException {
-        ArrayList<UserInfo> userList = GetUser();
+        ArrayList<UserInfo> userList = getUser();
         EncodeMD5 d5 = new EncodeMD5();
         for (UserInfo userInfo : userList) {
             if (username.equals(userInfo.getUser_username()) && d5.getMD5(password).equals(userInfo.getUser_password())) {

@@ -13,27 +13,31 @@
 <%@page import="Model.UserModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    String username = request.getParameter("username");
-    String user_name = "null";
     int role_id = -1;
-    String role_name = "null";
-    
+    int user_id = -1;
+    String user_name = "";
+    String username = "nullname";
+    String role_name = "nullrole";
+    if (request.getParameter("username")!=null) {
+            user_name = request.getParameter("username");
+        }
     Connection con = ConnectionLib.getConnection();
     UserModel um = new UserModel(con);
     RoleModel rm = new RoleModel(con);
-
     
-
-    int user_id = um.searchUserName(username);
-
-    ArrayList<UserInfo> uis = um.GetUser();
+    ArrayList<UserInfo> uis = um.getUser();
     for (UserInfo elem : uis) {
-        if (elem.getUser_id() == user_id) {
-            user_name = elem.getUser_name();
+        if (user_name.equals(elem.getUser_username())) {
+            username = elem.getUser_name();
+            role_id = elem.getRole_id();
         }
     }
-
-
+    ArrayList<RoleInfo> ris = rm.getRole();
+    for (RoleInfo elem : ris) {
+        if (role_id == elem.getRole_id()) {
+            role_name = elem.getRole_name();
+        }
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -105,7 +109,7 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown ml-auto"><a id="userInfo" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img src="img/avatar-6.jpg" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow"></a>
-                        <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family"><%=user_name%></strong><small><%=role_id%></small></a>
+                        <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family"><%=username%></strong><small><%=role_name%></small></a>
                             <div class="dropdown-divider"></div><a href="#" class="dropdown-item">Settings</a><a href="#" class="dropdown-item">Activity log</a>
                             <div class="dropdown-divider"></div><a href="logout.jsp" class="dropdown-item">Logout</a>
                         </div>
