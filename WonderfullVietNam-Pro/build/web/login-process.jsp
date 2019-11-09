@@ -1,28 +1,17 @@
+<%@page import="java.sql.Connection"%>
+<%@page import="DBLib.ConnectionLib"%>
+<%@page import="Model.UserModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%--<%@page import="Model.UserModel"%>--%>
 <%
-
-//    String username = "";
-//    String password = "";
-//    if (request.getParameter("username") != null) {
-//        username = request.getParameter("username");
-//    }
-//    if (request.getParameter("password") != null) {
-//        password = request.getParameter("password");
-//    }
-//    UserModel um = new UserModel();
-//    if (username.equals(password) && username != null && password != null) {
-//        session.setAttribute("username", username);
-//    } else if (session.getAttribute("username") == null) {
-//        session.removeAttribute("username");
-//    }
     String username = request.getParameter("username");
     String password = request.getParameter("password");
-
-    if (username.equals(password)) {
+    Connection con = ConnectionLib.getConnection();
+    UserModel um = new UserModel(con);
+    if (um.checkAccount(username, password)) {
         session.setAttribute("username", username);
-    } else if (session.getAttribute("username") == null) {
-        session.removeAttribute(username);
+    } else {
+        session.removeAttribute("username");
     }
     response.sendRedirect("index.jsp");
 %>
@@ -33,6 +22,5 @@
         <title></title>
     </head>
     <body>
-
     </body>
 </html>

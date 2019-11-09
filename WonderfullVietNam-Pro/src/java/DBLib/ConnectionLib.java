@@ -5,37 +5,31 @@
  */
 package DBLib;
 
-import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author haumqce130436@fpt.edu.vn
  */
 public class ConnectionLib {
-    static Statement statement;
-    static PreparedStatement preparedStatement;
-    Connection connection;
-    ResultSet resultSet;
-    /**
-     * Method connection
-     * @return 
-     */
-    public Connection getConnection(){
+    static com.mysql.jdbc.Connection con = null;
+    public static com.mysql.jdbc.Connection getConnection() {
         try {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wonderful_vietnam","root","");
-                return connection;
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Connection false!","Error", JOptionPane.ERROR_MESSAGE);
-//                Logger.getLogger(DEMO.class.getName()).log(Level.SEVERE, null, e);
-                return null;
-            } 
+            String url = "jdbc:mysql://localhost:3306/wonderful_vietnam";
+            String username = "root";
+            String password = "";
+
+            
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+            con = (com.mysql.jdbc.Connection) DriverManager.getConnection(url, username, password);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionLib.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            return con;
+        }
     }
 }

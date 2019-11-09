@@ -21,7 +21,6 @@ import wonderful_vietnam.RoleInfo;
  */
 public class RoleModel {
     //call Class
-    ConnectionLib cl = new ConnectionLib();
     private Connection connection;
     private Statement statement;
     private PreparedStatement preparedStatement;
@@ -33,8 +32,8 @@ public class RoleModel {
     /**
      * Constructor of user model
      */
-    public RoleModel() throws SQLException {
-        connection = cl.getConnection();
+    public RoleModel(Connection con) throws SQLException {
+        this.connection = con;
         preparedStatement = null;
         statement = null;
         roleList = new ArrayList<>();

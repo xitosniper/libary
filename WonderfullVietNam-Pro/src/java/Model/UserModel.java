@@ -6,6 +6,7 @@
 package Model;
 
 import DBLib.ConnectionLib;
+import Info.UserInfo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +15,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import wonderful_vietnam.UserInfo;
 
 /**
  *
@@ -23,12 +23,10 @@ import wonderful_vietnam.UserInfo;
 public class UserModel {
 
     //call Class
-    ConnectionLib cl = new ConnectionLib();
     private Connection connection;
     private Statement statement;
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
-    private EncodeMD5 d5;
 
 //    ConnectionLib con = new ConnectionLib();
     //crete userinfo list
@@ -40,8 +38,8 @@ public class UserModel {
      *
      * @throws java.sql.SQLException
      */
-    public UserModel() throws SQLException {
-        connection = cl.getConnection();
+    public UserModel(Connection con) throws SQLException {
+        this.connection = con;
         preparedStatement = null;
         statement = null;
         userList = new ArrayList<>();
@@ -71,7 +69,7 @@ public class UserModel {
      * @throws SQLException
      */
     public void insertUser(UserInfo userInfo) throws SQLException {
-
+        
         String sqlStr = "INSERT INTO `user`(`user_name`, `user_gender`, `user_img`, `user_phone`, `user_address`, `user_username`, `user_password`, `status`, `role_id`) VALUES (?,?,?,?,?,?,?,?,?)";
         preparedStatement = connection.prepareStatement(sqlStr, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, userInfo.getUser_name());
@@ -138,17 +136,34 @@ public class UserModel {
     /**
      * search user
      *
-     * @param user_name
+     * @param username
+     * @return
      * @throws SQLException
      */
-    public UserInfo searchUser(String user_name) throws SQLException {
+    public UserInfo searchUser(String username) throws SQLException {
         userList = GetUser();
         for (UserInfo userInfo : userList) {
-            if (userInfo.getUser_name() == user_name) {
+            if (userInfo.getUser_username().equals(username)) {
                 return userInfo;
             }
         }
         return null;
+    }
+    /**
+     * Method searchUserName by name and return id of user
+     * @param username
+     * @return
+     * @throws SQLException 
+     */
+    public int searchUserName(String username) throws SQLException {
+        ArrayList<UserInfo> userList = GetUser();
+        for (UserInfo userInfo : userList) {
+            if (userInfo.getUser_username().equals(username)) {
+                return userInfo.getUser_id();
+            }
+        }
+        return -1;
+        
     }
 
     /**
@@ -186,15 +201,15 @@ public class UserModel {
         //return result
         return checkPWD;
     }
-
-    public boolean checkAccount(String username, String password) throws SQLException{
+    
+    public boolean checkAccount(String username, String password) throws SQLException {
         ArrayList<UserInfo> userList = GetUser();
+        EncodeMD5 d5 = new EncodeMD5();
         for (UserInfo userInfo : userList) {
-            if (username.equals(userInfo.getUser_username())&& EncodeMD5.getMD5(password).equals(userInfo.getUser_password())) {
+            if (username.equals(userInfo.getUser_username()) && d5.getMD5(password).equals(userInfo.getUser_password())) {
                 return true;
             }
         }
         return false;
     }
 }
-       
