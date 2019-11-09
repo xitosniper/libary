@@ -162,8 +162,7 @@ public class UserModel {
                 return userInfo.getUser_id();
             }
         }
-        return -1;
-        
+        return -1;        
     }
 
     /**
