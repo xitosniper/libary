@@ -63,11 +63,11 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item active"><a class="nav-link" href="contact.jsp">Contact</a></li>
-                                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
+<!--                                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>-->
                             </ul>
                             <ul class="nav navbar-nav ml-auto">
                                 <li class="nav-item">
-                                    <a href="#" class="primary-btn">Book a trip</a>
+                                    <a href="login.jsp" class="primary-btn">Login</a>
                                 </li>
                                 <li class="nav-item">
                                     <button type="button" class="search nav-link">
@@ -111,7 +111,7 @@
         <!--================Contact Area =================-->
         <section class="contact_area section_gap">
             <div class="container">
-                <div id="mapBox" class="mapBox" data-lat="40.701083" data-lon="-74.1522848" data-zoom="13" data-info="PO Box CT16122 Collins Street West, Victoria 8007, Australia."
+                <div id="mapBox" class="mapBox" data-lat="40.701083" data-lon="-74.1522848" data-zoom="13" data-info="2PHX+FV Cần Thơ, Ninh Kiều, Cần Thơ, Việt Nam."
                      data-mlat="40.701083" data-mlon="-74.1522848">
                 </div>
                 <div class="row">
@@ -119,17 +119,17 @@
                         <div class="contact_info">
                             <div class="info_item">
                                 <i class="lnr lnr-home"></i>
-                                <h6>California, United States</h6>
-                                <p>Santa monica bullevard</p>
+                                <h6>Cần Thơ, Việt Nam</h6>
+                                <p>FPT University</p>
                             </div>
                             <div class="info_item">
                                 <i class="lnr lnr-phone-handset"></i>
-                                <h6><a href="#">00 (440) 9865 562</a></h6>
+                                <h6><a href="#">0378316480</a></h6>
                                 <p>Mon to Fri 9am to 6 pm</p>
                             </div>
                             <div class="info_item">
                                 <i class="lnr lnr-envelope"></i>
-                                <h6><a href="#">support@colorlib.com</a></h6>
+                                <h6><a href="#">haumqce130436@gmail.fpt.vn</a></h6>
                                 <p>Send us your query anytime!</p>
                             </div>
                         </div>

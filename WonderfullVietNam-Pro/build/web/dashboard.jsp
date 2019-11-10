@@ -134,7 +134,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="sidebar-list-item"><a href="login.jsp" class="sidebar-link text-muted"><i class="o-exit-1 mr-3 text-gray"></i><span>Login</span></a></li>
+                    <li class="sidebar-list-item"><a href="login.jsp" class="sidebar-link text-muted"><i class="o-exit-1 mr-3 text-gray"></i><span>Logout</span></a></li>
                 </ul>
 <!--                <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">EXTRAS</div>
                 <ul class="sidebar-menu list-unstyled">

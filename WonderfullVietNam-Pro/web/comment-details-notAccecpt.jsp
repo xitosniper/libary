@@ -9,11 +9,15 @@
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    String user_username="";
+    if (request.getParameter("username") != null) {
+        user_username = request.getParameter("username");
+    }
     Connection con = ConnectionLib.getConnection();
-    CommentModel cm = new CommentModel();
+    CommentModel cm = new CommentModel(con);
     int id = Integer.parseInt(request.getParameter("id"));
     cm.acceptComment(id);
-    response.sendRedirect("comment.jsp?");
+    response.sendRedirect("comment.jsp?username="+user_username);
 %>
 <!DOCTYPE html>
 <html>

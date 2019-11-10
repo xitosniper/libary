@@ -64,11 +64,11 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
-                                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
+<!--                                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>-->
                             </ul>
                             <ul class="nav navbar-nav ml-auto">
                                 <li class="nav-item">
-                                    <a href="#" class="primary-btn">Book a trip</a>
+                                    <a href="login.jsp" class="primary-btn">Login</a>
                                 </li>
                                 <li class="nav-item">
                                     <button type="button" class="search nav-link">

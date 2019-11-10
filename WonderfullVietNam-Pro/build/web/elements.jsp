@@ -72,7 +72,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
-                                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
+<!--                                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>-->
                             </ul>
                             <ul class="nav navbar-nav ml-auto">
                                 <div class="social-icons d-flex align-items-center">

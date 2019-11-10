@@ -223,7 +223,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="sidebar-list-item"><a href="login.jsp" class="sidebar-link text-muted"><i class="o-exit-1 mr-3 text-gray"></i><span>Login</span></a></li>
+                    <li class="sidebar-list-item"><a href="login.jsp" class="sidebar-link text-muted"><i class="o-exit-1 mr-3 text-gray"></i><span>Logout</span></a></li>
                 </ul>
                 <!--                <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">EXTRAS</div>
                                 <ul class="sidebar-menu list-unstyled">
@@ -243,7 +243,7 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <h6 class="text-uppercase mb-0">User Table</h6> 
-                                        <ins><p class="mb-0 text-uppercase text-right "><a href="" class="external">More Details</a></p></ins>
+                                        <ins><p class="mb-0 text-uppercase text-right "><a href="user-list.jsp?username=<%=user_username%>" class="external">More Details</a></p></ins>
                                     </div>
                                     <div class="card-body">
                                         <table class="table card-text">
@@ -365,7 +365,7 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <h6 class="text-uppercase mb-0">Comment Table</h6>
-                                        <ins><p class="mb-0 text-uppercase text-right "><a href="comment-details.jsp" class="external">More Details</a></p></ins>
+                                        <ins><p class="mb-0 text-uppercase text-right "><a href="comment-details.jsp?username=<%=user_username%>" class="external">More Details</a></p></ins>
                                     </div>
                                     <div class="card-body">                           
                                         <table class="table table-striped table-hover card-text">

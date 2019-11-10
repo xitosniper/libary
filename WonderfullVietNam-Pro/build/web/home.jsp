@@ -16,9 +16,10 @@
     Connection con = ConnectionLib.getConnection();
     PlaceModel pm = new PlaceModel(con);
     ImageModel im = new ImageModel(con);
-    
+
     ArrayList<PlaceInfo> plist = pm.getPlace();
     ArrayList<ImageInfo> ilist = im.getListImage();
+    session.removeAttribute("warning");
 %>
 <!doctype html>
 <html lang="en">
@@ -38,6 +39,17 @@
         <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
         <!-- main css -->
         <link rel="stylesheet" href="css/style.css">
+        <style>
+            .size-img{
+                height: 64px;
+                width: 64px;
+            }
+            .team_img {
+                height: 230px;
+                width: 210px;
+            }
+
+        </style>
     </head>
 
     <body>
@@ -137,16 +149,16 @@
                 </div>
                 <div class="row">
                     <!-- single-feature -->
-                    <%                        
-                            for (int i = 0; i < 3; i++) {
-                                String place_name = plist.get(i).getPlace_name();
-                                String place_description = pm.printWord(plist.get(i).getPlace_description(), 100);
-                                String image_name = "";
-                                for (int j = 0; j < ilist.size(); j++) {
-                                    if (plist.get(i).getPlace_id() == ilist.get(j).getPlace_id()) {
-                                        image_name = ilist.get(j).getImage_name();
-                                    }
+                    <%
+                        for (int i = 0; i < 3; i++) {
+                            String place_name = plist.get(i).getPlace_name();
+                            String place_description = pm.printWord(plist.get(i).getPlace_description(), 100);
+                            String image_name = "";
+                            for (int j = 0; j < ilist.size(); j++) {
+                                if (plist.get(i).getPlace_id() == ilist.get(j).getPlace_id()) {
+                                    image_name = ilist.get(j).getImage_name();
                                 }
+                            }
                     %>
                     <div class="col-lg-4 col-md-6">
                         <div class="single-feature">
@@ -166,13 +178,13 @@
                     %>
                     <div row>
                         <form class="col-md-12 contact_form" action="#" method="post" id="contactForm" novalidate="novalidate">
-                    <div class=" text-right">
-                        <button type="submit" value="submit" class="primary-btn text-uppercase">Xem thêm</button>
-                    </div>
-                </form>
+                            <div class=" text-right">
+                                <button type="submit" value="submit" class="primary-btn text-uppercase">Xem thêm</button>
+                            </div>
+                        </form>
                     </div>
 
-            </div>
+                </div>
         </section>
         <!--================ End Feature Area =================-->
 
@@ -337,7 +349,7 @@
                     <div class="col-lg-12">
                         <div class="main_title">
                             <p>We’re Offering these Team Members</p>
-                            <h1>Các Thành Viên Trong Team</h1>
+                            <h1>Fat Man Team Members</h1>
                             <span class="title-widget-bg"></span>
                         </div>
                     </div>
@@ -346,7 +358,7 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="team_item">
                             <div class="team_img">
-                                <img class="img-fluid w-100" src="img/team/team-1.jpg" alt="">
+                                <img class="img-fluid w-100" src="img/team/hau.jpg" alt="">
                                 <div class="hover">
                                     <h4>Mr. Hậu</h4>
                                     <p>Leader</p>
@@ -357,7 +369,7 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="team_item">
                             <div class="team_img">
-                                <img class="img-fluid w-100" src="img/team/team-2.jpg" alt="">
+                                <img class="img-fluid w-100" src="img/team/an.jpg" alt="">
                                 <div class="hover">
                                     <h4>Mr. An</h4>
                                     <p>Member</p>
@@ -368,7 +380,7 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="team_item">
                             <div class="team_img">
-                                <img class="img-fluid w-100" src="img/team/team-3.jpg" alt="">
+                                <img class="img-fluid w-100" src="img/team/tu.jpg" alt="">
                                 <div class="hover">
                                     <h4>Mr. Tú</h4>
                                     <p>Member</p>
@@ -379,7 +391,7 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="team_item">
                             <div class="team_img">
-                                <img class="img-fluid w-100" src="img/team/team-4.jpg" alt="">
+                                <img class="img-fluid w-100" src="img/team/dinh.jpg" alt="">
                                 <div class="hover">
                                     <h4>Mr. Đỉnh</h4>
                                     <p>Member</p>
@@ -443,9 +455,8 @@
                             </ul>
                             <div class="wow fadeIn" data-wow-duration="1s">
                                 <p>
-                                    As conscious traveling Paup ers we must always be oncerned about our dear <br>
-                                    Mother Earth. If you think about it, you travel across her faceand She is the host <br>
-                                    to your journey.
+                                    Admin - Leader's FatMan Group <br>
+                                    Student from FPT University <br>
                                 </p>
                             </div>
                         </div>
@@ -463,9 +474,8 @@
                             </ul>
                             <div class="wow fadeIn" data-wow-duration="1s">
                                 <p>
-                                    As conscious traveling Paup ers we must always be oncerned about our dear <br>
-                                    Mother Earth. If you think about it, you travel across her faceand She is the host <br>
-                                    to your journey.
+                                    Editor - Member's FatMan Group <br>
+                                    Student from FPT University <br>
                                 </p>
                             </div>
                         </div>
@@ -483,8 +493,8 @@
                             </ul>
                             <div class="wow fadeIn" data-wow-duration="1s">
                                 <p>
-                                    As conscious traveling Paup ers we must always be oncerned about our dear Mother Earth. If you think about it, you travel
-                                    across her face <br> and She is the host to your journey.
+                                    Writer - Member's FatMan Group <br>
+                                    Student from FPT University <br>
                                 </p>
                             </div>
                         </div>
@@ -502,9 +512,8 @@
                             </ul>
                             <div class="wow fadeIn" data-wow-duration="1s">
                                 <p>
-                                    As conscious traveling Paup ers we must always be oncerned about our dear <br>
-                                    Mother Earth. If you think about it, you travel across her faceand She is the host <br>
-                                    to your journey.
+                                    Guest - Member's FatMan Group <br>
+                                    Student from FPT University <br>
                                 </p>
                             </div>
                         </div>
@@ -513,25 +522,25 @@
                 <div class="owl-thumbs d-flex justify-content-center" data-slider-id="1">
                     <div class="owl-thumb-item">
                         <div>
-                            <img class="img-fluid rounded-circle" src="img/testimonial/t1.jpg" alt="">
+                            <img class="img-fluid rounded-circle size-img" src="img/team/hau.jpg" alt="">
                         </div>
                         <div class="overlay overlay-grad "></div>
                     </div>
                     <div class="owl-thumb-item">
                         <div>
-                            <img class="img-fluid rounded-circle" src="img/testimonial/t2.jpg" alt="">
+                            <img class="img-fluid rounded-circle size-img" src="img/team/an.jpg" alt="">
                         </div>
                         <div class="overlay overlay-grad"></div>
                     </div>
                     <div class="owl-thumb-item">
                         <div>
-                            <img class="img-fluid rounded-circle" src="img/testimonial/t3.jpg" alt="">
+                            <img class="img-fluid rounded-circle size-img" src="img/team/tu.jpg" alt="">
                         </div>
                         <div class="overlay overlay-grad"></div>
                     </div>
                     <div class="owl-thumb-item">
                         <div>
-                            <img class="img-fluid rounded-circle" src="img/testimonial/t4.jpg" alt="">
+                            <img class="img-fluid rounded-circle size-img" src="img/team/dinh.jpg" alt="">
                         </div>
                         <div class="overlay overlay-grad"></div>
                     </div>
@@ -661,7 +670,7 @@
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="single-footer-widget">
                                 <h5 class="footer_title">About Agency</h5>
-                                <p class="about-text">The world has become so fast paced that people don’t want to stand by reading a page of information, they would much rather look at a presentation and understand the message. It has come to a point where images and videos are used more to </p>
+                                <p class="about-text">The world has become so fast paced that people don’t want to stand by reading a page of information, they would much rather look at a presentation and understand the message. It has come to a point where images and videos are used more to.</p>
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-6 col-sm-6">
@@ -730,7 +739,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
                             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://www.facebook.com/hau.mai.796569" target="_blank">FatMan</a>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             </p>
                         </div>

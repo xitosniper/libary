@@ -24,6 +24,17 @@
         <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
         <!-- main css -->
         <link rel="stylesheet" href="css/style.css">
+        <style>
+            .size-img{
+                height: 64px;
+                width: 64px;
+            }
+            .team_img {
+                height: 230px;
+                width: 210px;
+            }
+
+        </style>
     </head>
 
     <body>
@@ -64,11 +75,11 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
-                                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
+<!--                                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>-->
                             </ul>
                             <ul class="nav navbar-nav ml-auto">
                                 <li class="nav-item">
-                                    <a href="#" class="primary-btn">Book a trip</a>
+                                    <a href="login.jsp" class="primary-btn">Login</a>
                                 </li>
                                 <li class="nav-item">
                                     <button type="button" class="search nav-link">
@@ -113,7 +124,7 @@
         <section class="section_gap about-area">
             <div class="container">
                 <div class="single-about row">
-                    <div class="col-lg-4 col-md-6 no-padding about-left">
+                    <div class="col-lg-6 col-md-4 no-padding about-left">
                         <div class="about-content">
                             <h1>
                                 We Believe <br>
@@ -121,16 +132,16 @@
                                 Lasts Long
                             </h1>
                             <p>
-                                inappropriate behavior is often laughed off as “boys will be boys,” women face higher 
+                                Inappropriate behavior is often laughed off as “boys will be boys,” women face higher 
                                 conduct standards especially in the workplace. That’s why it’s crucial that as women. 
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
                                 incididunt ut labore et dolore magna aliqua.
                             </p>
                         </div>
                     </div>
-                    <div class="col-lg-8 col-md-6 text-center no-padding about-right">
+                    <div class="col-lg-6 col-md-8 text-center no-padding about-right">
                         <div class="about-thumb">
-                            <img src="img/about-img.jpg" class="img-fluid info-img" alt="">
+                            <img src="img/vietnam.jpg" class="img-fluid info-img img-vietnam" alt="">
                         </div>
                     </div>
                 </div>
@@ -166,7 +177,7 @@
                     <div class="col-lg-12">
                         <div class="main_title">
                             <p>We’re Offering these Trip Packages</p>
-                            <h1>Intelligent Team Members</h1>
+                            <h1>Fat Man Team Members</h1>
                             <span class="title-widget-bg"></span>
                         </div>
                     </div>
@@ -175,10 +186,10 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="team_item">
                             <div class="team_img">
-                                <img class="img-fluid w-100" src="img/team/team-1.jpg" alt="">
+                                <img class="img-fluid w-100" src="img/team/hau.jpg" alt="">
                                 <div class="hover">
-                                    <h4>Randy Weaver</h4>
-                                    <p>Senior Barrister at law</p>
+                                    <h4>Mai Quốc Hậu</h4>
+                                    <p>Leader's FatMan Group</p>
                                 </div>
                             </div>
                         </div>
@@ -186,10 +197,10 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="team_item">
                             <div class="team_img">
-                                <img class="img-fluid w-100" src="img/team/team-2.jpg" alt="">
+                                <img class="img-fluid w-100" src="img/team/tu.jpg" alt="">
                                 <div class="hover">
-                                    <h4>Randy Weaver</h4>
-                                    <p>Senior Barrister at law</p>
+                                    <h4>Phạm Trương Anh Tú</h4>
+                                    <p>Member's FatMan Group</p>
                                 </div>
                             </div>
                         </div>
@@ -197,10 +208,10 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="team_item">
                             <div class="team_img">
-                                <img class="img-fluid w-100" src="img/team/team-3.jpg" alt="">
+                                <img class="img-fluid w-100" src="img/team/an.jpg" alt="">
                                 <div class="hover">
-                                    <h4>Randy Weaver</h4>
-                                    <p>Senior Barrister at law</p>
+                                    <h4>Trần Quốc An</h4>
+                                    <p>Member's FatMan Group</p>
                                 </div>
                             </div>
                         </div>
@@ -208,10 +219,10 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="team_item">
                             <div class="team_img">
-                                <img class="img-fluid w-100" src="img/team/team-4.jpg" alt="">
+                                <img class="img-fluid w-100" src="img/team/dinh.jpg" alt="">
                                 <div class="hover">
-                                    <h4>Randy Weaver</h4>
-                                    <p>Senior Barrister at law</p>
+                                    <h4>Phạm Hồng Đỉnh</h4>
+                                    <p>Member's FatMan Group</p>
                                 </div>
                             </div>
                         </div>
@@ -296,13 +307,13 @@
         <!--================ End Popular Places Area =================-->
 
         <!--================ Start Testimonials Area =================-->
-        <section class="testimonials-area section_gap_bottom">
+        <section class="testimonials-area section_gap">
             <div class="container">
                 <div class="testi-slider owl-carousel" data-slider-id="1">
                     <div class="item">
                         <div class="testi-item">
                             <img src="img/quote.png" alt="">
-                            <h4>Fanny Spencer</h4>
+                            <h4>Quốc Hậu</h4>
                             <ul class="list">
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
@@ -312,9 +323,8 @@
                             </ul>
                             <div class="wow fadeIn" data-wow-duration="1s">
                                 <p>
-                                    As conscious traveling Paup ers we must always be oncerned about our dear <br>
-                                    Mother Earth. If you think about it, you travel across her faceand She is the host <br>
-                                    to your journey.
+                                    Admin - Leader's FatMan Group <br>
+                                    Student from FPT University <br>
                                 </p>
                             </div>
                         </div>
@@ -322,7 +332,7 @@
                     <div class="item">
                         <div class="testi-item">
                             <img src="img/quote.png" alt="">
-                            <h4>Fanny Spencer</h4>
+                            <h4>Quốc An</h4>
                             <ul class="list">
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
@@ -332,9 +342,8 @@
                             </ul>
                             <div class="wow fadeIn" data-wow-duration="1s">
                                 <p>
-                                    As conscious traveling Paup ers we must always be oncerned about our dear <br>
-                                    Mother Earth. If you think about it, you travel across her faceand She is the host <br>
-                                    to your journey.
+                                    Editor - Member's FatMan Group <br>
+                                    Student from FPT University <br>
                                 </p>
                             </div>
                         </div>
@@ -342,7 +351,7 @@
                     <div class="item">
                         <div class="testi-item">
                             <img src="img/quote.png" alt="">
-                            <h4>Fanny Spencer</h4>
+                            <h4>Anh Tú</h4>
                             <ul class="list">
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
@@ -352,8 +361,8 @@
                             </ul>
                             <div class="wow fadeIn" data-wow-duration="1s">
                                 <p>
-                                    As conscious traveling Paup ers we must always be oncerned about our dear Mother Earth. If you think about it, you travel
-                                    across her face <br> and She is the host to your journey.
+                                    Writer - Member's FatMan Group <br>
+                                    Student from FPT University <br>
                                 </p>
                             </div>
                         </div>
@@ -361,7 +370,7 @@
                     <div class="item">
                         <div class="testi-item">
                             <img src="img/quote.png" alt="">
-                            <h4>Fanny Spencer</h4>
+                            <h4>Hồng Đỉnh</h4>
                             <ul class="list">
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
@@ -371,9 +380,8 @@
                             </ul>
                             <div class="wow fadeIn" data-wow-duration="1s">
                                 <p>
-                                    As conscious traveling Paup ers we must always be oncerned about our dear <br>
-                                    Mother Earth. If you think about it, you travel across her faceand She is the host <br>
-                                    to your journey.
+                                    Guest - Member's FatMan Group <br>
+                                    Student from FPT University <br>
                                 </p>
                             </div>
                         </div>
@@ -382,25 +390,25 @@
                 <div class="owl-thumbs d-flex justify-content-center" data-slider-id="1">
                     <div class="owl-thumb-item">
                         <div>
-                            <img class="img-fluid rounded-circle" src="img/testimonial/t1.jpg" alt="">
+                            <img class="img-fluid rounded-circle size-img" src="img/team/hau.jpg" alt="">
                         </div>
                         <div class="overlay overlay-grad "></div>
                     </div>
                     <div class="owl-thumb-item">
                         <div>
-                            <img class="img-fluid rounded-circle" src="img/testimonial/t2.jpg" alt="">
+                            <img class="img-fluid rounded-circle size-img" src="img/team/an.jpg" alt="">
                         </div>
                         <div class="overlay overlay-grad"></div>
                     </div>
                     <div class="owl-thumb-item">
                         <div>
-                            <img class="img-fluid rounded-circle" src="img/testimonial/t3.jpg" alt="">
+                            <img class="img-fluid rounded-circle size-img" src="img/team/tu.jpg" alt="">
                         </div>
                         <div class="overlay overlay-grad"></div>
                     </div>
                     <div class="owl-thumb-item">
                         <div>
-                            <img class="img-fluid rounded-circle" src="img/testimonial/t4.jpg" alt="">
+                            <img class="img-fluid rounded-circle size-img" src="img/team/dinh.jpg" alt="">
                         </div>
                         <div class="overlay overlay-grad"></div>
                     </div>

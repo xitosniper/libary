@@ -9,6 +9,7 @@
     <body>
         <%
             if (session.getAttribute("username") == null) {
+                
         %>
         <jsp:include page="home.jsp"></jsp:include>
 

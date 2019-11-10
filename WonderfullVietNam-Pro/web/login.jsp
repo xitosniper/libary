@@ -65,6 +65,7 @@
                                 <div class="form-group mb-4">
                                     <div class="custom-control custom-checkbox">
                                         <input id="customCheck1" type="checkbox"  class="custom-control-input">
+                                        <p style="color: red;"><%=warning%></p>
                                         <label for="customCheck1" class="custom-control-label">Remember Me</label>
                                     </div>
                                 </div>

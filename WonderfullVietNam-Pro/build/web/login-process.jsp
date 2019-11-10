@@ -10,11 +10,15 @@
     
     if (um.checkAccount(username, password)) {
         session.setAttribute("username", username);
+        session.removeAttribute("warning");
+        response.sendRedirect("index.jsp?username="+username);   
     } else {
+        session.setAttribute("warning", "Username or password is wrong!");
         session.removeAttribute("username");
+        response.sendRedirect("login.jsp");
     }
 
-    response.sendRedirect("index.jsp?username="+username);
+    
 %>
 <!DOCTYPE html>
 <html>

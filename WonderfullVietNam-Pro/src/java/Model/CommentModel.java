@@ -106,10 +106,10 @@ public class CommentModel {
      * @param commentInfo
      * @throws java.sql.SQLException
      */
-    public void deleteComment(CommentInfo commentInfo) throws SQLException {
+    public void deleteComment(int id) throws SQLException {
         String sql = "UPDATE `comment` SET `status`=0 WHERE `comment_id` = ?";
         preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, commentInfo.getComment_id());
+        preparedStatement.setInt(1, id);
 
         preparedStatement.executeUpdate();
     }
