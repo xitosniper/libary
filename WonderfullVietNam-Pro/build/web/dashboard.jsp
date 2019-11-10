@@ -6,7 +6,7 @@
 
 <%@page import="Info.UserInfo"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="wonderful_vietnam.RoleInfo"%>
+<%@page import="Info.RoleInfo"%>
 <%@page import="Model.RoleModel"%>
 <%@page import="DBLib.ConnectionLib"%>
 <%@page import="java.sql.Connection"%>
@@ -15,11 +15,12 @@
 <%
     int role_id = -1;
     int user_id = -1;
-    String user_name = "";
-    String username = "nullname";
-    String role_name = "nullrole";
+    String user_username = "";
+    String username = "";
+    String role_name = "";
+    String user_img ="";
     if (request.getParameter("username")!=null) {
-            user_name = request.getParameter("username");
+            user_username = request.getParameter("username");
         }
     Connection con = ConnectionLib.getConnection();
     UserModel um = new UserModel(con);
@@ -27,9 +28,10 @@
     
     ArrayList<UserInfo> uis = um.getUser();
     for (UserInfo elem : uis) {
-        if (user_name.equals(elem.getUser_username())) {
+        if (user_username.equals(elem.getUser_username())) {
             username = elem.getUser_name();
             role_id = elem.getRole_id();
+            user_img = elem.getUser_img();
         }
     }
     ArrayList<RoleInfo> ris = rm.getRole();
@@ -62,14 +64,11 @@
         <link rel="stylesheet" href="css/custom.css">
         <!-- Favicon-->
         <link rel="shortcut icon" href="img/favicon.png?3">
-        <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     </head>
     <body>
         <!-- navbar-->
         <header class="header">
-            <nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow"><a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a href="dashboard.jsp" class="navbar-brand font-weight-bold text-uppercase text-base">Fat Man Dashboard</a>
+            <nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow"><a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a href="dashboard.jsp?username=<%=user_username%>" class="navbar-brand font-weight-bold text-uppercase text-base">Fat Man Dashboard</a>
                 <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
                     <li class="nav-item">
                         <form id="searchForm" class="ml-auto d-none d-lg-block">
@@ -108,7 +107,7 @@
                             <div class="dropdown-divider"></div><a href="#" class="dropdown-item text-center"><small class="font-weight-bold headings-font-family text-uppercase">View all notifications</small></a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown ml-auto"><a id="userInfo" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img src="img/avatar-6.jpg" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow"></a>
+                    <li class="nav-item dropdown ml-auto"><a id="userInfo" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img src="img/<%=user_img%>" alt="" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow"></a>
                         <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family"><%=username%></strong><small><%=role_name%></small></a>
                             <div class="dropdown-divider"></div><a href="#" class="dropdown-item">Settings</a><a href="#" class="dropdown-item">Activity log</a>
                             <div class="dropdown-divider"></div><a href="logout.jsp" class="dropdown-item">Logout</a>
@@ -121,10 +120,10 @@
             <div id="sidebar" class="sidebar py-3">
                 <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MAIN</div>
                 <ul class="sidebar-menu list-unstyled">
-                    <li class="sidebar-list-item"><a href="dashboard.jsp" class="sidebar-link text-muted active"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
-                    <li class="sidebar-list-item"><a href="charts.jsp" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>Charts</span></a></li>
-                    <li class="sidebar-list-item"><a href="tables.jsp" class="sidebar-link text-muted"><i class="o-table-content-1 mr-3 text-gray"></i><span>Tables</span></a></li>
-                    <li class="sidebar-list-item"><a href="forms.jsp" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Forms</span></a></li>
+                    <li class="sidebar-list-item"><a href="dashboard.jsp?username=<%=user_username%>" class="sidebar-link text-muted active"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
+                    <li class="sidebar-list-item"><a href="charts.jsp?username=<%=user_username%>" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>Charts</span></a></li>
+                    <li class="sidebar-list-item"><a href="tables.jsp?username=<%=user_username%>" class="sidebar-link text-muted"><i class="o-table-content-1 mr-3 text-gray"></i><span>Tables</span></a></li>
+                    <li class="sidebar-list-item"><a href="forms.jsp?username=<%=user_username%>" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Forms</span></a></li>
                     <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Pages</span></a>
                         <div id="pages" class="collapse">
                             <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
@@ -137,13 +136,13 @@
                     </li>
                     <li class="sidebar-list-item"><a href="login.jsp" class="sidebar-link text-muted"><i class="o-exit-1 mr-3 text-gray"></i><span>Login</span></a></li>
                 </ul>
-                <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">EXTRAS</div>
+<!--                <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">EXTRAS</div>
                 <ul class="sidebar-menu list-unstyled">
                     <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Demo</span></a></li>
                     <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>Demo</span></a></li>
                     <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Demo</span></a></li>
                     <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Demo</span></a></li>
-                </ul>
+                </ul>-->
             </div>
             <div class="page-holder w-100 d-flex flex-wrap">
                 <div class="container-fluid px-xl-5">
@@ -283,48 +282,9 @@
                             </div>
                         </div>
                     </section>
-                    <section class="py-5">
-                        <div class="row text-dark">
-                            <div class="col-lg-4 mb-4 mb-lg-0">
-                                <div class="card rounded credit-card bg-hover-gradient-violet">
-                                    <div class="content d-flex flex-column justify-content-between p-4">
-                                        <h1 class="mb-5"><i class="fab fa-cc-visa"></i></h1>
-                                        <div class="d-flex justify-content-between align-items-end pt-3">
-                                            <div class="text-uppercase">
-                                                <div class="font-weight-bold d-block">Card Number</div><small class="text-gray">1245 1478 1362 6985</small>
-                                            </div>
-                                            <h4 class="mb-0">$417.78</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 mb-4 mb-lg-0">
-                                <div class="card rounded credit-card bg-hover-gradient-blue">
-                                    <div class="content d-flex flex-column justify-content-between p-4">
-                                        <h1 class="mb-5"><i class="fab fa-cc-mastercard"></i></h1>
-                                        <div class="d-flex justify-content-between align-items-end pt-3">
-                                            <div class="text-uppercase">
-                                                <div class="font-weight-bold d-block">Card Number</div><small class="text-gray">1245 1478 1362 6985</small>
-                                            </div>
-                                            <h4 class="mb-0">$124.17</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 mb-4 mb-lg-0">
-                                <div class="card rounded credit-card bg-hover-gradient-green">
-                                    <div class="content d-flex flex-column justify-content-between p-4">
-                                        <h1 class="mb-5"><i class="fab fa-cc-discover"></i></h1>
-                                        <div class="d-flex justify-content-between align-items-end pt-3">
-                                            <div class="text-uppercase">
-                                                <div class="font-weight-bold d-block">Card Number</div><small class="text-gray">1245 1478 1362 6985</small>
-                                            </div>
-                                            <h4 class="mb-0">$568.00</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       <section class="py-5">
+                        
+                        
                     </section>
                     <section>
                         <div class="row">
@@ -421,46 +381,27 @@
                     </section>
                     <section class="py-5">
                         <div class="row">
+                            
+                            <%
+                                for (UserInfo ui : uis) {
+                                    for (RoleInfo ri : ris) {  
+                                        if (ui.getRole_id() == ri.getRole_id()) {
+                            %>
                             <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
                                     <div class="row">
-                                        <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left"><strong class="h5 mb-0">24<sup class="smaller text-gray font-weight-normal">Apr</sup></strong><img src="img/avatar-1.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
-                                            <h6 class="mb-0">Jason Maxwell</h6>
+                                        <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left"><strong class="h5 mb-0">24<sup class="smaller text-gray font-weight-normal">Apr</sup></strong><img src="img/<%=ui.getUser_img()%>" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
+                                            <h6 class="mb-0"><%=ui.getUser_name()%></h6>
                                         </div>
                                         <div class="col-lg-9 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-3 mt-2 mt-lg-0 text-dark exclode">User testing</div>
-                                            <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                                            <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-3 mt-2 mt-lg-0 text-dark exclode"><%=ri.getRole_name()%></div>
+                                            <p class="mb-0 mt-3 mt-lg-0"><%=ri.getRole_description()%></p>
                                         </div>
                                     </div></a></div>
-                            <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
-                                    <div class="row">
-                                        <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left"><strong class="h5 mb-0">24<sup class="smaller text-gray font-weight-normal">Nov</sup></strong><img src="img/avatar-2.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
-                                            <h6 class="mb-0">Sam Andy</h6>
-                                        </div>
-                                        <div class="col-lg-9 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-3 mt-2 mt-lg-0 text-dark exclode">Web Developer</div>
-                                            <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                                        </div>
-                                    </div></a></div>
-                            <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
-                                    <div class="row">
-                                        <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left"><strong class="h5 mb-0">17<sup class="smaller text-gray font-weight-normal">Aug</sup></strong><img src="img/avatar-3.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
-                                            <h6 class="mb-0">Margret Peter</h6>
-                                        </div>
-                                        <div class="col-lg-9 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-3 mt-2 mt-lg-0 text-dark exclode">Analysis Agent</div>
-                                            <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                                        </div>
-                                    </div></a></div>
-                            <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
-                                    <div class="row">
-                                        <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left"><strong class="h5 mb-0">15<sup class="smaller text-gray font-weight-normal">Sep</sup></strong><img src="img/avatar-4.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
-                                            <h6 class="mb-0">Jason Doe</h6>
-                                        </div>
-                                        <div class="col-lg-9 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-3 mt-2 mt-lg-0 text-dark exclode">User testing</div>
-                                            <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                                        </div>
-                                    </div></a></div>
+                            <%
+                                        }
+                                    }
+                                }
+                            %>
                         </div>
                     </section>
                 </div>
@@ -468,12 +409,11 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6 text-center text-md-left text-primary">
-                                <p class="mb-2 mb-md-0">Your company &copy; 2018-2020</p>
+                                <p class="mb-2 mb-md-0">Fat Man Group: 2019</p>
                             </div>
                             <div class="col-md-6 text-center text-md-right text-gray-400">
-                                <p class="mb-0">Design by <a href="https://bootstrapious.com/admin-templates" class="external text-gray-400">Bootstrapious</a></p>
-                                <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
-                            </div>
+                                <p class="mb-0">Design by <a href="https://www.facebook.com/hau.mai.796569" class="external text-gray-400">FatManGroup</a></p>
+                           </div>
                         </div>
                     </div>
                 </footer>

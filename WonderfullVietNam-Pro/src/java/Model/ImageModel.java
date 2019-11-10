@@ -22,6 +22,7 @@ public class ImageModel {
 
     private ArrayList<ImageInfo> ListImage;
     ConnectionLib cl = new ConnectionLib();
+
     /**
      * get ArrayList
      *
@@ -48,55 +49,48 @@ public class ImageModel {
      *
      * @throws SQLException
      */
-    public ImageModel() throws SQLException {
-        try {
-            conn = cl.getConnection();
-            st = conn.createStatement();
-            pst = null;
-            rs = null;
-            sqlStr = "";
-            ListImage = new ArrayList<>();
-            LoadImage();
-        } catch (SQLException e) {
-            throw e;
-        }
+    public ImageModel(Connection connection) throws SQLException {
+        this.conn = connection;
+        st = conn.createStatement();
+        pst = null;
+        rs = null;
+        sqlStr = "";
+        ListImage = new ArrayList<>();
+        LoadImage();
     }
 
     /**
      * load data from database
      */
-    public void LoadImage() {
-        try {
-            sqlStr = "SELECT * FROM " + tableName;
-            rs = st.executeQuery(sqlStr);
-            if (rs.isBeforeFirst()) {
-                ListImage.clear();
-                while (rs.next()) {
-                    ListImage.add(new ImageInfo(rs.getInt("Image_id"), rs.getString("Image_name"), rs.getInt("Status")));
-                }
-            }
-        } catch (SQLException e) {
+    public void LoadImage() throws SQLException {
+        sqlStr = "SELECT * FROM `image`";
+        rs = st.executeQuery(sqlStr);
+        while (rs.next()) {
+            ListImage.add(new ImageInfo(rs.getInt("image_id"), rs.getString("image_name"), rs.getInt("status"), rs.getInt("place_id")));
         }
+
     }
 
     /**
      * add to data to database
      *
-     * @param Image_id
-     * @param Image_time
-     * @param Status
+     * @param image_id
+     * @param image_name
+     * @param status
+     * @param place_id
      * @return
      * @throws SQLException
      */
-    public boolean addImage(int Image_id, String Image_time, int Status) throws SQLException {
+    public boolean addImage(int image_id, String image_name, int status, int place_id) throws SQLException {
         try {
-            sqlStr = "INSERT INTO `Image`(`Image_id`,`Image_time`,`Status`) VALUES (?,?,?)";
+            sqlStr = "INSERT INTO `image`(`image_id`,`image_name`,`status`) VALUES (?,?,?,?)";
             pst = conn.prepareStatement(sqlStr);
-            pst.setInt(1, Image_id);
-            pst.setString(2, Image_time);
-            pst.setInt(3, Status);
+            pst.setInt(1, image_id);
+            pst.setString(2, image_name);
+            pst.setInt(3, status);
+            pst.setInt(4, place_id);
             pst.executeUpdate();
-            ListImage.add(new ImageInfo(rs.getInt("Image_id"), rs.getString("Image_name"), rs.getInt("Status")));
+            ListImage.add(new ImageInfo(rs.getInt("image_id"), rs.getString("image_name"), rs.getInt("status"), rs.getInt("place_id")));
             System.out.println("TRUE");
             return true;
         } catch (SQLException e) {
@@ -117,13 +111,14 @@ public class ImageModel {
      * @return
      * @throws SQLException
      */
-    public boolean updateImage(int Image_id, String Image_time, int Status) throws SQLException {
+    public boolean updateImage(int image_id, String image_name, int status, int place_id) throws SQLException {
         try {
-            sqlStr = "UPDATE `Image` SET 'Image_id'=?, 'Image_time'=?, 'Status'=? WHERE 'Editor_id'=?";
+            sqlStr = "UPDATE `image` SET 'image_id'=?, 'image_name'=?, 'status'=? WHERE 'image_id'=?";
             pst = conn.prepareStatement(sqlStr);
-            pst.setInt(1, Image_id);
-            pst.setString(2, Image_time);
-            pst.setInt(3, Status);
+            pst.setInt(1, image_id);
+            pst.setString(2, image_name);
+            pst.setInt(3, status);
+            pst.setInt(4, place_id);
             pst.executeUpdate();
             LoadImage();
             conn.close();
@@ -133,23 +128,6 @@ public class ImageModel {
         conn.close();
         return false;
     }
-
-    /**
-     * search by Image_id
-     *
-     * @param Image_id return Image
-     *
-     */
-    public ImageInfo Search(int Id) {
-        for (int i = 0; i < ListImage.size(); i++) {
-            ImageInfo a = ListImage.get(i);
-            if (a.getImage_id() == Id) {
-                return ListImage.get(i);
-            }
-        }
-        return null;
-    }
-
     /**
      * DeleteImage
      *
@@ -158,7 +136,7 @@ public class ImageModel {
      */
     public void DeleteImage(ImageInfo I) throws SQLException {
         try {
-            String sql = "UPDATE `Image` SET `status`=0 WHERE `Editor_id` = ?";
+            String sql = "UPDATE `image` SET `status`=0 WHERE `editor_id` = ?";
             pst = conn.prepareStatement(sqlStr);
             pst.setInt(0, I.getImage_id());
             pst.executeUpdate();

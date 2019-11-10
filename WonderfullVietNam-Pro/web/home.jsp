@@ -4,7 +4,22 @@
     Author     : haumqce130436@fpt.edu.vn
 --%>
 
+<%@page import="Info.ImageInfo"%>
+<%@page import="Model.ImageModel"%>
+<%@page import="Model.PlaceModel"%>
+<%@page import="Info.PlaceInfo"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="DBLib.ConnectionLib"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    Connection con = ConnectionLib.getConnection();
+    PlaceModel pm = new PlaceModel(con);
+    ImageModel im = new ImageModel(con);
+    
+    ArrayList<PlaceInfo> plist = pm.getPlace();
+    ArrayList<ImageInfo> ilist = im.getListImage();
+%>
 <!doctype html>
 <html lang="en">
 
@@ -12,7 +27,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="icon" href="img/favicon.png" type="image/png">
+        <link rel="icon" href="" type="image/png">
         <title>FatMan | Home </title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.css">
@@ -63,11 +78,11 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
-                                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
+                                <!--<li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>-->
                             </ul>
                             <ul class="nav navbar-nav ml-auto">
                                 <li class="nav-item">
-                                    <a href="#" class="primary-btn">Book a trip</a>
+                                    <a href="login.jsp" class="primary-btn">Login</a>
                                 </li>
                                 <li class="nav-item">
                                     <button type="button" class="search nav-link">
@@ -98,7 +113,7 @@
                 <div class="container">
                     <div class="row fullscreen d-flex align-items-center justify-content-center">
                         <div class="banner_content">
-                            <p>Our knowledge, your experiences</p>
+                            <!--<p>Our knowledge, your experiences</p>-->
                             <h2>Wonderful Viet Nam</h2>
                         </div>
                     </div>
@@ -110,65 +125,53 @@
         <!--================ Start Feature Area =================-->
         <section class="feature-area section_gap_top">
             <div class="container">
+                <!-- Miền Bắc -->
                 <div class="row align-items-end justify-content-left">
                     <div class="col-lg-12">
                         <div class="main_title">
-                            <p>We’re Offering these Popular Services</p>
-                            <h1>Getting Adventure with Services</h1>
+                            <p>Cảnh đẹp Việt Nam</p>
+                            <h1>Miền Bắc</h1>
                             <span class="title-widget-bg"></span>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <!-- single-feature -->
+                    <%                        
+                            for (int i = 0; i < 3; i++) {
+                                String place_name = plist.get(i).getPlace_name();
+                                String place_description = pm.printWord(plist.get(i).getPlace_description(), 100);
+                                String image_name = "";
+                                for (int j = 0; j < ilist.size(); j++) {
+                                    if (plist.get(i).getPlace_id() == ilist.get(j).getPlace_id()) {
+                                        image_name = ilist.get(j).getImage_name();
+                                    }
+                                }
+                    %>
                     <div class="col-lg-4 col-md-6">
                         <div class="single-feature">
                             <div class="feature-details">
-                                <h5>Desert Riding Turning <br>
-                                    So much Flowery</h5>
+                                <h5><%=place_name%></h5>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consecter adipisicing elit, sed do eiusmod tempor incididunt.
+                                    <%=place_description%>
                                 </p>
-                                <a href="#" class="primary-btn mb-40">Read More</a>
+                                <a href="#" class="primary-btn mb-40">Đọc Tiếp</a>
                             </div>
                             <div class="feature-thumb">
-                                <img class="img-fluid" src="img/service/s1.png" alt="">
+                                <img class="img-fluid" src="img/<%=image_name%>" alt="">
                             </div>
                         </div>
                     </div>
-                    <!-- single-feature -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-feature">
-                            <div class="feature-details">
-                                <h5>Relaxation in the <br>
-                                    Local Beach Campfire</h5>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consecter adipisicing elit, sed do eiusmod tempor incididunt.
-                                </p>
-                                <a href="#" class="primary-btn mb-40">Read More</a>
-                            </div>
-                            <div class="feature-thumb">
-                                <img class="img-fluid" src="img/service/s2.png" alt="">
-                            </div>
-                        </div>
+                    <%                        }
+                    %>
+                    <div row>
+                        <form class="col-md-12 contact_form" action="#" method="post" id="contactForm" novalidate="novalidate">
+                    <div class=" text-right">
+                        <button type="submit" value="submit" class="primary-btn text-uppercase">Xem thêm</button>
                     </div>
-                    <!-- single-feature -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-feature">
-                            <div class="feature-details">
-                                <h5>Forest Exploration <br>
-                                    with Energy Package</h5>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consecter adipisicing elit, sed do eiusmod tempor incididunt.
-                                </p>
-                                <a href="#" class="primary-btn mb-40">Read More</a>
-                            </div>
-                            <div class="feature-thumb">
-                                <img class="img-fluid" src="img/service/s3.png" alt="">
-                            </div>
-                        </div>
+                </form>
                     </div>
-                </div>
+
             </div>
         </section>
         <!--================ End Feature Area =================-->
@@ -178,13 +181,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-5">
-                        <h1>Get Ready for
-                            Real time Adventure</h1>
+                        <h1>Xem tất cả hình ảnh</h1>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt 
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation.
+                            Trong đây có rất nhiều ảnh đẹp, vô xem đi mọi người ơi.
                         </p>
-                        <a href="#" class="primary-btn">Book a Trip</a>
+                        <a href="#" class="primary-btn">Xem ngay</a>
                     </div>
                     <div class="offset-lg-1 col-lg-6">
                         <img class="cta-img img-fluid" src="img/cta-img.png" alt="">
@@ -200,8 +201,8 @@
                 <div class="row d-flex justify-content-center">
                     <div class="ol-lg-12">
                         <div class="main_title">
-                            <p>We’re Offering these Trip Packages</p>
-                            <h1>Famous Trips Packages</h1>
+                            <p>We’re Offering these Good Places</p>
+                            <h1>TOP 3 địa điểm đẹp nổi tiếng</h1>
                             <span class="title-widget-bg"></span>
                         </div>
                     </div>
@@ -210,55 +211,52 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="single-package">
                             <div class="thumb">
-                                <img class="img-fluid" src="img/package/p1.jpg" alt="">								
+                                <img class="img-fluid" src="img/PhanThiet01.jpg" alt="">								
                             </div>
-                            <p class="date"><span>18</span> <br> December</p>
+                            <p class="date"><span>1 ST</span> <br> </p>
                             <div class="meta-top d-flex">
-                                <p><span class="fa fa-location-arrow"></span> Stockholmes</p>
-                                <p class="ml-20"><span class="fa fa-calendar"></span> 5 days 6 nights</p>
+                                <p><span class="fa fa-location-arrow"></span> Miền Nam</p>
+                                <p class="ml-20"><span class="fa fa-calendar"></span> 2 April</p>
                             </div>
-                            <h4>Desert Riding Turning So <br>
-                                much Flowery</h4>
+                            <h4>Phan Thiết</h4>
                             <p>
-                                Lorem ipsum dolor sit amet, consecter adipisicing elit, sed do eiusmod tempor incididunt.
+                                Phan Thiết là một thành phố trẻ, thành phố công nghiệp mới và là tỉnh lỵ, trung tâm chính trị, kinh tế, văn hóa và khoa học kỹ thuật của tỉnh Bình Thuận, Việt Nam.
                             </p>
-                            <a href="#" class="primary-btn">Read More</a>
+                            <a href="#" class="primary-btn">Đọc Tiếp</a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="single-package">
                             <div class="thumb">
-                                <img class="img-fluid" src="img/package/p2.jpg" alt="">								
+                                <img class="img-fluid" src="img/LangSon_SaPa.jpg" alt="">								
                             </div>
-                            <p class="date"><span>18</span> <br> December</p>
+                            <p class="date"><span>2 ND</span> <br> </p>
                             <div class="meta-top d-flex">
-                                <p><span class="fa fa-location-arrow"></span> Stockholmes</p>
-                                <p class="ml-20"><span class="fa fa-calendar"></span> 5 days 6 nights</p>
+                                <p><span class="fa fa-location-arrow"></span> Miền Bắc</p>
+                                <p class="ml-20"><span class="fa fa-calendar"></span> 10 Oct</p>
                             </div>
-                            <h4>Desert Riding Turning So <br>
-                                much Flowery</h4>
+                            <h4>Lạng Sơn</h4>
                             <p>
-                                Lorem ipsum dolor sit amet, consecter adipisicing elit, sed do eiusmod tempor incididunt.
+                                Cảnh thiên nhiên tuyệt mĩ của Sa Pa. - Tháng 9 đến tháng 11: là thời điểm đẹp nhất trong năm ở Sapa, đây là lúc những cánh đồng lúa chín vàng rực. Vào thời ...
                             </p>
-                            <a href="#" class="primary-btn">Read More</a>
+                            <a href="#" class="primary-btn">Đọc Tiếp</a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="single-package">
                             <div class="thumb">
-                                <img class="img-fluid" src="img/package/p3.jpg" alt="">								
+                                <img class="img-fluid" src="img/HaiPhong_DoSon.jpg" alt="">								
                             </div>
-                            <p class="date"><span>18</span> <br> December</p>
+                            <p class="date"><span>3 RD</span> <br> </p>
                             <div class="meta-top d-flex">
-                                <p><span class="fa fa-location-arrow"></span> Stockholmes</p>
-                                <p class="ml-20"><span class="fa fa-calendar"></span> 5 days 6 nights</p>
+                                <p><span class="fa fa-location-arrow"></span> Miền Trung</p>
+                                <p class="ml-20"><span class="fa fa-calendar"></span> 5 Dec</p>
                             </div>
-                            <h4>Desert Riding Turning So <br>
-                                much Flowery</h4>
+                            <h4>Đồ Sơn</h4>
                             <p>
-                                Lorem ipsum dolor sit amet, consecter adipisicing elit, sed do eiusmod tempor incididunt.
+                                Đồ Sơn là một quận thuộc thành phố Hải Phòng, cách trung tâm thành phố khoảng 22 km về hướng đông nam.
                             </p>
-                            <a href="#" class="primary-btn">Read More</a>
+                            <a href="#" class="primary-btn">Đọc Tiếp</a>
                         </div>
                     </div>
                 </div>
@@ -272,8 +270,8 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-12">
                         <div class="main_title">
-                            <p>We’re Offering these Trip Packages</p>
-                            <h1>Popular Places Around the World</h1>
+                            <p>We’re Offering these Popular Places</p>
+                            <h1>Những địa hình phổ biến ở Việt Nam</h1>
                             <span class="title-widget-bg"></span>
                         </div>
                     </div>
@@ -338,8 +336,8 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-12">
                         <div class="main_title">
-                            <p>We’re Offering these Trip Packages</p>
-                            <h1>Intelligent Team Members</h1>
+                            <p>We’re Offering these Team Members</p>
+                            <h1>Các Thành Viên Trong Team</h1>
                             <span class="title-widget-bg"></span>
                         </div>
                     </div>
@@ -350,8 +348,8 @@
                             <div class="team_img">
                                 <img class="img-fluid w-100" src="img/team/team-1.jpg" alt="">
                                 <div class="hover">
-                                    <h4>Randy Weaver</h4>
-                                    <p>Senior Barrister at law</p>
+                                    <h4>Mr. Hậu</h4>
+                                    <p>Leader</p>
                                 </div>
                             </div>
                         </div>
@@ -361,8 +359,8 @@
                             <div class="team_img">
                                 <img class="img-fluid w-100" src="img/team/team-2.jpg" alt="">
                                 <div class="hover">
-                                    <h4>Randy Weaver</h4>
-                                    <p>Senior Barrister at law</p>
+                                    <h4>Mr. An</h4>
+                                    <p>Member</p>
                                 </div>
                             </div>
                         </div>
@@ -372,8 +370,8 @@
                             <div class="team_img">
                                 <img class="img-fluid w-100" src="img/team/team-3.jpg" alt="">
                                 <div class="hover">
-                                    <h4>Randy Weaver</h4>
-                                    <p>Senior Barrister at law</p>
+                                    <h4>Mr. Tú</h4>
+                                    <p>Member</p>
                                 </div>
                             </div>
                         </div>
@@ -383,8 +381,8 @@
                             <div class="team_img">
                                 <img class="img-fluid w-100" src="img/team/team-4.jpg" alt="">
                                 <div class="hover">
-                                    <h4>Randy Weaver</h4>
-                                    <p>Senior Barrister at law</p>
+                                    <h4>Mr. Đỉnh</h4>
+                                    <p>Member</p>
                                 </div>
                             </div>
                         </div>
@@ -435,7 +433,7 @@
                     <div class="item">
                         <div class="testi-item">
                             <img src="img/quote.png" alt="">
-                            <h4>Fanny Spencer</h4>
+                            <h4>Quốc Hậu</h4>
                             <ul class="list">
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
@@ -455,7 +453,7 @@
                     <div class="item">
                         <div class="testi-item">
                             <img src="img/quote.png" alt="">
-                            <h4>Fanny Spencer</h4>
+                            <h4>Quốc An</h4>
                             <ul class="list">
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
@@ -475,7 +473,7 @@
                     <div class="item">
                         <div class="testi-item">
                             <img src="img/quote.png" alt="">
-                            <h4>Fanny Spencer</h4>
+                            <h4>Anh Tú</h4>
                             <ul class="list">
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
@@ -494,7 +492,7 @@
                     <div class="item">
                         <div class="testi-item">
                             <img src="img/quote.png" alt="">
-                            <h4>Fanny Spencer</h4>
+                            <h4>Hồng Đỉnh</h4>
                             <ul class="list">
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
@@ -548,8 +546,8 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-12">
                         <div class="main_title">
-                            <p>We’re Offering these Trip Packages</p>
-                            <h1>Latest Posts from Blog</h1>
+                            <p>We’re Offering these Latest Posts</p>
+                            <h1>Những bài đăng mới nhất</h1>
                             <span class="title-widget-bg"></span>
                         </div>
                     </div>
@@ -559,7 +557,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-blog">
                             <div class="blog-thumb">
-                                <img class="img-fluid" src="img/blog/h-blog1.jpg" alt="">
+                                <img class="img-fluid" src="img/DaLat02.jpg" alt="">
                             </div>
                             <div class="blog-details">
                                 <div class="blog-meta d-flex">
@@ -580,11 +578,9 @@
                                     </p>
                                 </div>
                                 <h5>
-                                    <a href="#">Cruise Private Party Booking
-                                        Available Now</a>
+                                    <a href="#">Cổng trời Đà Lạt</a>
                                 </h5>
-                                <p>Computers have become ubiquitous in almost every facet of our lives. At work, desk jockeys spend hours in
-                                    front of their desktops.</p>
+                                <p>Cổng trời Bali Đà Lạt là một trong những cụm từ. Mà trong thời gian gần đây, đặc biệt là trong dịp hè này. Được quý du khách thập phương ...</p>
                             </div>
                         </div>
                     </div>
@@ -593,7 +589,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-blog">
                             <div class="blog-thumb">
-                                <img class="img-fluid" src="img/blog/h-blog2.jpg" alt="">
+                                <img class="img-fluid" src="img/DaNang_HoiAn.jpg" alt="">
                             </div>
                             <div class="blog-details">
                                 <div class="blog-meta d-flex">
@@ -614,11 +610,9 @@
                                     </p>
                                 </div>
                                 <h5>
-                                    <a href="#">Cruise Private Party Booking
-                                        Available Now</a>
+                                    <a href="#">Hội An - Đà Nẳng</a>
                                 </h5>
-                                <p>Computers have become ubiquitous in almost every facet of our lives. At work, desk jockeys spend hours in
-                                    front of their desktops.</p>
+                                <p>Hội An – nơi mà cuộc sống cứ bình lặng như thế. Hội An – nơi mà dường như dòng chảy vô tình của thời gian chẳng thể nào vùi lấp đi cái ...</p>
                             </div>
                         </div>
                     </div>
@@ -627,7 +621,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-blog">
                             <div class="blog-thumb">
-                                <img class="img-fluid" src="img/blog/h-blog3.jpg" alt="">
+                                <img class="img-fluid" src="img/LangSon_SaPa02.jpg" alt="">
                             </div>
                             <div class="blog-details">
                                 <div class="blog-meta d-flex">
@@ -648,11 +642,9 @@
                                     </p>
                                 </div>
                                 <h5>
-                                    <a href="#">Cruise Private Party Booking
-                                        Available Now</a>
+                                    <a href="#">SaPa - Lạng Sơn</a>
                                 </h5>
-                                <p>Computers have become ubiquitous in almost every facet of our lives. At work, desk jockeys spend hours in
-                                    front of their desktops.</p>
+                                <p>Tên gọi của thị xã xuất phát từ tên thị trấn Sa Pa cũ. Thị trấn này ra đời vào cỡ 1905, khi người Pháp phát hiện đây là địa điểm lý tưởng để xây dựng khu nghỉ ...</p>
                             </div>
                         </div>
                     </div>

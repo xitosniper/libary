@@ -4,9 +4,20 @@
     Author     : haumqce130436@fpt.edu.vn
 --%>
 
+<%@page import="Info.LocationInfo"%>
+<%@page import="Model.LocationModel"%>
+<%@page import="Info.ImageInfo"%>
+<%@page import="Model.ImageModel"%>
+<%@page import="Info.CommentInfo"%>
+<%@page import="Model.CommentModel"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="Model.EditorModel"%>
+<%@page import="Info.EditorInfo"%>
+<%@page import="Info.PlaceInfo"%>
+<%@page import="Model.PlaceModel"%>
 <%@page import="Info.PostInfo"%>
 <%@page import="Model.PostModel"%>
-<%@page import="wonderful_vietnam.RoleInfo"%>
+<%@page import="Info.RoleInfo"%>
 <%@page import="Model.RoleModel"%>
 <%@page import="Info.UserInfo"%>
 <%@page import="java.util.ArrayList"%>
@@ -15,13 +26,70 @@
 <%@page import="Model.UserModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    int placeNo = 1;
+    int postNo = 1;
+    int commentNo = 1;
+    String s = "";
+    String sortColumn = "";
+    if (request.getParameter("s") != null) {
+        s = request.getParameter("s");
+    }
+    if (request.getParameter("placeNo") != null) {
+        placeNo = Integer.parseInt(request.getParameter("placeNo"));
+    }
+    if (request.getParameter("postNo") != null) {
+        postNo = Integer.parseInt(request.getParameter("postNo"));
+    }
+    if (request.getParameter("commentNo") != null) {
+        commentNo = Integer.parseInt(request.getParameter("commentNo"));
+    }
     Connection con = ConnectionLib.getConnection();
     UserModel um = new UserModel(con);
     RoleModel rm = new RoleModel(con);
     PostModel pm = new PostModel(con);
+    PlaceModel plm = new PlaceModel(con);
+    EditorModel em = new EditorModel(con);
+    CommentModel cm = new CommentModel(con);
+    ImageModel im = new ImageModel(con);
+    LocationModel lm = new LocationModel(con);
     ArrayList<UserInfo> userInfos = um.getUser();
     ArrayList<RoleInfo> roleInfos = rm.getRole();
     ArrayList<PostInfo> postInfos = pm.getPost();
+    ArrayList<PlaceInfo> placeInfos = plm.getPlace();
+
+    ArrayList<EditorInfo> editorInfos = em.getListEditor();
+    ArrayList<CommentInfo> commentInfos = cm.getComment();
+    ArrayList<ImageInfo> imageInfos = im.getListImage();
+    ArrayList<LocationInfo> locationInfos = lm.getListLocation();
+
+    ArrayList<PlaceInfo> placeInfos1 = plm.getPaging(placeNo, s, sortColumn);
+    ArrayList<PostInfo> postInfos1 = pm.getPaging(postNo, s, sortColumn);
+    ArrayList<CommentInfo> commentInfos1 = cm.getPaging(commentNo, s, sortColumn);
+
+    int role_id = -1;
+    int user_id = -1;
+    String user_username = "";
+    String username = "";
+    String role_name = "";
+    String user_img = "";
+    if (request.getParameter("username") != null) {
+        user_username = request.getParameter("username");
+    }
+    ArrayList<UserInfo> uis = um.getUser();
+    for (UserInfo elem : uis) {
+        if (user_username.equals(elem.getUser_username())) {
+            username = elem.getUser_name();
+            role_id = elem.getRole_id();
+            user_img = elem.getUser_img();
+        }
+    }
+    ArrayList<RoleInfo> ris = rm.getRole();
+    for (RoleInfo elem : ris) {
+        if (role_id == elem.getRole_id()) {
+            role_name = elem.getRole_name();
+        }
+    }
+
 %>
 <!DOCTYPE html>
 <html>
@@ -46,21 +114,50 @@
         <link rel="stylesheet" href="css/custom.css">
         <!-- Favicon-->
         <link rel="shortcut icon" href="img/favicon.png?3">
-        <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
         <style>
-            .user_img{
+            .size_img{
                 height: 32px;
                 width: 32px;
             }
-
+            .size_img2{
+                height: 128px;
+                width: 128px;
+            }
+            .sp_center{
+                text-align: center;
+            }
+            .table tr td {
+                vertical-align: middle !important;
+            }
+            .table tr th {
+                vertical-align: middle !important;
+            }
+            .table_span{
+                padding-top: 50px;
+            }
+            .paging {
+                margin: 10px;
+            }
         </style>
     </head>
     <body>
         <!-- navbar-->
         <header class="header">
-            <nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow"><a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a href="dashboard.jsp" class="navbar-brand font-weight-bold text-uppercase text-base">Bubbly Dashboard</a>
+            <nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow"><a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a href="dashboard.jsp?username=<%=user_username%>" class="navbar-brand font-weight-bold text-uppercase text-base">Fat Man Dashboard</a>
                 <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
                     <li class="nav-item">
                         <form id="searchForm" class="ml-auto d-none d-lg-block">
@@ -99,8 +196,8 @@
                             <div class="dropdown-divider"></div><a href="#" class="dropdown-item text-center"><small class="font-weight-bold headings-font-family text-uppercase">View all notifications</small></a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown ml-auto"><a id="userInfo" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img src="img/avatar-6.jpg" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow"></a>
-                        <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family">Mark Stephen</strong><small>Web Developer</small></a>
+                    <li class="nav-item dropdown ml-auto"><a id="userInfo" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img src="img/<%=user_img%>" alt="" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow"></a>
+                        <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family"><%=username%></strong><small><%=role_name%></small></a>
                             <div class="dropdown-divider"></div><a href="#" class="dropdown-item">Settings</a><a href="#" class="dropdown-item">Activity log       </a>
                             <div class="dropdown-divider"></div><a href="login.jsp" class="dropdown-item">Logout</a>
                         </div>
@@ -112,10 +209,10 @@
             <div id="sidebar" class="sidebar py-3">
                 <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MAIN</div>
                 <ul class="sidebar-menu list-unstyled">
-                    <li class="sidebar-list-item"><a href="dashboard.jsp" class="sidebar-link text-muted"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
-                    <li class="sidebar-list-item"><a href="charts.jsp" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>Charts</span></a></li>
-                    <li class="sidebar-list-item"><a href="tables.jsp" class="sidebar-link text-muted active"><i class="o-table-content-1 mr-3 text-gray"></i><span>Tables</span></a></li>
-                    <li class="sidebar-list-item"><a href="forms.jsp" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Forms</span></a></li>
+                    <li class="sidebar-list-item"><a href="dashboard.jsp?username=<%=user_username%>" class="sidebar-link text-muted"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
+                    <li class="sidebar-list-item"><a href="charts.jsp?username=<%=user_username%>" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>Charts</span></a></li>
+                    <li class="sidebar-list-item"><a href="tables.jsp?username=<%=user_username%>" class="sidebar-link text-muted active"><i class="o-table-content-1 mr-3 text-gray"></i><span>Tables</span></a></li>
+                    <li class="sidebar-list-item"><a href="forms.jsp?username=<%=user_username%>" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Forms</span></a></li>
                     <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Pages</span></a>
                         <div id="pages" class="collapse">
                             <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
@@ -128,24 +225,25 @@
                     </li>
                     <li class="sidebar-list-item"><a href="login.jsp" class="sidebar-link text-muted"><i class="o-exit-1 mr-3 text-gray"></i><span>Login</span></a></li>
                 </ul>
-                <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">EXTRAS</div>
-                <ul class="sidebar-menu list-unstyled">
-                    <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Demo</span></a></li>
-                    <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>Demo</span></a></li>
-                    <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Demo</span></a></li>
-                    <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Demo</span></a></li>
-                </ul>
-
-
+                <!--                <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">EXTRAS</div>
+                                <ul class="sidebar-menu list-unstyled">
+                                    <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Demo</span></a></li>
+                                    <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>Demo</span></a></li>
+                                    <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Demo</span></a></li>
+                                    <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Demo</span></a></li>
+                                </ul>-->
             </div>
+
             <div class="page-holder w-100 d-flex flex-wrap">
                 <div class="container-fluid px-xl-5">
                     <section class="py-5">
                         <div class="row">
-                            <div class="col-lg-12 mb-12">
+
+                            <div class="col-lg-12 mb-12 table_span">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h6 class="text-uppercase mb-0">User Table</h6>
+                                        <h6 class="text-uppercase mb-0">User Table</h6> 
+                                        <ins><p class="mb-0 text-uppercase text-right "><a href="" class="external">More Details</a></p></ins>
                                     </div>
                                     <div class="card-body">
                                         <table class="table card-text">
@@ -163,25 +261,25 @@
                                             <tbody>
                                                 <%
                                                     String gender;
-                                                    String role_name = "";
+                                                    String role_name1 = "";
                                                     int userNo = 0;
                                                     for (UserInfo us : userInfos) {
                                                         userNo++;
                                                         gender = us.getUser_gender() == 0 ? "<i>Female</i>" : "<i>Male</i>";
                                                         for (RoleInfo rl : roleInfos) {
                                                             if (us.getRole_id() == rl.getRole_id()) {
-                                                                role_name = rl.getRole_name();
+                                                                role_name1 = rl.getRole_name();
                                                             }
                                                         }
                                                 %>
                                                 <tr>
                                                     <th scope="row"><%=userNo%></th>
                                                     <td><%=us.getUser_name()%></td>
-                                                    <td><img class="user_img" src="img/<%=us.getUser_img()%>"></td>
+                                                    <td><img class="size_img" src="img/<%=us.getUser_img()%>"></td>
                                                     <td><%=gender%></td>
                                                     <td><%=us.getUser_phone()%></td>
                                                     <td><%=us.getUser_address()%></td>
-                                                    <td><%=role_name%></td>
+                                                    <td><%=role_name1%></td>
                                                 </tr>
                                                 <%
                                                     }
@@ -190,142 +288,196 @@
                                         </table>
                                     </div>
                                 </div>
-
-
                             </div>
-                            <div class="col-lg-12 mb-12">
+
+                            <div class="col-lg-12 mb-12 table_span">
                                 <div class="card">
                                     <div class="card-header">
                                         <h6 class="text-uppercase mb-0">Post Table</h6>
+                                        <ins><p class="mb-0 text-uppercase text-right "><a href="" class="external">More Details</a></p></ins>
                                     </div>
                                     <div class="card-body">                           
                                         <table class="table table-striped card-text">
                                             <thead>
+                                                <tr class="">
+                                                    <th class="paging" colspan="9" align="left">
+                                                        <%=pm.getPagingString(postNo, s, sortColumn)%>
+                                                    </th>
+                                                </tr>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Place name</th>
-                                                    <th>Description</th>
-                                                    <th>Post time</th>
+                                                    <th>Place Name</th>
+                                                    <th>Post Time</th>
                                                     <th>Writer</th>
+                                                    <th>Editor</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <%
+                                                    //Attribute 
+                                                    int poNo = (postNo - 1) * PlaceModel.SoDong_Trang;
+                                                    String place_name = "";
+                                                    String writer_name = "";
+                                                    String editor_name = "null";
+                                                    SimpleDateFormat dFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+                                                    for (PostInfo po : postInfos1) {
+                                                        poNo++;
+                                                        //get place name
+                                                        for (PlaceInfo pi : placeInfos) {
+                                                            if (po.getPlace_id() == pi.getPlace_id()) {
+                                                                place_name = pi.getPlace_name();
+                                                            }
+                                                        }
+                                                        //get writer name
+                                                        for (UserInfo us : userInfos) {
+                                                            if (us.getUser_id() == po.getUser_id()) {
+                                                                writer_name = us.getUser_name();
+                                                            }
+                                                        }
+                                                        for (UserInfo us : userInfos) {
+                                                            //get editor name
+                                                            for (EditorInfo ed : editorInfos) {
+                                                                if (ed.getEditor_id() == po.getEditor_id() && ed.getUser_id() == us.getUser_id()) {
+                                                                    editor_name = us.getUser_name();
+                                                                }
+                                                            }
+                                                        }
+                                                %>
+                                                <tr>
+                                                    <th scope="row"><%=poNo%></th>
+                                                    <td><%=place_name%></td>
+                                                    <td><%=dFormat.format(po.getPost_time())%></td>
+                                                    <td><%=writer_name%></td>
+                                                    <td><%=editor_name%></td>
+                                                </tr>
+                                                <%
+                                                    }
+                                                %>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 mb-12 table_span">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="text-uppercase mb-0">Comment Table</h6>
+                                        <ins><p class="mb-0 text-uppercase text-right "><a href="comment-details.jsp" class="external">More Details</a></p></ins>
+                                    </div>
+                                    <div class="card-body">                           
+                                        <table class="table table-striped table-hover card-text">
+                                            <thead>
+                                                <tr class="">
+                                                    <th class="paging" colspan="9" align="left">
+                                                        <%=cm.getPagingString(commentNo, s, sortColumn)%>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Place Name</th>
+                                                    <th>Email</th>
+                                                    <th>Comment Time</th>
                                                     <th>Editor</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <%
-                                                    int postNo = 0;
-                                                    for (UserInfo us : userInfos) {
-                                                        postNo++;
+                                                    //Attribute 
+                                                    int cNo = (commentNo - 1) * PlaceModel.SoDong_Trang;
+                                                    String place_name1 = "";
+                                                    String editor_name1 = "";
+                                                    for (CommentInfo ci : commentInfos1) {
+                                                        cNo++;
+                                                        for (PostInfo po : postInfos) {
+                                                            if (ci.getPost_id() == po.getPost_id()) {
+                                                                for (PlaceInfo pa : placeInfos) {
+                                                                    if (pa.getPlace_id() == po.getPlace_id()) {
+                                                                        place_name1 = pa.getPlace_name();
+                                                                    }
+                                                                }
+
+                                                            }
+                                                        }
+                                                        for (UserInfo ui : userInfos) {
+                                                            if (ci.getUser_id() == ui.getUser_id()) {
+                                                                editor_name1 = ui.getUser_name();
+                                                            }
+                                                        }
                                                 %>
                                                 <tr>
-                                                    <th scope="row"><%=postNo%></th>
-                                                    <td><%=us.getUser_name()%></td>
-                                                    
+                                                    <th scope="row"><%=cNo%></th>
+                                                    <td><%=place_name1%></td>
+                                                    <td><%=ci.getComment_email()%></td>
+                                                    <td><%=dFormat.format(ci.getComment_time())%></td>
+                                                    <td><%=editor_name1%></td>
                                                 </tr>
                                                 <%
                                                     }
                                                 %>
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 mb-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h6 class="text-uppercase mb-0">Comment Table</h6>
-                                    </div>
-                                    <div class="card-body">                           
-                                        <table class="table table-striped table-hover card-text">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
-                                                    <th>Username</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>Larry</td>
-                                                    <td>the Bird</td>
-                                                    <td>@twitter                            </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>Sam</td>
-                                                    <td>Nevoresky</td>
-                                                    <td>@facebook                            </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
+
+                            <div class="col-lg-12 table_span">
                                 <div class="card">
                                     <div class="card-header">
                                         <h6 class="text-uppercase mb-0">Place Table</h6>
+                                        <ins><p class="mb-0 text-uppercase text-right "><a href="" class="external">More Details</a></p></ins>
                                     </div>
                                     <div class="card-body">                          
                                         <table class="table table-striped table-sm card-text">
                                             <thead>
+                                                <tr class="">
+                                                    <th class="paging" colspan="9" align="left">
+                                                        <%=plm.getPagingString(placeNo, s, sortColumn)%>
+                                                    </th>
+                                                </tr>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
-                                                    <th>Username</th>
+                                                    <th>Place Name</th>
+                                                    <th>Image</th>
+                                                    <th>Location</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <%
+                                                    int pNo = (placeNo - 1) * PlaceModel.SoDong_Trang;
+                                                    String image_place = "";
+                                                    String location_name = "";
+                                                    for (PlaceInfo pl : placeInfos1) {
+                                                        pNo++;
+                                                        for (LocationInfo li : locationInfos) {
+                                                            if (pl.getLocation_id() == li.getLocation_id()) {
+                                                                location_name = li.getLocation_name();
+                                                            }
+                                                        }
+                                                %>
                                                 <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
+                                                    <th scope="row"><%=pNo%></th>
+                                                    <td><%=pl.getPlace_name()%></td>
+                                                    <td>
+                                                        <%
+                                                            for (ImageInfo ii : imageInfos) {
+                                                                if (pl.getPlace_id() == ii.getPlace_id()) {
+                                                                    image_place = ii.getImage_name();
+
+                                                        %>
+                                                        <span><img class="size_img2" src="img/<%=image_place%>"></span>
+                                                            <%
+                                                                    }
+                                                                }
+                                                            %>
+                                                    </td>
+                                                    <td><%=location_name%></td>
                                                 </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>Larry</td>
-                                                    <td>the Bird</td>
-                                                    <td>@twitter      </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">4</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">5</th>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">6</th>
-                                                    <td>Larry</td>
-                                                    <td>the Bird</td>
-                                                    <td>@twitter</td>
+                                                <%
+                                                    }
+                                                %>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -339,11 +491,10 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6 text-center text-md-left text-primary">
-                                <p class="mb-2 mb-md-0">Your company &copy; 2018-2020</p>
+                                <p class="mb-2 mb-md-0">Fat Man Group: 2019</p>
                             </div>
                             <div class="col-md-6 text-center text-md-right text-gray-400">
-                                <p class="mb-0">Design by <a href="https://bootstrapious.com/admin-templates" class="external text-gray-400">Bootstrapious</a></p>
-                                <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+                                <p class="mb-0">Design by <a href="https://www.facebook.com/hau.mai.796569" class="external text-gray-400">FatManGroup</a></p>
                             </div>
                         </div>
                     </div>
@@ -358,5 +509,6 @@
         <script src="vendor/chart.js/Chart.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
         <script src="js/front.js"></script>
+        <script src="https://code.jquery.com/jquery-latest.js"></script>
     </body>
 </html>

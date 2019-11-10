@@ -12,64 +12,58 @@ package Info;
 public class ImageInfo {
 
     //declare variables
-    int Image_id;
-    String Image_name;
-    int Status;
-
+    private int image_id;
+    private String image_name;
+    private int status;
+    private int place_id;
     /**
-     * Create Constructor
+     * Constructor image
+     * @param image_id
+     * @param image_name
+     * @param status
+     * @param place_id 
      */
-    public ImageInfo() {
-
+    public ImageInfo(int image_id, String image_name, int status, int place_id) {
+        this.image_id = image_id;
+        this.image_name = image_name;
+        this.status = status;
+        this.place_id = place_id;
     }
 
     /**
-     * Create Constructor with full parameter
+     * Create getimage_id
      *
-     * @param Image_id
-     * @param Image_name
-     * @param Status
-     */
-    public ImageInfo(int Image_id, String Image_name, int Status) {
-        this.Image_id = Image_id;
-        this.Image_name = Image_name;
-        this.Status = Status;
-    }
-
-    /**
-     * Create getImage_id
-     *
-     * @return Image_id
+     * @return image_id
      */
     public int getImage_id() {
-        return Image_id;
+        return image_id;
     }
 
     /**
      * Create setImage_id
      *
-     * @param Image_id
+     * @param image_id
      */
-    public void setImage_id(int Image_id) {
-        this.Image_id = Image_id;
+    public void setImage_id(int image_id) {
+        this.image_id = image_id;
     }
 
     /**
      * Create getImage_name
      *
-     * @return Image_name
+     * @return image_name
      */
     public String getImage_name() {
-        return Image_name;
+        return image_name;
     }
 
     /**
      * Create setImage_name
      *
-     * @param Image_name
+     * @param image_name
      */
-    public void setImage_name(String Image_name) {
-        this.Image_name = Image_name;
+    public void setImage_name(String image_name) {
+        this.image_name = image_name;
     }
 
     /**
@@ -78,7 +72,7 @@ public class ImageInfo {
      * @return Status
      */
     public int getStatus() {
-        return Status;
+        return status;
     }
 
     /**
@@ -86,17 +80,16 @@ public class ImageInfo {
      *
      * @param Status
      */
-    public void setStatus(int Status) {
-        this.Status = Status;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    /**
-     * Create toString()
-     *
-     * @return all parameter
-     */
-    @Override
-    public String toString() {
-        return Image_id + " " + Image_name + " " + Status;
+    public int getPlace_id() {
+        return place_id;
     }
+
+    public void setPlace_id(int place_id) {
+        this.place_id = place_id;
+    }
+
 }

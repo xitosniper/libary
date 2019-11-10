@@ -7,18 +7,15 @@
         <title>FatMan | Home Page</title>
     </head>
     <body>
-        
-        
         <%
             if (session.getAttribute("username") == null) {
         %>
         <jsp:include page="home.jsp"></jsp:include>
 
-        <% } else {
-        %>
+        <% } else { %>
         <jsp:include page="dashboard.jsp"></jsp:include>
-        <%}
-
+        <%
+            }
         %>
     </body>
 </html>

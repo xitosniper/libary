@@ -5,6 +5,8 @@
  */
 package Info;
 
+import java.sql.Date;
+
 /**
  *
  * @author Admin
@@ -12,35 +14,34 @@ package Info;
 public class EditorInfo {
     //declare variables
 
-    int Editor_id;
-    String Editor_time;
-    int Status;
+    private int editor_id;
+    private Date editor_time;
+    private int status;
+    private int user_id;
 
     /**
-     * Create Constructor
+     * Constructor editorInfo
+     * @param editor_id
+     * @param editor_time
+     * @param status
+     * @param user_id 
      */
-    public EditorInfo() {
+    public EditorInfo(int editor_id, Date editor_time, int status, int user_id) {
+        this.editor_id = editor_id;
+        this.editor_time = editor_time;
+        this.status = status;
+        this.user_id = user_id;
     }
 
-    /**
-     * Create Constructor with full parameter
-     *
-     * @param Editor_id
-     * @param Editor_time
-     * @param Status
-     */
-    public EditorInfo(int Editor_id, String Editor_time, int Status) {
-        this.Editor_id = Editor_id;
-        this.Editor_time = Editor_time;
-        this.Status = Status;
-    }
+
+    
 
     /**
      * Create getEditor_id
      * @return Editor_id
      */
     public int getEditor_id() {
-        return Editor_id;
+        return editor_id;
     }
 
     /**
@@ -48,23 +49,23 @@ public class EditorInfo {
      * @param Editor_id
      */
     public void setEditor_id(int Editor_id) {
-        this.Editor_id = Editor_id;
+        this.editor_id = Editor_id;
     }
 
     /**
      * Create getEditor_time
      * @return
      */
-    public String getEditor_time() {
-        return Editor_time;
+    public Date getEditor_time() {
+        return editor_time;
     }
 
     /**
      * Create setEditor_time
      * @param Editor_time
      */
-    public void setEditor_time(String Editor_time) {
-        this.Editor_time = Editor_time;
+    public void setEditor_time(Date editor_time) {
+        this.editor_time = editor_time;
     }
 
     /**
@@ -72,7 +73,7 @@ public class EditorInfo {
      * @return
      */
     public int getStatus() {
-        return Status;
+        return status;
     }
 
     /**
@@ -80,16 +81,14 @@ public class EditorInfo {
      * @param Status
      */
     public void setStatus(int Status) {
-        this.Status = Status;
+        this.status = Status;
     }
 
-    /**
-     * Create toString
-     * @return all parameter
-     */
-    @Override
-    public String toString() {
-        return Editor_id + " " + Editor_time + " " + Status;
+    public int getUser_id() {
+        return user_id;
     }
 
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
 }

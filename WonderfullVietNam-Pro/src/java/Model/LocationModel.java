@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class LocationModel {
 
     private ArrayList<LocationInfo> ListLocation;
-    ConnectionLib cl = new ConnectionLib();
+
     /**
      * get ArrayList
      *
@@ -36,7 +36,6 @@ public class LocationModel {
      * Stores prepared statement object Stores result set object; Stores mysql
      * statement
      */
-    private static final String tableName = "Location";
     private static Connection conn;
     private static Statement st;
     private static PreparedStatement pst;
@@ -48,9 +47,9 @@ public class LocationModel {
      *
      * @throws SQLException
      */
-    public LocationModel() throws SQLException {
+    public LocationModel(Connection connection) throws SQLException {
         try {
-            conn = cl.getConnection();
+            this.conn = connection;
             st = conn.createStatement();
             pst = null;
             rs = null;
@@ -65,18 +64,15 @@ public class LocationModel {
     /**
      * load data from database
      */
-    public void LoadLocation() {
-        try {
-            sqlStr = "SELECT * FROM " + tableName;
-            rs = st.executeQuery(sqlStr);
-            if (rs.isBeforeFirst()) {
-                ListLocation.clear();
-                while (rs.next()) {
-                    ListLocation.add(new LocationInfo(rs.getInt("Location_id"), rs.getString("Location_name"), rs.getString("Location_description"), rs.getInt("Status")));
-                }
-            }
-        } catch (SQLException e) {
+    public void LoadLocation() throws SQLException {
+
+        sqlStr = "SELECT * FROM `location`";
+        rs = st.executeQuery(sqlStr);
+
+        while (rs.next()) {
+            ListLocation.add(new LocationInfo(rs.getInt("location_id"), rs.getString("location_name"), rs.getString("location_description"), rs.getInt("status")));
         }
+
     }
 
     /**

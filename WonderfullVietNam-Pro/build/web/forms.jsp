@@ -4,7 +4,43 @@
     Author     : haumqce130436@fpt.edu.vn
 --%>
 
+<%@page import="Info.RoleInfo"%>
+<%@page import="Info.UserInfo"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Model.RoleModel"%>
+<%@page import="Model.UserModel"%>
+<%@page import="DBLib.ConnectionLib"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    int role_id = -1;
+    int user_id = -1;
+    String user_username = "";
+    String username = "";
+    String role_name = "";
+    String user_img ="";
+    if (request.getParameter("username")!=null) {
+            user_username = request.getParameter("username");
+        }
+    Connection con = ConnectionLib.getConnection();
+    UserModel um = new UserModel(con);
+    RoleModel rm = new RoleModel(con);
+    
+    ArrayList<UserInfo> uis = um.getUser();
+    for (UserInfo elem : uis) {
+        if (user_username.equals(elem.getUser_username())) {
+            username = elem.getUser_name();
+            role_id = elem.getRole_id();
+            user_img = elem.getUser_img();
+        }
+    }
+    ArrayList<RoleInfo> ris = rm.getRole();
+    for (RoleInfo elem : ris) {
+        if (role_id == elem.getRole_id()) {
+            role_name = elem.getRole_name();
+        }
+    }
+%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -35,7 +71,7 @@
   <body>
     <!-- navbar-->
     <header class="header">
-      <nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow"><a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a href="dashboard.jsp" class="navbar-brand font-weight-bold text-uppercase text-base">Bubbly Dashboard</a>
+        <nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow"><a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a href="dashboard.jsp?username=<%=user_username%>" class="navbar-brand font-weight-bold text-uppercase text-base">Fat Man Dashboard</a>
         <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
           <li class="nav-item">
             <form id="searchForm" class="ml-auto d-none d-lg-block">
@@ -74,9 +110,9 @@
               <div class="dropdown-divider"></div><a href="#" class="dropdown-item text-center"><small class="font-weight-bold headings-font-family text-uppercase">View all notifications</small></a>
             </div>
           </li>
-          <li class="nav-item dropdown ml-auto"><a id="userInfo" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img src="img/avatar-6.jpg" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow"></a>
-            <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family">Mark Stephen</strong><small>Web Developer</small></a>
-              <div class="dropdown-divider"></div><a href="#" class="dropdown-item">Settings</a><a href="#" class="dropdown-item">Activity log       </a>
+          <li class="nav-item dropdown ml-auto"><a id="userInfo" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img src="img/<%=user_img%>" alt="" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow"></a>
+            <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family"><%=username%></strong><small><%=role_name%></small></a>
+              <div class="dropdown-divider"></div><a href="#" class="dropdown-item">Settings</a><a href="#" class="dropdown-item">Activity log</a>
               <div class="dropdown-divider"></div><a href="login.jsp" class="dropdown-item">Logout</a>
             </div>
           </li>
@@ -87,10 +123,10 @@
       <div id="sidebar" class="sidebar py-3">
         <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MAIN</div>
         <ul class="sidebar-menu list-unstyled">
-              <li class="sidebar-list-item"><a href="dashboard.jsp" class="sidebar-link text-muted"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
-              <li class="sidebar-list-item"><a href="charts.jsp" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>Charts</span></a></li>
-              <li class="sidebar-list-item"><a href="tables.jsp" class="sidebar-link text-muted"><i class="o-table-content-1 mr-3 text-gray"></i><span>Tables</span></a></li>
-              <li class="sidebar-list-item"><a href="forms.jsp" class="sidebar-link text-muted active"><i class="o-survey-1 mr-3 text-gray"></i><span>Forms</span></a></li>
+              <li class="sidebar-list-item"><a href="dashboard.jsp?username=<%=user_username%>" class="sidebar-link text-muted"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
+              <li class="sidebar-list-item"><a href="charts.jsp?username=<%=user_username%>" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>Charts</span></a></li>
+              <li class="sidebar-list-item"><a href="tables.jsp?username=<%=user_username%>" class="sidebar-link text-muted"><i class="o-table-content-1 mr-3 text-gray"></i><span>Tables</span></a></li>
+              <li class="sidebar-list-item"><a href="forms.jsp?username=<%=user_username%>" class="sidebar-link text-muted active"><i class="o-survey-1 mr-3 text-gray"></i><span>Forms</span></a></li>
           <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Pages</span></a>
             <div id="pages" class="collapse">
               <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
@@ -103,20 +139,20 @@
           </li>
               <li class="sidebar-list-item"><a href="login.jsp" class="sidebar-link text-muted"><i class="o-exit-1 mr-3 text-gray"></i><span>Login</span></a></li>
         </ul>
-        <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">EXTRAS</div>
+<!--        <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">EXTRAS</div>
         <ul class="sidebar-menu list-unstyled">
               <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Demo</span></a></li>
               <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>Demo</span></a></li>
               <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Demo</span></a></li>
               <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Demo</span></a></li>
-        </ul>
+        </ul>-->
       </div>
       <div class="page-holder w-100 d-flex flex-wrap">
         <div class="container-fluid px-xl-5">
           <section class="py-5">
             <div class="row">
               <!-- Basic Form-->
-              <div class="col-lg-6 mb-5">
+<!--              <div class="col-lg-6 mb-5">
                 <div class="card">
                   <div class="card-header">
                     <h3 class="h6 text-uppercase mb-0">Basic Form</h3>
@@ -138,9 +174,9 @@
                     </form>
                   </div>
                 </div>
-              </div>
+              </div>-->
               <!-- Horizontal Form-->
-              <div class="col-lg-6 mb-5">
+<!--              <div class="col-lg-6 mb-5">
                 <div class="card">
                   <div class="card-header">
                     <h3 class="h6 text-uppercase mb-0">Horizontal Form</h3>
@@ -168,9 +204,9 @@
                     </form>
                   </div>
                 </div>
-              </div>
+              </div>-->
               <!-- Inline Form-->
-              <div class="col-lg-8 mb-5">                           
+<!--              <div class="col-lg-8 mb-5">                           
                 <div class="card">
                   <div class="card-header">
                     <h3 class="h6 text-uppercase mb-0">Inline Form</h3>
@@ -191,16 +227,16 @@
                     </form>
                   </div>
                 </div>
-              </div>
+              </div>-->
               <!-- Modal Form-->
-              <div class="col-lg-4 mb-5">
+<!--              <div class="col-lg-4 mb-5">
                 <div class="card">
                   <div class="card-header">
                     <h3 class="h6 text-uppercase mb-0">Modal Form</h3>
                   </div>
                   <div class="card-body">
                     <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Form in a simple modal </button>
-                    <!-- Modal-->
+                     Modal
                     <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
                       <div role="document" class="modal-dialog">
                         <div class="modal-content">
@@ -233,12 +269,12 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>-->
               <!-- Form Elements -->
               <div class="col-lg-12 mb-5">
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="h6 text-uppercase mb-0">All form elements</h3>
+                    <h3 class="h6 text-uppercase mb-0">Form post</h3>
                   </div>
                   <div class="card-body">
                     <form class="form-horizontal">
@@ -508,12 +544,11 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-6 text-center text-md-left text-primary">
-                <p class="mb-2 mb-md-0">Your company &copy; 2018-2020</p>
+                <p class="mb-2 mb-md-0">Fat Man Group: 2019</p>
               </div>
               <div class="col-md-6 text-center text-md-right text-gray-400">
-                <p class="mb-0">Design by <a href="https://bootstrapious.com/admin-templates" class="external text-gray-400">Bootstrapious</a></p>
-                <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
-              </div>
+                <p class="mb-0">Design by <a href="https://www.facebook.com/hau.mai.796569" class="external text-gray-400">FatManGroup</a></p>
+                 </div>
             </div>
           </div>
         </footer>

@@ -12,104 +12,56 @@ package Info;
 public class LocationInfo {
 
     //declare variables
-    int Location_id;
-    String Location_name;
-    String Location_description;
-    int Status;
+    private int location_id;
+    private String location_name;
+    private String location_description;
+    private int status;
 
     /**
-     * Create Constructor with full parameter
+     * Constructor LocationInfor
      *
-     * @param Location_id
-     * @param Location_name
-     * @param Location_description
-     * @param Status
+     * @param location_id
+     * @param location_name
+     * @param location_description
+     * @param status
      */
-    public LocationInfo(int Location_id, String Location_name, String Location_description, int Status) {
-        this.Location_id = Location_id;
-        this.Location_name = Location_name;
-        this.Location_description = Location_description;
-        this.Status = Status;
+    public LocationInfo(int location_id, String location_name, String location_description, int status) {
+        this.location_id = location_id;
+        this.location_name = location_name;
+        this.location_description = location_description;
+        this.status = status;
     }
 
-    /**
-     * Create getLocation_id
-     *
-     * @return Location_id
-     */
     public int getLocation_id() {
-        return Location_id;
+        return location_id;
     }
 
-    /**
-     * Create setLocation_id
-     *
-     * @param Location_id
-     */
-    public void setLocation_id(int Location_id) {
-        this.Location_id = Location_id;
+    public void setLocation_id(int location_id) {
+        this.location_id = location_id;
     }
 
-    /**
-     * Create getLocation_name
-     *
-     * @return Location_name
-     */
     public String getLocation_name() {
-        return Location_name;
+        return location_name;
     }
 
-    /**
-     * Create setLocation_name
-     *
-     * @param Location_name
-     */
-    public void setLocation_name(String Location_name) {
-        this.Location_name = Location_name;
+    public void setLocation_name(String location_name) {
+        this.location_name = location_name;
     }
 
-    /**
-     * Create getLocation_description
-     *
-     * @return Location_description
-     */
     public String getLocation_description() {
-        return Location_description;
+        return location_description;
     }
 
-    /**
-     * Create setLocation_description
-     *
-     * @param Location_description
-     */
-    public void setLocation_description(String Location_description) {
-        this.Location_description = Location_description;
+    public void setLocation_description(String location_description) {
+        this.location_description = location_description;
     }
 
-    /**
-     * Create getStatus
-     *
-     * @return Status
-     */
     public int getStatus() {
-        return Status;
+        return status;
     }
 
-    /**
-     * Create setStatus
-     *
-     * @param Status
-     */
-    public void setStatus(int Status) {
-        this.Status = Status;
-    }
-
-    /**
-     * Create toString return all parameter
-     */
-    @Override
-    public String toString() {
-        return Location_id + " " + Location_name + " " + Location_description + " " + Status;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
 }

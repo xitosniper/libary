@@ -13,46 +13,56 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Dell
  */
 public class PostModel {
+
     //Declare variables
     private Statement statement;
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
     private final Connection connection;
+    public static int SoDong_Trang = 4;
+    private ArrayList<PostInfo> list;
 
     /**
-     * Create PostModel constructor  to connect this application with database on mysql
+     * Create PostModel constructor to connect this application with database on
+     * mysql
      */
     public PostModel(Connection connection) {
         this.connection = connection;
     }
 
     /**
-     * Create ArrayList to pull all information of Post from database into ArrayList     *
+     * Create ArrayList to pull all information of Post from database into
+     * ArrayList
+     *
+     *
      * @return
      * @throws java.sql.SQLException
      */
     public ArrayList<PostInfo> getPost() throws SQLException {
         ArrayList<PostInfo> postInfoList = new ArrayList<>();
-        String sql = "SELECT * FROM `post` WHERE `status` = 1";
+        String sql = "SELECT * FROM `post` WHERE `status` = 1 ORDER BY `post_time` DESC";
         statement = connection.createStatement();
         resultSet = statement.executeQuery(sql);
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             postInfoList.add(new PostInfo(resultSet.getInt("post_id"), resultSet.getInt("place_id"), resultSet.getString("post_text"),
                     resultSet.getDate("post_time"), resultSet.getInt("status"), resultSet.getInt("user_id"), resultSet.getInt("editor_id")));
         }
-        return postInfoList;     
+        return postInfoList;
     }
 
     /**
-     * Create insertPost method to add new post 
+     * Create insertPost method to add new post
+     *
      * @param postInfo
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void insertPost(PostInfo postInfo) throws SQLException {
         String sql = "INSERT INTO `post`(`place_id`, `post_text`, `post_time`, `status`, `user_id`, `editor_id`) VALUES (?,?,?,?,?,?)";
@@ -63,14 +73,15 @@ public class PostModel {
         preparedStatement.setInt(4, postInfo.getStatus());
         preparedStatement.setInt(5, postInfo.getUser_id());
         preparedStatement.setInt(6, postInfo.getEditor_id());
-        
-        preparedStatement.executeUpdate();        
+
+        preparedStatement.executeUpdate();
     }
-    
+
     /**
      * Create UpdatePost method to modify information of the post
+     *
      * @param postInfo
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void updatePost(PostInfo postInfo) throws SQLException {
         String sql = "UPDATE `post` SET `place_id`=?,`post_text`=?,`post_time`=?,`status`=?,`user_id`=?,`editor_id`=? WHERE `post_id` = ?";
@@ -82,28 +93,30 @@ public class PostModel {
         preparedStatement.setInt(5, postInfo.getUser_id());
         preparedStatement.setInt(6, postInfo.getEditor_id());
         preparedStatement.setInt(7, postInfo.getPost_id());
-        
-        preparedStatement.executeUpdate(); 
+
+        preparedStatement.executeUpdate();
     }
-    
+
     /**
      * Create deletePost to set the this status equal zero (status = 0)
+     *
      * @param postInfo
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void deletePost(PostInfo postInfo) throws SQLException {
         String sql = "UPDATE `post` SET `status`=0 WHERE `post_id` = ?";
         preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setInt(1, postInfo.getPost_id());
-        
+
         preparedStatement.executeUpdate();
     }
-    
+
     /**
      * Create searchPost method to search any post by their's post_id
+     *
      * @param post_id
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
     public ArrayList<PostInfo> searchPost(PostInfo postInfo) throws SQLException {
         //pl is postList
@@ -111,13 +124,90 @@ public class PostModel {
         String sql = "SELECT `place_id`, `post_text`, `post_time`, `status`, `user_id`, `editor_id` FROM `post` WHERE `post_id` = ?";
         preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, postInfo.getPost_id());
-        
+
         resultSet = preparedStatement.executeQuery();
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             pl.add(new PostInfo(resultSet.getInt("place_id"), resultSet.getString("post_text"),
                     resultSet.getDate("post_time"), resultSet.getInt("status"), resultSet.getInt("user_id"), resultSet.getInt("editor_id")));
         }
-        
+
         return pl;
+    }
+
+    public ArrayList<PostInfo> getPaging(int page, String search, String sortColumn) {
+        try {
+            String sqlStr = "";
+            sqlStr += " SELECT *";
+            sqlStr += " FROM `post`";
+
+            if (search != "") {
+//                sqlStr += " WHERE (`place_name` like '%" + search + "%')";
+            }
+
+            if (sortColumn != "") {
+                //thuc hien sap xep
+            }
+
+            //phan trang
+            int tongSoSanPham = getNumberOfProduct(page, search, sortColumn);
+            int tongSoTrang = (int) Math.ceil(tongSoSanPham / SoDong_Trang);
+            int index = (page - 1) * SoDong_Trang;
+
+            sqlStr += " LIMIT " + index + ", " + SoDong_Trang;
+
+            this.statement = this.connection.createStatement();
+            this.resultSet = this.statement.executeQuery(sqlStr);
+            list = new ArrayList<PostInfo>();
+            while (resultSet.next()) {
+                list.add(new PostInfo(resultSet.getInt("place_id"), resultSet.getString("post_text"),
+                    resultSet.getDate("post_time"), resultSet.getInt("status"), resultSet.getInt("user_id"), resultSet.getInt("editor_id")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return this.list;
+    }
+
+    public int getNumberOfProduct(int page, String search, String sortColumn) throws SQLException {
+        String sqlStr = "";
+        sqlStr += " SELECT count(*) as soLuong ";
+        sqlStr += " FROM `post`";
+
+        if (search != "") {
+//            sqlStr += " WHERE (`place_name` like '%" + search + "%')";
+        }
+
+        this.statement = this.connection.createStatement();
+        this.resultSet = this.statement.executeQuery(sqlStr);
+        resultSet.next();
+        return resultSet.getInt("soLuong");
+    }
+
+    public String getPagingString(int currentPage, String search, String sortColumn) {
+        String strPaging = "<ul class='pagination'>";
+        try {
+            int tongSoSanPham = getNumberOfProduct(currentPage, search, sortColumn);
+            int tongSoTrang = (int) Math.ceil(tongSoSanPham / SoDong_Trang);
+            for (int stt_trang = 1; stt_trang <= tongSoTrang; stt_trang++) {
+                if (search == "") {
+                    if (stt_trang == currentPage) {
+                        strPaging += "<li class='active'><a href='?postNo=" + stt_trang + "'>" + stt_trang + "</a></li>";
+                    } else {
+                        strPaging += "<li><a href='?postNo=" + stt_trang + "'>" + stt_trang + "</a></li>";
+                    }
+                } else {
+                    if (stt_trang == currentPage) {
+                        strPaging += "<li class='active'><a href='?postNo=" + stt_trang + "&s=" + search + "'>" + stt_trang + "</a></li>";
+                    } else {
+                        strPaging += "<li><a href='?postNo=" + stt_trang + "&s=" + search + "'>" + stt_trang + "</a></li>";
+                    }
+                }
+            }
+
+            strPaging += "</ul>";
+        } catch (SQLException ex) {
+            Logger.getLogger(PlaceModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return strPaging;
     }
 }

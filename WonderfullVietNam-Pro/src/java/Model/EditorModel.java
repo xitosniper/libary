@@ -5,7 +5,6 @@
  */
 package Model;
 
-import DBLib.ConnectionLib;
 import Info.EditorInfo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,8 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  *
@@ -23,7 +20,7 @@ import java.util.Comparator;
 public class EditorModel {
 
     private ArrayList<EditorInfo> ListEditor;
-        ConnectionLib cl = new ConnectionLib();
+
     /**
      * get ArrayList
      *
@@ -38,7 +35,6 @@ public class EditorModel {
      * Stores prepared statement object Stores result set object; Stores mysql
      * statement
      */
-    private static final String tableName = "Editor";
     private static Connection conn;
     private static Statement st;
     private static PreparedStatement pst;
@@ -50,9 +46,9 @@ public class EditorModel {
      *
      * @throws SQLException
      */
-    public EditorModel() throws SQLException {
+    public EditorModel(Connection connection) throws SQLException {
         try {
-            conn = cl.getConnection();
+            this.conn = connection;
             st = conn.createStatement();
             pst = null;
             rs = null;
@@ -67,18 +63,13 @@ public class EditorModel {
     /**
      * load data from database
      */
-    public void LoadEditor() {
-        try {
-            sqlStr = "SELECT * FROM " + tableName;
-            rs = st.executeQuery(sqlStr);
-            if (rs.isBeforeFirst()) {
-                ListEditor.clear();
-                while (rs.next()) {
-                    ListEditor.add(new EditorInfo(rs.getInt("Editor_id"), rs.getString("Editor_name"), rs.getInt("Status")));
-                }
-            }
-        } catch (SQLException e) {
+    public void LoadEditor() throws SQLException {
+        sqlStr = "SELECT * FROM `editor` WHERE status = 1";
+        rs = st.executeQuery(sqlStr);
+        while (rs.next()) {
+            ListEditor.add(new EditorInfo(rs.getInt("editor_id"), rs.getDate("editor_time"), rs.getInt("status"), rs.getInt("user_id")));
         }
+
     }
 
     /**
@@ -90,15 +81,16 @@ public class EditorModel {
      * @return
      * @throws SQLException
      */
-    public boolean addEditor(int Editor_id, String Editor_time, int Status) throws SQLException {
+    public boolean addEditor(int Editor_id, String Editor_time, int Status, int user_id) throws SQLException {
         try {
-            sqlStr = "INSERT INTO `Editor`(`Editor_id`,`Editor_time`,`Status`) VALUES (?,?,?)";
+            sqlStr = "INSERT INTO `editor`(`editor_id`,`editor_time`,`status`,`user_id`) VALUES (?,?,?,?)";
             pst = conn.prepareStatement(sqlStr);
             pst.setInt(1, Editor_id);
             pst.setString(2, Editor_time);
             pst.setInt(3, Status);
+            pst.setInt(4, user_id);
             pst.executeUpdate();
-            ListEditor.add(new EditorInfo(rs.getInt("Editor_id"), rs.getString("Editor_name"), rs.getInt("Status")));
+            ListEditor.add(new EditorInfo(rs.getInt("editor_id"), rs.getDate("editor_time"), rs.getInt("status"), rs.getInt("user_id")));
             System.out.println("TRUE");
             return true;
         } catch (SQLException e) {
@@ -121,7 +113,7 @@ public class EditorModel {
      */
     public boolean updateEditor(int Editor_id, String Editor_time, int Status) throws SQLException {
         try {
-            sqlStr = "UPDATE `Editor` SET 'Editor_id'=?, 'Editor_time'=?, 'Status'=? WHERE 'Editor_id'=?";
+            sqlStr = "UPDATE `editor` SET 'editor_id'=?, 'editor_time'=?, 'status'=? WHERE 'editor_id'=?";
             pst = conn.prepareStatement(sqlStr);
             pst.setInt(1, Editor_id);
             pst.setString(2, Editor_time);
@@ -159,7 +151,7 @@ public class EditorModel {
      */
     public void DeleteEditor(EditorInfo E) throws SQLException {
         try {
-            String sql = "UPDATE `Editor` SET `status`=0 WHERE `Editor_id` = ?";
+            String sql = "UPDATE `editor` SET `status`=0 WHERE `editor_id` = ?";
             pst = conn.prepareStatement(sqlStr);
             pst.setInt(0, E.getEditor_id());
             pst.executeUpdate();

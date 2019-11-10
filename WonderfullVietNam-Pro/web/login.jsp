@@ -8,6 +8,12 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="Model.UserModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    String warning = "";
+    if(session.getAttribute("warning") != null){
+        warning = (String)session.getAttribute("warning");
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,43 +32,50 @@
         <link rel="shortcut icon" href="img/favicon.png?3">        
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <link href="css/style.css" rel="stylesheet">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+       
     </head>
     <body>
-        <div class="page-holder d-flex align-items-center">
-            <div class="container">
-                <button name="submit" type="submit" class="btn btn-primary btnBack" onclick="location.href = 'home.jsp?'">Back</button>
-                <div class="row align-items-center py-5">
-                    <div class="col-5 col-lg-7 mx-auto mb-5 mb-lg-0">
-                        <div class="pr-lg-5"><img src="img/illustration.svg" alt="" class="img-fluid"></div>
-                    </div>
-                    <div class="col-lg-5 px-lg-4">
-                        <h1 class="text-base text-primary text-uppercase mb-4">Wonderful Viet Nam</h1>
-                        <h2 class="mb-4">Welcome!</h2>
-                        <p class="text-muted">Local culture and practical experience.</p>
-                        <form id="loginForm" action="login-process.jsp" method="post" class="mt-4">
-                            <div class="form-group mb-4">
-                                <input type="text" name="username" placeholder="Username" class="form-control border-0 shadow form-control-lg" required>
-                                <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                            <div class="form-group mb-4">
-                                <input type="password" name="password" placeholder="Password" class="form-control border-0 shadow form-control-lg" required>
-                                <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                            <div class="form-group mb-4">
-                                <div class="custom-control custom-checkbox">
-                                    <input id="customCheck1" type="checkbox"  class="custom-control-input">
-                                    <label for="customCheck1" class="custom-control-label">Remember Me</label>
+        <section class="login-block">
+            <div class="page-holder d-flex align-items-center">
+                <div class="container">
+                    <button name="submit" type="submit" class="btn btn-primary btnBack" onclick="location.href = 'home.jsp?'">Back</button>
+                    <div class="row align-items-center py-5">
+                        <div class="col-5 col-lg-7 mx-auto mb-5 mb-lg-0">
+                            <div class="pr-lg-5"><img src="img/illustration.svg" alt="" class="img-fluid"></div>
+                        </div>
+                        <div class="col-lg-5 px-lg-4">
+                            <h1 class="text-base text-primary text-uppercase mb-4">Wonderful Viet Nam</h1>
+                            <h2 class="mb-4">Welcome!</h2>
+                            <p class="text-muted">Local culture and practical experience.</p>
+                            <form id="loginForm" action="login-process.jsp" method="post" class="mt-4">
+                                <div class="form-group mb-4">
+                                    <input type="text" name="username" placeholder="Username" class="form-control border-0 shadow form-control-lg" required>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
-                            </div>
-                            <button type="submit" name="submit" value="load" class="btn btn-primary shadow px-5">Log in</button>
-                        </form>
+                                <div class="form-group mb-4">
+                                    <input type="password" name="password" placeholder="Password" class="form-control border-0 shadow form-control-lg" required>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <div class="custom-control custom-checkbox">
+                                        <input id="customCheck1" type="checkbox"  class="custom-control-input">
+                                        <label for="customCheck1" class="custom-control-label">Remember Me</label>
+                                    </div>
+                                </div>
+                                <button type="submit" name="submit" value="load" class="btn btn-primary shadow px-5">Log in</button>
+                            </form>
+                        </div>
                     </div>
+                    <p class="mt-5 mb-0 text-gray-400 text-center">Design by <a href="https://www.facebook.com/hau.mai.796569" class="external text-gray-400">MaiHau</a> & FatMan Group</p>              
                 </div>
-                <p class="mt-5 mb-0 text-gray-400 text-center">Design by <a href="https://www.facebook.com/hau.mai.796569" class="external text-gray-400">MaiHau</a> & FatMan Group</p>              
             </div>
-        </div>
+        </section>
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/popper.js/umd/popper.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script>

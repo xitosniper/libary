@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import wonderful_vietnam.RoleInfo;
+import Info.RoleInfo;
 
 /**
  *
