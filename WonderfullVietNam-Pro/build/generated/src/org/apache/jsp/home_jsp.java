@@ -62,9 +62,10 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
     Connection con = ConnectionLib.getConnection();
     PlaceModel pm = new PlaceModel(con);
     ImageModel im = new ImageModel(con);
-    
+
     ArrayList<PlaceInfo> plist = pm.getPlace();
     ArrayList<ImageInfo> ilist = im.getListImage();
+    session.removeAttribute("warning");
 
       out.write("\r\n");
       out.write("<!doctype html>\r\n");
@@ -85,6 +86,19 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link rel=\"stylesheet\" href=\"vendors/nice-select/css/nice-select.css\">\r\n");
       out.write("        <!-- main css -->\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"css/style.css\">\r\n");
+      out.write("        <style>\r\n");
+      out.write("            .size-img{\r\n");
+      out.write("                height: 64px;\r\n");
+      out.write("                width: 64px;\r\n");
+      out.write("            }\r\n");
+      out.write("            .team_img {\r\n");
+      out.write("                height: 230px;\r\n");
+      out.write("                width: 210px;\r\n");
+      out.write("            }\r\n");
+      out.write("            .single-feature{\r\n");
+      out.write("                border-bottom-width: 2px;\r\n");
+      out.write("            }\r\n");
+      out.write("        </style>\r\n");
       out.write("    </head>\r\n");
       out.write("\r\n");
       out.write("    <body>\r\n");
@@ -185,16 +199,16 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                <div class=\"row\">\r\n");
       out.write("                    <!-- single-feature -->\r\n");
       out.write("                    ");
-                        
-                            for (int i = 0; i < 3; i++) {
-                                String place_name = plist.get(i).getPlace_name();
-                                String place_description = pm.printWord(plist.get(i).getPlace_description(), 100);
-                                String image_name = "";
-                                for (int j = 0; j < ilist.size(); j++) {
-                                    if (plist.get(i).getPlace_id() == ilist.get(j).getPlace_id()) {
-                                        image_name = ilist.get(j).getImage_name();
-                                    }
+
+                        for (int i = 0; i < 3; i++) {
+                            String place_name = plist.get(i).getPlace_name();
+                            String place_description = pm.printWord(plist.get(i).getPlace_description(), 100);
+                            String image_name = "";
+                            for (int j = 0; j < ilist.size(); j++) {
+                                if (plist.get(i).getPlace_id() == ilist.get(j).getPlace_id()) {
+                                    image_name = ilist.get(j).getImage_name();
                                 }
+                            }
                     
       out.write("\r\n");
       out.write("                    <div class=\"col-lg-4 col-md-6\">\r\n");
@@ -203,18 +217,19 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                <h5>");
       out.print(place_name);
       out.write("</h5>\r\n");
+      out.write("                                <div style=\"text-align: justify;\">\r\n");
       out.write("                                <p>\r\n");
       out.write("                                    ");
       out.print(place_description);
       out.write("\r\n");
       out.write("                                </p>\r\n");
+      out.write("                                </div>\r\n");
       out.write("                                <a href=\"#\" class=\"primary-btn mb-40\">Đọc Tiếp</a>\r\n");
       out.write("                            </div>\r\n");
       out.write("                            <div class=\"feature-thumb\">\r\n");
-      out.write("                                ");
+      out.write("                                <img class=\"img-fluid\" style=\"height: 128px; width: 256px;\" src=\"img/");
       out.print(image_name);
-      out.write("\r\n");
-      out.write("                                <img class=\"img-fluid\" src=\"img/DaLat.jpg\" alt=\"\">\r\n");
+      out.write("\" alt=\"\">\r\n");
       out.write("                            </div>\r\n");
       out.write("                        </div>\r\n");
       out.write("                    </div>\r\n");
@@ -224,12 +239,12 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("                    <div row>\r\n");
       out.write("                        <form class=\"col-md-12 contact_form\" action=\"#\" method=\"post\" id=\"contactForm\" novalidate=\"novalidate\">\r\n");
-      out.write("                    <div class=\" text-right\">\r\n");
-      out.write("                        <button type=\"submit\" value=\"submit\" class=\"primary-btn text-uppercase\">Xem thêm</button>\r\n");
+      out.write("                            <div class=\" text-right\">\r\n");
+      out.write("                                <button type=\"submit\" value=\"submit\" class=\"primary-btn text-uppercase\">Xem thêm</button>\r\n");
+      out.write("                            </div>\r\n");
+      out.write("                        </form>\r\n");
       out.write("                    </div>\r\n");
-      out.write("                </form>\r\n");
-      out.write("                    </div>\r\n");
-      out.write("\r\n");
+      out.write("                </div>\r\n");
       out.write("            </div>\r\n");
       out.write("        </section>\r\n");
       out.write("        <!--================ End Feature Area =================-->\r\n");
@@ -243,7 +258,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <p>\r\n");
       out.write("                            Trong đây có rất nhiều ảnh đẹp, vô xem đi mọi người ơi.\r\n");
       out.write("                        </p>\r\n");
-      out.write("                        <a href=\"#\" class=\"primary-btn\">Xem ngay</a>\r\n");
+      out.write("                        <a href=\"images.jsp\" class=\"primary-btn\">Xem ngay</a>\r\n");
       out.write("                    </div>\r\n");
       out.write("                    <div class=\"offset-lg-1 col-lg-6\">\r\n");
       out.write("                        <img class=\"cta-img img-fluid\" src=\"img/cta-img.png\" alt=\"\">\r\n");
@@ -269,7 +284,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <div class=\"col-lg-4 col-md-6\">\r\n");
       out.write("                        <div class=\"single-package\">\r\n");
       out.write("                            <div class=\"thumb\">\r\n");
-      out.write("                                <img class=\"img-fluid\" src=\"img/PhanThiet01.jpg\" alt=\"\">\t\t\t\t\t\t\t\t\r\n");
+      out.write("                                <img class=\"img-fluid\" style=\"height: 200px;\" src=\"img/PhanThiet01.jpg\" alt=\"\">\t\t\t\t\t\t\t\t\r\n");
       out.write("                            </div>\r\n");
       out.write("                            <p class=\"date\"><span>1 ST</span> <br> </p>\r\n");
       out.write("                            <div class=\"meta-top d-flex\">\r\n");
@@ -277,7 +292,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                <p class=\"ml-20\"><span class=\"fa fa-calendar\"></span> 2 April</p>\r\n");
       out.write("                            </div>\r\n");
       out.write("                            <h4>Phan Thiết</h4>\r\n");
-      out.write("                            <p>\r\n");
+      out.write("                            <p style=\"text-align: justify;\">\r\n");
       out.write("                                Phan Thiết là một thành phố trẻ, thành phố công nghiệp mới và là tỉnh lỵ, trung tâm chính trị, kinh tế, văn hóa và khoa học kỹ thuật của tỉnh Bình Thuận, Việt Nam.\r\n");
       out.write("                            </p>\r\n");
       out.write("                            <a href=\"#\" class=\"primary-btn\">Đọc Tiếp</a>\r\n");
@@ -286,7 +301,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <div class=\"col-lg-4 col-md-6\">\r\n");
       out.write("                        <div class=\"single-package\">\r\n");
       out.write("                            <div class=\"thumb\">\r\n");
-      out.write("                                <img class=\"img-fluid\" src=\"img/LangSon_SaPa.jpg\" alt=\"\">\t\t\t\t\t\t\t\t\r\n");
+      out.write("                                <img class=\"img-fluid\" style=\"height: 200px;\" src=\"img/LangSon_SaPa.jpg\" alt=\"\">\t\t\t\t\t\t\t\t\r\n");
       out.write("                            </div>\r\n");
       out.write("                            <p class=\"date\"><span>2 ND</span> <br> </p>\r\n");
       out.write("                            <div class=\"meta-top d-flex\">\r\n");
@@ -294,7 +309,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                <p class=\"ml-20\"><span class=\"fa fa-calendar\"></span> 10 Oct</p>\r\n");
       out.write("                            </div>\r\n");
       out.write("                            <h4>Lạng Sơn</h4>\r\n");
-      out.write("                            <p>\r\n");
+      out.write("                            <p style=\"text-align: justify;\">\r\n");
       out.write("                                Cảnh thiên nhiên tuyệt mĩ của Sa Pa. - Tháng 9 đến tháng 11: là thời điểm đẹp nhất trong năm ở Sapa, đây là lúc những cánh đồng lúa chín vàng rực. Vào thời ...\r\n");
       out.write("                            </p>\r\n");
       out.write("                            <a href=\"#\" class=\"primary-btn\">Đọc Tiếp</a>\r\n");
@@ -303,7 +318,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <div class=\"col-lg-4 col-md-6\">\r\n");
       out.write("                        <div class=\"single-package\">\r\n");
       out.write("                            <div class=\"thumb\">\r\n");
-      out.write("                                <img class=\"img-fluid\" src=\"img/HaiPhong_DoSon.jpg\" alt=\"\">\t\t\t\t\t\t\t\t\r\n");
+      out.write("                                <img class=\"img-fluid\" style=\"height: 200px;\" src=\"img/HaiPhong_DoSon.jpg\" alt=\"\">\t\t\t\t\t\t\t\t\r\n");
       out.write("                            </div>\r\n");
       out.write("                            <p class=\"date\"><span>3 RD</span> <br> </p>\r\n");
       out.write("                            <div class=\"meta-top d-flex\">\r\n");
@@ -311,8 +326,8 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                <p class=\"ml-20\"><span class=\"fa fa-calendar\"></span> 5 Dec</p>\r\n");
       out.write("                            </div>\r\n");
       out.write("                            <h4>Đồ Sơn</h4>\r\n");
-      out.write("                            <p>\r\n");
-      out.write("                                Đồ Sơn là một quận thuộc thành phố Hải Phòng, cách trung tâm thành phố khoảng 22 km về hướng đông nam.\r\n");
+      out.write("                            <p style=\"text-align: justify;\">\r\n");
+      out.write("                                Đồ Sơn là một quận thuộc thành phố Hải Phòng, cách trung tâm thành phố khoảng 22 km về hướng đông nam. Đây là địa điểm đẹp thu hút hàng trăm nghàn lượt...\r\n");
       out.write("                            </p>\r\n");
       out.write("                            <a href=\"#\" class=\"primary-btn\">Đọc Tiếp</a>\r\n");
       out.write("                        </div>\r\n");
@@ -329,7 +344,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <div class=\"col-lg-12\">\r\n");
       out.write("                        <div class=\"main_title\">\r\n");
       out.write("                            <p>We’re Offering these Popular Places</p>\r\n");
-      out.write("                            <h1>Những địa hình phổ biến ở Việt Nam</h1>\r\n");
+      out.write("                            <h1>Những điểm nhấn vẻ đẹp Việt Nam</h1>\r\n");
       out.write("                            <span class=\"title-widget-bg\"></span>\r\n");
       out.write("                        </div>\r\n");
       out.write("                    </div>\r\n");
@@ -395,7 +410,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <div class=\"col-lg-12\">\r\n");
       out.write("                        <div class=\"main_title\">\r\n");
       out.write("                            <p>We’re Offering these Team Members</p>\r\n");
-      out.write("                            <h1>Các Thành Viên Trong Team</h1>\r\n");
+      out.write("                            <h1>Fat Man Team Members</h1>\r\n");
       out.write("                            <span class=\"title-widget-bg\"></span>\r\n");
       out.write("                        </div>\r\n");
       out.write("                    </div>\r\n");
@@ -404,7 +419,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <div class=\"col-lg-3 col-md-6\">\r\n");
       out.write("                        <div class=\"team_item\">\r\n");
       out.write("                            <div class=\"team_img\">\r\n");
-      out.write("                                <img class=\"img-fluid w-100\" src=\"img/team/team-1.jpg\" alt=\"\">\r\n");
+      out.write("                                <img class=\"img-fluid w-100\" src=\"img/team/hau.jpg\" alt=\"\">\r\n");
       out.write("                                <div class=\"hover\">\r\n");
       out.write("                                    <h4>Mr. Hậu</h4>\r\n");
       out.write("                                    <p>Leader</p>\r\n");
@@ -415,7 +430,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <div class=\"col-lg-3 col-md-6\">\r\n");
       out.write("                        <div class=\"team_item\">\r\n");
       out.write("                            <div class=\"team_img\">\r\n");
-      out.write("                                <img class=\"img-fluid w-100\" src=\"img/team/team-2.jpg\" alt=\"\">\r\n");
+      out.write("                                <img class=\"img-fluid w-100\" src=\"img/team/an.jpg\" alt=\"\">\r\n");
       out.write("                                <div class=\"hover\">\r\n");
       out.write("                                    <h4>Mr. An</h4>\r\n");
       out.write("                                    <p>Member</p>\r\n");
@@ -426,7 +441,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <div class=\"col-lg-3 col-md-6\">\r\n");
       out.write("                        <div class=\"team_item\">\r\n");
       out.write("                            <div class=\"team_img\">\r\n");
-      out.write("                                <img class=\"img-fluid w-100\" src=\"img/team/team-3.jpg\" alt=\"\">\r\n");
+      out.write("                                <img class=\"img-fluid w-100\" src=\"img/team/tu.jpg\" alt=\"\">\r\n");
       out.write("                                <div class=\"hover\">\r\n");
       out.write("                                    <h4>Mr. Tú</h4>\r\n");
       out.write("                                    <p>Member</p>\r\n");
@@ -437,7 +452,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <div class=\"col-lg-3 col-md-6\">\r\n");
       out.write("                        <div class=\"team_item\">\r\n");
       out.write("                            <div class=\"team_img\">\r\n");
-      out.write("                                <img class=\"img-fluid w-100\" src=\"img/team/team-4.jpg\" alt=\"\">\r\n");
+      out.write("                                <img class=\"img-fluid w-100\" src=\"img/team/dinh.jpg\" alt=\"\">\r\n");
       out.write("                                <div class=\"hover\">\r\n");
       out.write("                                    <h4>Mr. Đỉnh</h4>\r\n");
       out.write("                                    <p>Member</p>\r\n");
@@ -501,9 +516,8 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            </ul>\r\n");
       out.write("                            <div class=\"wow fadeIn\" data-wow-duration=\"1s\">\r\n");
       out.write("                                <p>\r\n");
-      out.write("                                    As conscious traveling Paup ers we must always be oncerned about our dear <br>\r\n");
-      out.write("                                    Mother Earth. If you think about it, you travel across her faceand She is the host <br>\r\n");
-      out.write("                                    to your journey.\r\n");
+      out.write("                                    Admin - Leader's FatMan Group <br>\r\n");
+      out.write("                                    Student from FPT University <br>\r\n");
       out.write("                                </p>\r\n");
       out.write("                            </div>\r\n");
       out.write("                        </div>\r\n");
@@ -521,9 +535,8 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            </ul>\r\n");
       out.write("                            <div class=\"wow fadeIn\" data-wow-duration=\"1s\">\r\n");
       out.write("                                <p>\r\n");
-      out.write("                                    As conscious traveling Paup ers we must always be oncerned about our dear <br>\r\n");
-      out.write("                                    Mother Earth. If you think about it, you travel across her faceand She is the host <br>\r\n");
-      out.write("                                    to your journey.\r\n");
+      out.write("                                    Editor - Member's FatMan Group <br>\r\n");
+      out.write("                                    Student from FPT University <br>\r\n");
       out.write("                                </p>\r\n");
       out.write("                            </div>\r\n");
       out.write("                        </div>\r\n");
@@ -541,8 +554,8 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            </ul>\r\n");
       out.write("                            <div class=\"wow fadeIn\" data-wow-duration=\"1s\">\r\n");
       out.write("                                <p>\r\n");
-      out.write("                                    As conscious traveling Paup ers we must always be oncerned about our dear Mother Earth. If you think about it, you travel\r\n");
-      out.write("                                    across her face <br> and She is the host to your journey.\r\n");
+      out.write("                                    Writer - Member's FatMan Group <br>\r\n");
+      out.write("                                    Student from FPT University <br>\r\n");
       out.write("                                </p>\r\n");
       out.write("                            </div>\r\n");
       out.write("                        </div>\r\n");
@@ -560,9 +573,8 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            </ul>\r\n");
       out.write("                            <div class=\"wow fadeIn\" data-wow-duration=\"1s\">\r\n");
       out.write("                                <p>\r\n");
-      out.write("                                    As conscious traveling Paup ers we must always be oncerned about our dear <br>\r\n");
-      out.write("                                    Mother Earth. If you think about it, you travel across her faceand She is the host <br>\r\n");
-      out.write("                                    to your journey.\r\n");
+      out.write("                                    Guest - Member's FatMan Group <br>\r\n");
+      out.write("                                    Student from FPT University <br>\r\n");
       out.write("                                </p>\r\n");
       out.write("                            </div>\r\n");
       out.write("                        </div>\r\n");
@@ -571,25 +583,25 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                <div class=\"owl-thumbs d-flex justify-content-center\" data-slider-id=\"1\">\r\n");
       out.write("                    <div class=\"owl-thumb-item\">\r\n");
       out.write("                        <div>\r\n");
-      out.write("                            <img class=\"img-fluid rounded-circle\" src=\"img/testimonial/t1.jpg\" alt=\"\">\r\n");
+      out.write("                            <img class=\"img-fluid rounded-circle size-img\" src=\"img/team/hau.jpg\" alt=\"\">\r\n");
       out.write("                        </div>\r\n");
       out.write("                        <div class=\"overlay overlay-grad \"></div>\r\n");
       out.write("                    </div>\r\n");
       out.write("                    <div class=\"owl-thumb-item\">\r\n");
       out.write("                        <div>\r\n");
-      out.write("                            <img class=\"img-fluid rounded-circle\" src=\"img/testimonial/t2.jpg\" alt=\"\">\r\n");
+      out.write("                            <img class=\"img-fluid rounded-circle size-img\" src=\"img/team/an.jpg\" alt=\"\">\r\n");
       out.write("                        </div>\r\n");
       out.write("                        <div class=\"overlay overlay-grad\"></div>\r\n");
       out.write("                    </div>\r\n");
       out.write("                    <div class=\"owl-thumb-item\">\r\n");
       out.write("                        <div>\r\n");
-      out.write("                            <img class=\"img-fluid rounded-circle\" src=\"img/testimonial/t3.jpg\" alt=\"\">\r\n");
+      out.write("                            <img class=\"img-fluid rounded-circle size-img\" src=\"img/team/tu.jpg\" alt=\"\">\r\n");
       out.write("                        </div>\r\n");
       out.write("                        <div class=\"overlay overlay-grad\"></div>\r\n");
       out.write("                    </div>\r\n");
       out.write("                    <div class=\"owl-thumb-item\">\r\n");
       out.write("                        <div>\r\n");
-      out.write("                            <img class=\"img-fluid rounded-circle\" src=\"img/testimonial/t4.jpg\" alt=\"\">\r\n");
+      out.write("                            <img class=\"img-fluid rounded-circle size-img\" src=\"img/team/dinh.jpg\" alt=\"\">\r\n");
       out.write("                        </div>\r\n");
       out.write("                        <div class=\"overlay overlay-grad\"></div>\r\n");
       out.write("                    </div>\r\n");
@@ -615,7 +627,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <div class=\"col-lg-4 col-md-6 col-sm-6\">\r\n");
       out.write("                        <div class=\"single-blog\">\r\n");
       out.write("                            <div class=\"blog-thumb\">\r\n");
-      out.write("                                <img class=\"img-fluid\" src=\"img/DaLat02.jpg\" alt=\"\">\r\n");
+      out.write("                                <img class=\"img-fluid\" style=\"height: 200px;\" src=\"img/DaLat02.jpg\" alt=\"\">\r\n");
       out.write("                            </div>\r\n");
       out.write("                            <div class=\"blog-details\">\r\n");
       out.write("                                <div class=\"blog-meta d-flex\">\r\n");
@@ -647,7 +659,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <div class=\"col-lg-4 col-md-6 col-sm-6\">\r\n");
       out.write("                        <div class=\"single-blog\">\r\n");
       out.write("                            <div class=\"blog-thumb\">\r\n");
-      out.write("                                <img class=\"img-fluid\" src=\"img/DaNang_HoiAn.jpg\" alt=\"\">\r\n");
+      out.write("                                <img class=\"img-fluid\" style=\"height: 200px;\"  src=\"img/DaNang_HoiAn.jpg\" alt=\"\">\r\n");
       out.write("                            </div>\r\n");
       out.write("                            <div class=\"blog-details\">\r\n");
       out.write("                                <div class=\"blog-meta d-flex\">\r\n");
@@ -679,7 +691,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <div class=\"col-lg-4 col-md-6 col-sm-6\">\r\n");
       out.write("                        <div class=\"single-blog\">\r\n");
       out.write("                            <div class=\"blog-thumb\">\r\n");
-      out.write("                                <img class=\"img-fluid\" src=\"img/LangSon_SaPa02.jpg\" alt=\"\">\r\n");
+      out.write("                                <img class=\"img-fluid\" style=\"height: 200px;\" src=\"img/LangSon_SaPa02.jpg\" alt=\"\">\r\n");
       out.write("                            </div>\r\n");
       out.write("                            <div class=\"blog-details\">\r\n");
       out.write("                                <div class=\"blog-meta d-flex\">\r\n");
@@ -702,7 +714,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                <h5>\r\n");
       out.write("                                    <a href=\"#\">SaPa - Lạng Sơn</a>\r\n");
       out.write("                                </h5>\r\n");
-      out.write("                                <p>Tên gọi của thị xã xuất phát từ tên thị trấn Sa Pa cũ. Thị trấn này ra đời vào cỡ 1905, khi người Pháp phát hiện đây là địa điểm lý tưởng để xây dựng khu nghỉ ...</p>\r\n");
+      out.write("                                <p>Tên gọi của thị xã xuất phát từ tên thị trấn Sa Pa cũ. Thị trấn này ra đời vào cỡ 1905, khi người Pháp phát hiện...</p>\r\n");
       out.write("                            </div>\r\n");
       out.write("                        </div>\r\n");
       out.write("                    </div>\r\n");
@@ -719,7 +731,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <div class=\"col-lg-3 col-md-6 col-sm-6\">\r\n");
       out.write("                            <div class=\"single-footer-widget\">\r\n");
       out.write("                                <h5 class=\"footer_title\">About Agency</h5>\r\n");
-      out.write("                                <p class=\"about-text\">The world has become so fast paced that people don’t want to stand by reading a page of information, they would much rather look at a presentation and understand the message. It has come to a point where images and videos are used more to </p>\r\n");
+      out.write("                                <p class=\"about-text\">The world has become so fast paced that people don’t want to stand by reading a page of information, they would much rather look at a presentation and understand the message. It has come to a point where images and videos are used more to.</p>\r\n");
       out.write("                            </div>\r\n");
       out.write("                        </div>\r\n");
       out.write("                        <div class=\"col-lg-2 col-md-6 col-sm-6\">\r\n");
@@ -788,7 +800,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <div class=\"row\">\r\n");
       out.write("                        <div class=\"col-lg-6 col-md-12\">\r\n");
       out.write("                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->\r\n");
-      out.write("                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class=\"fa fa-heart-o\" aria-hidden=\"true\"></i> by <a href=\"https://colorlib.com\" target=\"_blank\">Colorlib</a>\r\n");
+      out.write("                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class=\"fa fa-heart-o\" aria-hidden=\"true\"></i> by <a href=\"https://www.facebook.com/hau.mai.796569\" target=\"_blank\">FatMan</a>\r\n");
       out.write("                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->\r\n");
       out.write("                            </p>\r\n");
       out.write("                        </div>\r\n");

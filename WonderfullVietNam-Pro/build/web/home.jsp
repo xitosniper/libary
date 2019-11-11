@@ -48,7 +48,9 @@
                 height: 230px;
                 width: 210px;
             }
-
+            .single-feature{
+                border-bottom-width: 2px;
+            }
         </style>
     </head>
 
@@ -78,6 +80,7 @@
                                     <ul class="dropdown-menu">
                                         <li class="nav-item"><a class="nav-link" href="about-us.jsp">About</a></li>
                                         <li class="nav-item"><a class="nav-link" href="book-trip.jsp">Book trip</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="images.jsp">Images</a></li>
                                         <li class="nav-item"><a class="nav-link" href="elements.jsp">Elements</a></li>
                                     </ul>
                                 </li>
@@ -87,6 +90,7 @@
                                     <ul class="dropdown-menu">
                                         <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
                                         <li class="nav-item"><a class="nav-link" href="single-blog.jsp">Blog Details</a></li>
+                                        
                                     </ul>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
@@ -164,13 +168,15 @@
                         <div class="single-feature">
                             <div class="feature-details">
                                 <h5><%=place_name%></h5>
+                                <div style="text-align: justify;">
                                 <p>
                                     <%=place_description%>
                                 </p>
+                                </div>
                                 <a href="#" class="primary-btn mb-40">Đọc Tiếp</a>
                             </div>
                             <div class="feature-thumb">
-                                <img class="img-fluid" src="img/<%=image_name%>" alt="">
+                                <img class="img-fluid" style="height: 128px; width: 256px;" src="img/<%=image_name%>" alt="">
                             </div>
                         </div>
                     </div>
@@ -183,8 +189,8 @@
                             </div>
                         </form>
                     </div>
-
                 </div>
+            </div>
         </section>
         <!--================ End Feature Area =================-->
 
@@ -197,7 +203,7 @@
                         <p>
                             Trong đây có rất nhiều ảnh đẹp, vô xem đi mọi người ơi.
                         </p>
-                        <a href="#" class="primary-btn">Xem ngay</a>
+                        <a href="images.jsp" class="primary-btn">Xem ngay</a>
                     </div>
                     <div class="offset-lg-1 col-lg-6">
                         <img class="cta-img img-fluid" src="img/cta-img.png" alt="">
@@ -223,7 +229,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="single-package">
                             <div class="thumb">
-                                <img class="img-fluid" src="img/PhanThiet01.jpg" alt="">								
+                                <img class="img-fluid" style="height: 200px;" src="img/PhanThiet01.jpg" alt="">								
                             </div>
                             <p class="date"><span>1 ST</span> <br> </p>
                             <div class="meta-top d-flex">
@@ -231,7 +237,7 @@
                                 <p class="ml-20"><span class="fa fa-calendar"></span> 2 April</p>
                             </div>
                             <h4>Phan Thiết</h4>
-                            <p>
+                            <p style="text-align: justify;">
                                 Phan Thiết là một thành phố trẻ, thành phố công nghiệp mới và là tỉnh lỵ, trung tâm chính trị, kinh tế, văn hóa và khoa học kỹ thuật của tỉnh Bình Thuận, Việt Nam.
                             </p>
                             <a href="#" class="primary-btn">Đọc Tiếp</a>
@@ -240,7 +246,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="single-package">
                             <div class="thumb">
-                                <img class="img-fluid" src="img/LangSon_SaPa.jpg" alt="">								
+                                <img class="img-fluid" style="height: 200px;" src="img/LangSon_SaPa.jpg" alt="">								
                             </div>
                             <p class="date"><span>2 ND</span> <br> </p>
                             <div class="meta-top d-flex">
@@ -248,7 +254,7 @@
                                 <p class="ml-20"><span class="fa fa-calendar"></span> 10 Oct</p>
                             </div>
                             <h4>Lạng Sơn</h4>
-                            <p>
+                            <p style="text-align: justify;">
                                 Cảnh thiên nhiên tuyệt mĩ của Sa Pa. - Tháng 9 đến tháng 11: là thời điểm đẹp nhất trong năm ở Sapa, đây là lúc những cánh đồng lúa chín vàng rực. Vào thời ...
                             </p>
                             <a href="#" class="primary-btn">Đọc Tiếp</a>
@@ -257,7 +263,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="single-package">
                             <div class="thumb">
-                                <img class="img-fluid" src="img/HaiPhong_DoSon.jpg" alt="">								
+                                <img class="img-fluid" style="height: 200px;" src="img/HaiPhong_DoSon.jpg" alt="">								
                             </div>
                             <p class="date"><span>3 RD</span> <br> </p>
                             <div class="meta-top d-flex">
@@ -265,8 +271,8 @@
                                 <p class="ml-20"><span class="fa fa-calendar"></span> 5 Dec</p>
                             </div>
                             <h4>Đồ Sơn</h4>
-                            <p>
-                                Đồ Sơn là một quận thuộc thành phố Hải Phòng, cách trung tâm thành phố khoảng 22 km về hướng đông nam.
+                            <p style="text-align: justify;">
+                                Đồ Sơn là một quận thuộc thành phố Hải Phòng, cách trung tâm thành phố khoảng 22 km về hướng đông nam. Đây là địa điểm đẹp thu hút hàng trăm nghàn lượt...
                             </p>
                             <a href="#" class="primary-btn">Đọc Tiếp</a>
                         </div>
@@ -283,7 +289,7 @@
                     <div class="col-lg-12">
                         <div class="main_title">
                             <p>We’re Offering these Popular Places</p>
-                            <h1>Những địa hình phổ biến ở Việt Nam</h1>
+                            <h1>Những điểm nhấn vẻ đẹp Việt Nam</h1>
                             <span class="title-widget-bg"></span>
                         </div>
                     </div>
@@ -566,7 +572,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-blog">
                             <div class="blog-thumb">
-                                <img class="img-fluid" src="img/DaLat02.jpg" alt="">
+                                <img class="img-fluid" style="height: 200px;" src="img/DaLat02.jpg" alt="">
                             </div>
                             <div class="blog-details">
                                 <div class="blog-meta d-flex">
@@ -598,7 +604,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-blog">
                             <div class="blog-thumb">
-                                <img class="img-fluid" src="img/DaNang_HoiAn.jpg" alt="">
+                                <img class="img-fluid" style="height: 200px;"  src="img/DaNang_HoiAn.jpg" alt="">
                             </div>
                             <div class="blog-details">
                                 <div class="blog-meta d-flex">
@@ -630,7 +636,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-blog">
                             <div class="blog-thumb">
-                                <img class="img-fluid" src="img/LangSon_SaPa02.jpg" alt="">
+                                <img class="img-fluid" style="height: 200px;" src="img/LangSon_SaPa02.jpg" alt="">
                             </div>
                             <div class="blog-details">
                                 <div class="blog-meta d-flex">
@@ -653,7 +659,7 @@
                                 <h5>
                                     <a href="#">SaPa - Lạng Sơn</a>
                                 </h5>
-                                <p>Tên gọi của thị xã xuất phát từ tên thị trấn Sa Pa cũ. Thị trấn này ra đời vào cỡ 1905, khi người Pháp phát hiện đây là địa điểm lý tưởng để xây dựng khu nghỉ ...</p>
+                                <p>Tên gọi của thị xã xuất phát từ tên thị trấn Sa Pa cũ. Thị trấn này ra đời vào cỡ 1905, khi người Pháp phát hiện...</p>
                             </div>
                         </div>
                     </div>

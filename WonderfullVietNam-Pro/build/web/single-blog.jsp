@@ -51,6 +51,7 @@
 								<ul class="dropdown-menu">
 									<li class="nav-item"><a class="nav-link" href="about-us.jsp">About</a></li>
 									<li class="nav-item"><a class="nav-link" href="book-trip.jsp">Book trip</a></li>
+                                                                        <li class="nav-item"><a class="nav-link" href="images.jsp">Images</a></li>
 									<li class="nav-item"><a class="nav-link" href="elements.jsp">Elements</a></li>
 								</ul>
 							</li>
@@ -60,6 +61,7 @@
 								<ul class="dropdown-menu">
 									<li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
 									<li class="nav-item"><a class="nav-link" href="single-blog.jsp">Blog Details</a></li>
+                                                                        
 								</ul>
 							</li>
 							<li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>

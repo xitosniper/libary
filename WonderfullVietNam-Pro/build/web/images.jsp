@@ -72,7 +72,7 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                             <ul class="nav navbar-nav menu_nav ml-auto">
-                                <li class="nav-item active"><a class="nav-link" href="home.jsp">Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href="home.jsp">Home</a></li>
                                 <li class="nav-item"><a class="nav-link" href="packages.jsp">Packages</a></li>
                                 <li class="nav-item submenu dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -84,7 +84,7 @@
                                         <li class="nav-item"><a class="nav-link" href="elements.jsp">Elements</a></li>
                                     </ul>
                                 </li>
-                                <li class="nav-item submenu dropdown">
+                                <li class="nav-item submenu dropdown active">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                        aria-expanded="false">Blog</a>
                                     <ul class="dropdown-menu">
@@ -137,150 +137,6 @@
             </div>
         </section>
         <!--================ End Home Banner Area =================-->
-
-        <!--================ Start Feature Area =================-->
-        <section class="feature-area section_gap_top">
-            <div class="container">
-                <!-- Miền Bắc -->
-                <div class="row align-items-end justify-content-left">
-                    <div class="col-lg-12">
-                        <div class="main_title">
-                            <p>Cảnh đẹp Việt Nam</p>
-                            <h1>Miền Bắc</h1>
-                            <span class="title-widget-bg"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <!-- single-feature -->
-                    <%
-                        for (int i = 0; i < 3; i++) {
-                            String place_name = plist.get(i).getPlace_name();
-                            String place_description = pm.printWord(plist.get(i).getPlace_description(), 100);
-                            String image_name = "";
-                            for (int j = 0; j < ilist.size(); j++) {
-                                if (plist.get(i).getPlace_id() == ilist.get(j).getPlace_id()) {
-                                    image_name = ilist.get(j).getImage_name();
-                                }
-                            }
-                    %>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-feature">
-                            <div class="feature-details">
-                                <h5><%=place_name%></h5>
-                                <div style="text-align: justify;">
-                                <p>
-                                    <%=place_description%>
-                                </p>
-                                </div>
-                                <a href="#" class="primary-btn mb-40">Đọc Tiếp</a>
-                            </div>
-                            <div class="feature-thumb">
-                                <img class="img-fluid" style="height: 128px; width: 256px;" src="img/<%=image_name%>" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <%                        }
-                    %>
-                    <div row>
-                        <form class="col-md-12 contact_form" action="#" method="post" id="contactForm" novalidate="novalidate">
-                            <div class=" text-right">
-                                <button type="submit" value="submit" class="primary-btn text-uppercase">Xem thêm</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--================ End Feature Area =================-->
-
-        <!--================ Start CTA Area =================-->
-        <div class="cta-area section_gap">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-5">
-                        <h1>Xem tất cả hình ảnh</h1>
-                        <p>
-                            Trong đây có rất nhiều ảnh đẹp, vô xem đi mọi người ơi.
-                        </p>
-                        <a href="images.jsp" class="primary-btn">Xem ngay</a>
-                    </div>
-                    <div class="offset-lg-1 col-lg-6">
-                        <img class="cta-img img-fluid" src="img/cta-img.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--================ End CTA Area =================-->
-
-        <!--================ Start Trip Package Area =================-->
-        <section class="package-area section_gap_top">
-            <div class="container">
-                <div class="row d-flex justify-content-center">
-                    <div class="ol-lg-12">
-                        <div class="main_title">
-                            <p>We’re Offering these Good Places</p>
-                            <h1>TOP 3 địa điểm đẹp nổi tiếng</h1>
-                            <span class="title-widget-bg"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-package">
-                            <div class="thumb">
-                                <img class="img-fluid" style="height: 200px;" src="img/PhanThiet01.jpg" alt="">								
-                            </div>
-                            <p class="date"><span>1 ST</span> <br> </p>
-                            <div class="meta-top d-flex">
-                                <p><span class="fa fa-location-arrow"></span> Miền Nam</p>
-                                <p class="ml-20"><span class="fa fa-calendar"></span> 2 April</p>
-                            </div>
-                            <h4>Phan Thiết</h4>
-                            <p style="text-align: justify;">
-                                Phan Thiết là một thành phố trẻ, thành phố công nghiệp mới và là tỉnh lỵ, trung tâm chính trị, kinh tế, văn hóa và khoa học kỹ thuật của tỉnh Bình Thuận, Việt Nam.
-                            </p>
-                            <a href="#" class="primary-btn">Đọc Tiếp</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-package">
-                            <div class="thumb">
-                                <img class="img-fluid" style="height: 200px;" src="img/LangSon_SaPa.jpg" alt="">								
-                            </div>
-                            <p class="date"><span>2 ND</span> <br> </p>
-                            <div class="meta-top d-flex">
-                                <p><span class="fa fa-location-arrow"></span> Miền Bắc</p>
-                                <p class="ml-20"><span class="fa fa-calendar"></span> 10 Oct</p>
-                            </div>
-                            <h4>Lạng Sơn</h4>
-                            <p style="text-align: justify;">
-                                Cảnh thiên nhiên tuyệt mĩ của Sa Pa. - Tháng 9 đến tháng 11: là thời điểm đẹp nhất trong năm ở Sapa, đây là lúc những cánh đồng lúa chín vàng rực. Vào thời ...
-                            </p>
-                            <a href="#" class="primary-btn">Đọc Tiếp</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-package">
-                            <div class="thumb">
-                                <img class="img-fluid" style="height: 200px;" src="img/HaiPhong_DoSon.jpg" alt="">								
-                            </div>
-                            <p class="date"><span>3 RD</span> <br> </p>
-                            <div class="meta-top d-flex">
-                                <p><span class="fa fa-location-arrow"></span> Miền Trung</p>
-                                <p class="ml-20"><span class="fa fa-calendar"></span> 5 Dec</p>
-                            </div>
-                            <h4>Đồ Sơn</h4>
-                            <p style="text-align: justify;">
-                                Đồ Sơn là một quận thuộc thành phố Hải Phòng, cách trung tâm thành phố khoảng 22 km về hướng đông nam. Đây là địa điểm đẹp thu hút hàng trăm nghàn lượt...
-                            </p>
-                            <a href="#" class="primary-btn">Đọc Tiếp</a>
-                        </div>
-                    </div>
-                </div>
-            </div>	
-        </section>
-        <!--================ End Trip Package Area =================-->
 
         <!--================ Start Popular Places Area =================-->
         <section class="popular-places-area section_gap_bottom">
@@ -347,102 +203,6 @@
             </div>
         </section>
         <!--================ End Popular Places Area =================-->
-
-        <!--================Team Area =================-->
-        <section class="team_area">
-            <div class="container">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-lg-12">
-                        <div class="main_title">
-                            <p>We’re Offering these Team Members</p>
-                            <h1>Fat Man Team Members</h1>
-                            <span class="title-widget-bg"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row team_inner">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="team_item">
-                            <div class="team_img">
-                                <img class="img-fluid w-100" src="img/team/hau.jpg" alt="">
-                                <div class="hover">
-                                    <h4>Mr. Hậu</h4>
-                                    <p>Leader</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="team_item">
-                            <div class="team_img">
-                                <img class="img-fluid w-100" src="img/team/an.jpg" alt="">
-                                <div class="hover">
-                                    <h4>Mr. An</h4>
-                                    <p>Member</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="team_item">
-                            <div class="team_img">
-                                <img class="img-fluid w-100" src="img/team/tu.jpg" alt="">
-                                <div class="hover">
-                                    <h4>Mr. Tú</h4>
-                                    <p>Member</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="team_item">
-                            <div class="team_img">
-                                <img class="img-fluid w-100" src="img/team/dinh.jpg" alt="">
-                                <div class="hover">
-                                    <h4>Mr. Đỉnh</h4>
-                                    <p>Member</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--================End Team Area =================-->
-
-        <!--================ Start CTA Area =================-->
-        <div class="cta-area2 section_gap">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-5">
-                        <img class="cta-img2 img-fluid" src="img/cta-img2.png" alt="">
-                    </div>
-                    <div class="offset-lg-2 col-lg-5">
-                        <h1>Subscribe <br>
-                            for our Newsletter</h1>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-                            tempor incididunt ut labore et dolore magna aliqua.
-                        </p>
-                        <div class="" id="mc_embed_signup2">	
-                            <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                  method="get" class="form-inline">
-                                <div class="d-flex flex-row">
-                                    <input class="form-control" name="EMAIL" placeholder="Enter Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email Address '"
-                                           required="" type="email">
-                                    <button class="click-btn btn text-uppercase">subscribe</button>
-                                    <div style="position: absolute; left: -5000px;">
-                                        <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
-                                    </div>
-                                </div>
-                                <div class="info"></div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--================ End CTA Area =================-->
 
         <!--================ Start Testimonials Area =================-->
         <section class="testimonials-area section_gap">
@@ -604,7 +364,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-blog">
                             <div class="blog-thumb">
-                                <img class="img-fluid" style="height: 200px;"  src="img/DaNang_HoiAn.jpg" alt="">
+                                <img class="img-fluid" style="height: 200px;" src="img/DaNang_HoiAn.jpg" alt="">
                             </div>
                             <div class="blog-details">
                                 <div class="blog-meta d-flex">
