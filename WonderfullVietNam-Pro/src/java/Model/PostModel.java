@@ -118,13 +118,12 @@ public class PostModel {
      * @return
      * @throws SQLException
      */
-    public ArrayList<PostInfo> searchPost(PostInfo postInfo) throws SQLException {
+    public ArrayList<PostInfo> searchPost(int id) throws SQLException {
         //pl is postList
         ArrayList<PostInfo> pl = new ArrayList<>();
-        String sql = "SELECT `place_id`, `post_text`, `post_time`, `status`, `user_id`, `editor_id` FROM `post` WHERE `post_id` = ?";
+        String sql = "SELECT * FROM `post` WHERE `post_id` = ?";
         preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, postInfo.getPost_id());
-
+        preparedStatement.setInt(1, id);
         resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             pl.add(new PostInfo(resultSet.getInt("place_id"), resultSet.getString("post_text"),
@@ -191,15 +190,15 @@ public class PostModel {
             for (int stt_trang = 1; stt_trang <= tongSoTrang; stt_trang++) {
                 if (search == "") {
                     if (stt_trang == currentPage) {
-                        strPaging += "<li class='active'><a href='?postNo=" + stt_trang + "'>" + stt_trang + "</a></li>";
+                        strPaging += "<li class='page-item active'><a class='page-link' href='?postNo=" + stt_trang + "'>" + stt_trang + "</a></li>";
                     } else {
-                        strPaging += "<li><a href='?postNo=" + stt_trang + "'>" + stt_trang + "</a></li>";
+                        strPaging += "<li class='page-item'><a class='page-link' href='?postNo=" + stt_trang + "'>" + stt_trang + "</a></li>";
                     }
                 } else {
                     if (stt_trang == currentPage) {
-                        strPaging += "<li class='active'><a href='?postNo=" + stt_trang + "&s=" + search + "'>" + stt_trang + "</a></li>";
+                        strPaging += "<li class='page-item active'><a class='page-link' href='?postNo=" + stt_trang + "&s=" + search + "'>" + stt_trang + "</a></li>";
                     } else {
-                        strPaging += "<li><a href='?postNo=" + stt_trang + "&s=" + search + "'>" + stt_trang + "</a></li>";
+                        strPaging += "<li class='page-item'><a class='page-link' href='?postNo=" + stt_trang + "&s=" + search + "'>" + stt_trang + "</a></li>";
                     }
                 }
             }

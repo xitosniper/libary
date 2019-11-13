@@ -74,7 +74,7 @@
                             <ul class="nav navbar-nav menu_nav ml-auto">
                                 <li class="nav-item"><a class="nav-link" href="home.jsp">Home</a></li>
                                 <li class="nav-item"><a class="nav-link" href="packages.jsp">Packages</a></li>
-                                <li class="nav-item submenu dropdown">
+                                <li class="nav-item submenu dropdown active">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                        aria-expanded="false">Pages</a>
                                     <ul class="dropdown-menu">
@@ -84,17 +84,16 @@
                                         <li class="nav-item"><a class="nav-link" href="elements.jsp">Elements</a></li>
                                     </ul>
                                 </li>
-                                <li class="nav-item submenu dropdown active">
+                                <li class="nav-item submenu dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                        aria-expanded="false">Blog</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="single-blog.jsp">Blog Details</a></li>
                                         
                                     </ul>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
-                                <!--<li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>-->
+<!--                                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>-->
                             </ul>
                             <ul class="nav navbar-nav ml-auto">
                                 <li class="nav-item">
@@ -123,21 +122,23 @@
         </header>
         <!--================ End Header Menu Area =================-->
 
-        <!--================ Start Home Banner Area =================-->
-        <section class="home_banner_area">
-            <div class="banner_inner">
+        <!--================Home Banner Area =================-->
+        <section class="banner_area ">
+            <div class="banner_inner overlay d-flex align-items-center">
                 <div class="container">
-                    <div class="row fullscreen d-flex align-items-center justify-content-center">
-                        <div class="banner_content">
-                            <!--<p>Our knowledge, your experiences</p>-->
-                            <h2>Wonderful Viet Nam</h2>
+                    <div class="banner_content">
+                        <div class="page_link">
+                            <a href="home.jsp">Home</a>
+                            <a href="about-us.jsp">Images</a>
                         </div>
+                        <h2>Images</h2>
                     </div>
                 </div>
             </div>
         </section>
-        <!--================ End Home Banner Area =================-->
-
+        <!--================End Home Banner Area =================-->
+        <br>
+        <br>
         <!--================ Start Popular Places Area =================-->
         <section class="popular-places-area section_gap_bottom">
             <div class="container">

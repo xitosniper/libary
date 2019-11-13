@@ -89,7 +89,7 @@
                                        aria-expanded="false">Blog</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="single-blog.jsp">Blog Details</a></li>
+<!--                                        <li class="nav-item"><a class="nav-link" href="single-blog.jsp">Blog Details</a></li>-->
                                         
                                     </ul>
                                 </li>

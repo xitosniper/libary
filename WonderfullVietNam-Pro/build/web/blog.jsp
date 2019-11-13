@@ -4,7 +4,38 @@
     Author     : haumqce130436@fpt.edu.vn
 --%>
 
+<%@page import="Info.PostInfo"%>
+<%@page import="Info.ImageInfo"%>
+<%@page import="Info.PlaceInfo"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Model.PostModel"%>
+<%@page import="Model.ImageModel"%>
+<%@page import="Model.PlaceModel"%>
+<%@page import="DBLib.ConnectionLib"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    int postNo = 1;
+    String s = "";
+    String sortColumn = "";
+    if (request.getParameter("s") != null) {
+        s = request.getParameter("s");
+    }
+    if (request.getParameter("postNo") != null) {
+        postNo = Integer.parseInt(request.getParameter("postNo"));
+    }
+    Connection con = ConnectionLib.getConnection();
+    PlaceModel pm = new PlaceModel(con);
+    ImageModel im = new ImageModel(con);
+    PostModel pom = new PostModel(con);
+    ArrayList<PlaceInfo> plist = pm.getPlace();
+    ArrayList<ImageInfo> ilist = im.getListImage();
+    ArrayList<PostInfo> polist = pom.getPost();
+
+    ArrayList<PostInfo> postInfos = pom.getPaging(postNo, s, sortColumn);
+
+    session.removeAttribute("warning");
+%>
 <!doctype html>
 <html lang="en">
 
@@ -24,6 +55,17 @@
         <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
         <!-- main css -->
         <link rel="stylesheet" href="css/style.css">
+
+        <style>
+            .image{
+                width: 550px !important;
+                height: 270px !important;
+            }
+            .image-mien {
+                height: 200px;
+                width: 330px;
+            }
+        </style>
     </head>
 
     <body>
@@ -61,12 +103,12 @@
                                        aria-expanded="false">Blog</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="single-blog.jsp">Blog Details</a></li>
-                                        
+<!--                                        <li class="nav-item"><a class="nav-link" href="single-blog.jsp">Blog Details</a></li>-->
+
                                     </ul>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
-<!--                                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>-->
+                                <!--                                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>-->
                             </ul>
                             <ul class="nav navbar-nav ml-auto">
                                 <li class="nav-item">
@@ -117,42 +159,42 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="categories_post">
-                            <img src="img/blog/cat-post/cat-post-3.jpg" alt="post">
+                            <img class="image-mien" src="img/blog/cat-post/mienbac.jpg" alt="post">
                             <div class="categories_details">
                                 <div class="categories_text">
                                     <a href="blog-details.jsp">
-                                        <h5>Social Life</h5>
+                                        <h5>Miền Bắc</h5>
                                     </a>
                                     <div class="border_line"></div>
-                                    <p>Enjoy your social life together</p>
+                                    <p>Vẻ đẹp thuần khiết</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="categories_post">
-                            <img src="img/blog/cat-post/cat-post-2.jpg" alt="post">
+                            <img class="image-mien" src="img/blog/cat-post/mientrung.jpg" alt="post">
                             <div class="categories_details">
                                 <div class="categories_text">
                                     <a href="blog-details.jsp">
-                                        <h5>Politics</h5>
+                                        <h5>Miền Trung</h5>
                                     </a>
                                     <div class="border_line"></div>
-                                    <p>Be a part of politics</p>
+                                    <p>Vẻ đẹp nhẹ nhàng, tinh tế</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="categories_post">
-                            <img src="img/blog/cat-post/cat-post-1.jpg" alt="post">
+                            <img class="image-mien" src="img/blog/cat-post/miennam.jpg" alt="post">
                             <div class="categories_details">
                                 <div class="categories_text">
                                     <a href="blog-details.jsp">
-                                        <h5>Food</h5>
+                                        <h5>Miền Nam</h5>
                                     </a>
                                     <div class="border_line"></div>
-                                    <p>Let the food be finished</p>
+                                    <p>Giao thoa văn hóa, vẻ đẹp mặn mà</p>
                                 </div>
                             </div>
                         </div>
@@ -168,6 +210,28 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="blog_left_sidebar">
+                            <%
+                                String place_name = "";
+                                String image = "";
+                                String post_text = "";
+                                int post_id = -1;
+                                //loop of post list
+                                for (int i = 0; i < postInfos.size(); i++) {
+                                    post_text = postInfos.get(i).getPost_text();
+                                    
+                                    for (int j = 0; j < plist.size(); j++) {
+                                        for (int k = 0; k < ilist.size(); k++) {
+                                            if (postInfos.get(i).getPlace_id() == plist.get(j).getPlace_id() && postInfos.get(i).getPlace_id() == ilist.get(k).getPlace_id()) {
+                                                 post_id = postInfos.get(i).getPost_id();
+                                                if (ilist.get(k).getPlace_id() == ilist.get(k + 1).getPlace_id()) {
+                                                    image = ilist.get(k).getImage_name();
+                                                    k++;
+                                                }
+                                               
+                                                place_name = plist.get(j).getPlace_name();
+
+                                                
+                            %>
                             <article class="row blog_item">
                                 <div class="col-md-3">
                                     <div class="blog_info text-right">
@@ -187,165 +251,37 @@
                                 </div>
                                 <div class="col-md-9">
                                     <div class="blog_post">
-                                        <img src="img/blog/main-blog/m-blog-1.jpg" alt="">
+                                        <img class="image" src="img/<%=image%>" alt="">
                                         <div class="blog_details">
-                                            <a href="single-blog.jsp">
-                                                <h2>Astronomy Binoculars A Great Alternative</h2>
+                                            <a href="single-blog.jsp?id=<%=post_id%>">
+                                                <h2><%=place_name%></h2>
                                             </a>
-                                            <p>MCSE boot camps have its supporters and its detractors. Some people do not
-                                                understand why you should have to spend money on boot camp when you can get
-                                                the MCSE study materials yourself at a fraction.</p>
-                                            <a href="single-blog.jsp" class="blog_btn">View More</a>
+                                            <p><%=post_text%></p>
+                                            <a href="single-blog.jsp?id=<%=post_id%>" class="blog_btn">Chi tiết</a>
                                         </div>
                                     </div>
                                 </div>
                             </article>
-                            <article class="row blog_item">
-                                <div class="col-md-3">
-                                    <div class="blog_info text-right">
-                                        <div class="post_tag">
-                                            <a href="#">Food,</a>
-                                            <a class="active" href="#">Technology,</a>
-                                            <a href="#">Politics,</a>
-                                            <a href="#">Lifestyle</a>
-                                        </div>
-                                        <ul class="blog_meta list">
-                                            <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                            <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                            <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                            <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="blog_post">
-                                        <img src="img/blog/main-blog/m-blog-2.jpg" alt="">
-                                        <div class="blog_details">
-                                            <a href="single-blog.jsp">
-                                                <h2>The Basics Of Buying A Telescope</h2>
-                                            </a>
-                                            <p>MCSE boot camps have its supporters and its detractors. Some people do not
-                                                understand why you should have to spend money on boot camp when you can get
-                                                the MCSE study materials yourself at a fraction.</p>
-                                            <a href="single-blog.jsp" class="blog_btn">View More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                            <article class="row blog_item">
-                                <div class="col-md-3">
-                                    <div class="blog_info text-right">
-                                        <div class="post_tag">
-                                            <a href="#">Food,</a>
-                                            <a class="active" href="#">Technology,</a>
-                                            <a href="#">Politics,</a>
-                                            <a href="#">Lifestyle</a>
-                                        </div>
-                                        <ul class="blog_meta list">
-                                            <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                            <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                            <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                            <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="blog_post">
-                                        <img src="img/blog/main-blog/m-blog-3.jpg" alt="">
-                                        <div class="blog_details">
-                                            <a href="single-blog.jsp">
-                                                <h2>The Glossary Of Telescopes</h2>
-                                            </a>
-                                            <p>MCSE boot camps have its supporters and its detractors. Some people do not
-                                                understand why you should have to spend money on boot camp when you can get
-                                                the MCSE study materials yourself at a fraction.</p>
-                                            <a href="single-blog.jsp" class="blog_btn">View More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                            <article class="row blog_item">
-                                <div class="col-md-3">
-                                    <div class="blog_info text-right">
-                                        <div class="post_tag">
-                                            <a href="#">Food,</a>
-                                            <a class="active" href="#">Technology,</a>
-                                            <a href="#">Politics,</a>
-                                            <a href="#">Lifestyle</a>
-                                        </div>
-                                        <ul class="blog_meta list">
-                                            <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                            <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                            <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                            <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="blog_post">
-                                        <img src="img/blog/main-blog/m-blog-4.jpg" alt="">
-                                        <div class="blog_details">
-                                            <a href="single-blog.jsp">
-                                                <h2>The Night Sky</h2>
-                                            </a>
-                                            <p>MCSE boot camps have its supporters and its detractors. Some people do not
-                                                understand why you should have to spend money on boot camp when you can get
-                                                the MCSE study materials yourself at a fraction.</p>
-                                            <a href="single-blog.jsp" class="blog_btn">View More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                            <article class="row blog_item">
-                                <div class="col-md-3">
-                                    <div class="blog_info text-right">
-                                        <div class="post_tag">
-                                            <a href="#">Food,</a>
-                                            <a class="active" href="#">Technology,</a>
-                                            <a href="#">Politics,</a>
-                                            <a href="#">Lifestyle</a>
-                                        </div>
-                                        <ul class="blog_meta list">
-                                            <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                            <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                            <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                            <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="blog_post">
-                                        <img src="img/blog/main-blog/m-blog-5.jpg" alt="">
-                                        <div class="blog_details">
-                                            <a href="single-blog.jsp">
-                                                <h2>Telescopes 101</h2>
-                                            </a>
-                                            <p>MCSE boot camps have its supporters and its detractors. Some people do not
-                                                understand why you should have to spend money on boot camp when you can get
-                                                the MCSE study materials yourself at a fraction.</p>
-                                            <a href="single-blog.jsp" class="blog_btn">View More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
+                            <%
+
+                                            }
+                                        }
+                                    }
+                                }%>
                             <nav class="blog-pagination justify-content-center d-flex">
                                 <ul class="pagination">
                                     <li class="page-item">
                                         <a href="#" class="page-link" aria-label="Previous">
                                             <span aria-hidden="true">
-                                                <span class="lnr lnr-chevron-left"></span>
+<!--                                                <span class="lnr lnr-chevron-left"></span>-->
                                             </span>
                                         </a>
                                     </li>
-                                    <li class="page-item"><a href="#" class="page-link">01</a></li>
-                                    <li class="page-item active"><a href="#" class="page-link">02</a></li>
-                                    <li class="page-item"><a href="#" class="page-link">03</a></li>
-                                    <li class="page-item"><a href="#" class="page-link">04</a></li>
-                                    <li class="page-item"><a href="#" class="page-link">09</a></li>
+                                    <li class="paging"><%=pom.getPagingString(postNo, s, sortColumn)%></li>
                                     <li class="page-item">
                                         <a href="#" class="page-link" aria-label="Next">
                                             <span aria-hidden="true">
-                                                <span class="lnr lnr-chevron-right"></span>
+<!--                                                <span class="lnr lnr-chevron-right"></span>-->
                                             </span>
                                         </a>
                                     </li>
@@ -356,12 +292,14 @@
                     <div class="col-lg-4">
                         <div class="blog_right_sidebar">
                             <aside class="single_sidebar_widget search_widget">
+                                <form class="form_search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search Posts">
+                                    <input type="text" class="form-control" value="<%=s%>" name="s" placeholder="Search Posts">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
+                                        <button class="btn btn-default" type="submit"><i class="lnr lnr-magnifier"></i></button>
                                     </span>
                                 </div><!-- /input-group -->
+                                </form>
                                 <div class="br"></div>
                             </aside>
                             <aside class="single_sidebar_widget author_widget">
