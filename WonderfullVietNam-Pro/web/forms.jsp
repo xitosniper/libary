@@ -4,6 +4,8 @@
     Author     : haumqce130436@fpt.edu.vn
 --%>
 
+<%@page import="Info.PlaceInfo"%>
+<%@page import="Model.PlaceModel"%>
 <%@page import="Info.RoleInfo"%>
 <%@page import="Info.UserInfo"%>
 <%@page import="java.util.ArrayList"%>
@@ -15,23 +17,29 @@
 <%
     int role_id = -1;
     int user_id = -1;
+    int place_id = -1;
+    int editor_id = 0;
     String user_username = "";
     String username = "";
     String role_name = "";
     String user_img = "";
+    
     if (request.getParameter("username") != null) {
         user_username = request.getParameter("username");
     }
     Connection con = ConnectionLib.getConnection();
     UserModel um = new UserModel(con);
     RoleModel rm = new RoleModel(con);
+    PlaceModel pm = new PlaceModel(con);
 
+    ArrayList<PlaceInfo> pis = pm.getPlace();
     ArrayList<UserInfo> uis = um.getUser();
     for (UserInfo elem : uis) {
         if (user_username.equals(elem.getUser_username())) {
             username = elem.getUser_name();
             role_id = elem.getRole_id();
             user_img = elem.getUser_img();
+            user_id = elem.getUser_id();
         }
     }
     ArrayList<RoleInfo> ris = rm.getRole();
@@ -151,34 +159,55 @@
                                         <h3 class="h6 text-uppercase mb-0">Form post</h3>
                                     </div>
                                     <div class="card-body">
-                                        <form class="form-horizontal" enctype="multipart/form-data" action="post-process.jsp">
-                                            <div class="form-group row">
-                                                <label class="col-md-3 form-control-label">Title</label>
-                                                <div class="col-md-9">
-                                                    <input type="text" class="form-control" name="place_name" >
+                                        <form class="form-horizontal" name="upload" enctype="multipart/form-data" method="post" action="addPost">
+                                            
+                                            
+                                            <input name="txtUser_id" value="<%=user_id%>" type="hidden">
+                                            
+                                            <input name="txtEditor_id" value="<%=editor_id%>" type="hidden">
+                                            
+                                            <input name="txtUsername" value="<%=user_username%>" type="hidden">
+                                            
+                                            
+                                            <div class="input-group-icon mt-10">
+                                                <div class="form-select" id="default-select">
+                                                    <label>Place name</label>
+                                                    <select name="txtPlace_id" style="margin-left: 200px;">
+                                                        <%
+                                                            for (int i = 0; i < pis.size(); i++) {
+
+                                                                place_id = pis.get(i).getPlace_id();
+                                                        %>
+                                                        <option value="<%=place_id%>"><%=pis.get(i).getPlace_name()%></option>
+                                                        <%  }
+                                                        
+                                                        %>
+                                                    </select>
                                                 </div>
                                             </div>
-                                            <div class="line"></div>
+
                                             <div class="form-group row">
                                                 <label class="col-md-3 form-control-label">Content</label>
                                                 <div class="col-md-9">
-                                                    <textarea class="form-control" style="height:300px;" name="post_text"></textarea>
+                                                    <textarea class="form-control" style="height:300px;" name="txtPost_text"></textarea>
                                                 </div>
                                             </div>
-                                            <div class="line"></div>
+                                            
                                             <div class="form-group row">
                                                 <label class="col-md-3 form-control-label">Image</label>
                                                 <div class="col-md-9">
-                                                    <input type="file" name="password" multiple="multiple" name="image_name" class="form-control">
+                                                    <input type="file" name="image_name" multiple="multiple" class="form-control">
                                                 </div>
                                             </div>
-                                            <div class="line"></div>
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-9 ml-auto">
                                                     <button type="reset" class="btn btn-secondary">Cancel</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    <button type="submit" name="submit" value="upload" class="btn btn-primary">Save changes</button>
                                                 </div>
                                             </div>
+                                                    
+                                                    
                                         </form>
                                     </div>
                                 </div>

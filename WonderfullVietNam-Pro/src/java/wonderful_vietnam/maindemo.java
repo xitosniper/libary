@@ -7,7 +7,9 @@ package wonderful_vietnam;
 
 import DBLib.ConnectionLib;
 import Info.EditorInfo;
+import Info.PostInfo;
 import Model.EditorModel;
+import Model.PostModel;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,13 +22,11 @@ public class maindemo {
 
     public static void main(String[] args) throws SQLException {
         Connection con = ConnectionLib.getConnection();
-        EditorModel em = new EditorModel(con);
-        ArrayList<EditorInfo> list = em.getListEditor();
-        for (EditorInfo editorInfo : list) {
-            System.out.println(editorInfo.getEditor_time());
-        }
-        if (list.isEmpty()) {
-            System.out.println("1");
+        PostModel pm = new PostModel(con);
+        pm.insertPost(0, "test", "2019-11-10 10:00:00", 1, 2, 1);
+        ArrayList<PostInfo> list = pm.getPost();
+        for (PostInfo postInfo : list) {
+            System.out.println(postInfo.getPost_text());
         }
     }
 }

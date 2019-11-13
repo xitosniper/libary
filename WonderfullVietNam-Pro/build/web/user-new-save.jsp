@@ -18,7 +18,7 @@
     if (request.getParameter("trang") != null) {
         p = Integer.parseInt(request.getParameter("trang"));
     }
-    response.sendRedirect("user-list.jsp?username="+user_username+"p=" + p + "&search=" + s);
+    response.sendRedirect("user-list.jsp?username="+user_username+"&p=" + p + "&search=" + s);
 %>
 <!DOCTYPE html>
 <html>

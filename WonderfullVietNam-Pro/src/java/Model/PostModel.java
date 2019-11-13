@@ -8,6 +8,7 @@ package Model;
 import DBLib.ConnectionLib;
 import Info.PostInfo;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -57,22 +58,39 @@ public class PostModel {
         }
         return postInfoList;
     }
+    
+        public ArrayList<PostInfo> getAllPost() throws SQLException {
+        ArrayList<PostInfo> postInfoList = new ArrayList<>();
+        String sql = "SELECT * FROM `post`";
+        statement = connection.createStatement();
+        resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) {
+            postInfoList.add(new PostInfo(resultSet.getInt("post_id"), resultSet.getInt("place_id"), resultSet.getString("post_text"),
+                    resultSet.getDate("post_time"), resultSet.getInt("status"), resultSet.getInt("user_id"), resultSet.getInt("editor_id")));
+        }
+        return postInfoList;
+    }
 
     /**
-     * Create insertPost method to add new post
-     *
-     * @param postInfo
-     * @throws SQLException
+     * 
+     * @param place_id
+     * @param post_text
+     * @param post_time
+     * @param status
+     * @param user_id
+     * @param editor_id
+     * @throws SQLException 
      */
-    public void insertPost(PostInfo postInfo) throws SQLException {
-        String sql = "INSERT INTO `post`(`place_id`, `post_text`, `post_time`, `status`, `user_id`, `editor_id`) VALUES (?,?,?,?,?,?)";
+    public void insertPost(int place_id, String post_text, String post_time, int status, int user_id, int editor_id) throws SQLException {
+        String sql = "INSERT INTO `post`(`post_id`,`place_id`, `post_text`, `post_time`, `status`, `user_id`, `editor_id`) VALUES (?,?,?,?,?,?,?)";
         preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        preparedStatement.setInt(1, postInfo.getPlace_id());
-        preparedStatement.setString(2, postInfo.getPost_text());
-        preparedStatement.setDate(3, postInfo.getPost_time());
-        preparedStatement.setInt(4, postInfo.getStatus());
-        preparedStatement.setInt(5, postInfo.getUser_id());
-        preparedStatement.setInt(6, postInfo.getEditor_id());
+        preparedStatement.setInt(1, getAllPost().size());
+        preparedStatement.setInt(2, place_id);
+        preparedStatement.setString(3, post_text);
+        preparedStatement.setString(4, post_time);
+        preparedStatement.setInt(5, status);
+        preparedStatement.setInt(6, user_id);
+        preparedStatement.setInt(7, editor_id);
 
         preparedStatement.executeUpdate();
     }

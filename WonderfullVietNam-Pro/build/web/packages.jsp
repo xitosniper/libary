@@ -53,7 +53,7 @@
                                         <li class="nav-item"><a class="nav-link" href="about-us.jsp">About</a></li>
                                         <li class="nav-item"><a class="nav-link" href="book-trip.jsp">Book trip</a></li>
                                         <li class="nav-item"><a class="nav-link" href="images.jsp">Images</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="elements.jsp">Elements</a></li>
+<!--                                        <li class="nav-item"><a class="nav-link" href="elements.jsp">Elements</a></li>-->
                                     </ul>
                                 </li>
                                 <li class="nav-item submenu dropdown">
@@ -356,20 +356,20 @@
         </div>
         <!--================ End CTA Area =================-->
 
-        <!--================  start footer Area =================-->
+        <!--================  Start Footer Area =================-->
         <footer class="footer-area">
             <div class="footer_top section_gap_top">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="single-footer-widget">
-                                <h5 class="footer_title">About Agency</h5>
-                                <p class="about-text">The world has become so fast paced that people don’t want to stand by reading a page of information, they would much rather look at a presentation and understand the message. It has come to a point where images and videos are used more to </p>
+                                <h5 class="footer_title">Thông tin pháp lý</h5>
+                                <p class="about-text">Trang website phát triển trên nguyên tắc cộng đồng mở. Phục vụ cho sự phát triển cộng đồng và nổ lực vì Việt Nam.</p>
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-6 col-sm-6">
                             <div class="single-footer-widget">
-                                <h5 class="footer_title">Navigation Links</h5>
+                                <h5 class="footer_title">Các liên kết</h5>
                                 <div class="row">
                                     <div class="col-5">
                                         <ul class="list">
@@ -392,8 +392,8 @@
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="single-footer-widget">
-                                <h5>Newsletter</h5>
-                                <p>For business professionals caught between high OEM price and mediocre print and graphic output, </p>
+                                <h5>Bản tin</h5>
+                                <p>Đối với các chuyên gia kinh doanh bị bắt giữa giá OEM cao và sản lượng đồ họa và in ấn tầm thường, </p>
                                 <div class="footer-newsletter" id="mc_embed_signup">	
                                     <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
                                           method="get" class="form-inline">
@@ -433,7 +433,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
                             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://www.facebook.com/hau.mai.796569" target="_blank">FatMan</a>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             </p>
                         </div>
@@ -449,7 +449,7 @@
                 </div>
             </div>
         </footer>
-        <!--================ End footer Area =================-->
+        <!--================ End Footer Area =================-->
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

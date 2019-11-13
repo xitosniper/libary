@@ -3,6 +3,8 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import Info.PlaceInfo;
+import Model.PlaceModel;
 import Info.RoleInfo;
 import Info.UserInfo;
 import java.util.ArrayList;
@@ -58,20 +60,27 @@ public final class forms_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
 
     int role_id = -1;
-    int user_id = -1;
+    int user_id = 1;
+    int place_id = -1;
+    int editor_id = 0;
     String user_username = "";
     String username = "";
     String role_name = "";
     String user_img = "";
+    
     if (request.getParameter("username") != null) {
         user_username = request.getParameter("username");
     }
     Connection con = ConnectionLib.getConnection();
     UserModel um = new UserModel(con);
     RoleModel rm = new RoleModel(con);
+    PlaceModel pm = new PlaceModel(con);
 
+    ArrayList<PlaceInfo> pis = pm.getPlace();
     ArrayList<UserInfo> uis = um.getUser();
     for (UserInfo elem : uis) {
         if (user_username.equals(elem.getUser_username())) {
@@ -214,32 +223,60 @@ public final class forms_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                        <h3 class=\"h6 text-uppercase mb-0\">Form post</h3>\n");
       out.write("                                    </div>\n");
       out.write("                                    <div class=\"card-body\">\n");
-      out.write("                                        <form class=\"form-horizontal\" enctype=\"multipart/form-data\" action=\"post-process.jsp\">\n");
-      out.write("                                            <div class=\"form-group row\">\n");
-      out.write("                                                <label class=\"col-md-3 form-control-label\">Title</label>\n");
-      out.write("                                                <div class=\"col-md-9\">\n");
-      out.write("                                                    <input type=\"text\" class=\"form-control\" name=\"place_name\" >\n");
+      out.write("                                        <form class=\"form-horizontal\" name=\"upload\" enctype=\"multipart/form-data\" method=\"post\" action=\"addPost\">\n");
+      out.write("                                            <input name=\"txtUser_id\" value=\"");
+      out.print(user_id);
+      out.write("\" type=\"hidden\">\n");
+      out.write("                                            <input name=\"txtEditor_id\" value=\"");
+      out.print(editor_id);
+      out.write("\" type=\"hidden\">\n");
+      out.write("                                            <input name=\"txtUsername\" type=\"hidden\" value=\"");
+      out.print(user_username);
+      out.write("\">\n");
+      out.write("                                            <div class=\"input-group-icon mt-10\">\n");
+      out.write("                                                <div class=\"form-select\" id=\"default-select\">\n");
+      out.write("                                                    <label>Place name</label>\n");
+      out.write("                                                    <select name=\"txtPlace_id\" style=\"margin-left: 200px;\">\n");
+      out.write("                                                        ");
+
+                                                            for (int i = 0; i < pis.size(); i++) {
+
+                                                                place_id = pis.get(i).getPlace_id();
+                                                        
+      out.write("\n");
+      out.write("                                                        <option value=\"");
+      out.print(place_id);
+      out.write('"');
+      out.write('>');
+      out.print(pis.get(i).getPlace_name());
+      out.write("</option>\n");
+      out.write("                                                        ");
+  }
+                                                        
+                                                        
+      out.write("\n");
+      out.write("                                                    </select>\n");
       out.write("                                                </div>\n");
       out.write("                                            </div>\n");
-      out.write("                                            <div class=\"line\"></div>\n");
+      out.write("\n");
       out.write("                                            <div class=\"form-group row\">\n");
       out.write("                                                <label class=\"col-md-3 form-control-label\">Content</label>\n");
       out.write("                                                <div class=\"col-md-9\">\n");
-      out.write("                                                    <textarea class=\"form-control\" style=\"height:300px;\" name=\"post_text\"></textarea>\n");
+      out.write("                                                    <textarea class=\"form-control\" style=\"height:300px;\" name=\"txtPost_text\"></textarea>\n");
       out.write("                                                </div>\n");
       out.write("                                            </div>\n");
-      out.write("                                            <div class=\"line\"></div>\n");
+      out.write("                                            \n");
       out.write("                                            <div class=\"form-group row\">\n");
       out.write("                                                <label class=\"col-md-3 form-control-label\">Image</label>\n");
       out.write("                                                <div class=\"col-md-9\">\n");
-      out.write("                                                    <input type=\"file\" name=\"password\" multiple=\"multiple\" name=\"image_name\" class=\"form-control\">\n");
+      out.write("                                                    <input type=\"file\" name=\"image_name\" multiple=\"multiple\" class=\"form-control\">\n");
       out.write("                                                </div>\n");
       out.write("                                            </div>\n");
-      out.write("                                            <div class=\"line\"></div>\n");
+      out.write("                                            \n");
       out.write("                                            <div class=\"form-group row\">\n");
       out.write("                                                <div class=\"col-md-9 ml-auto\">\n");
       out.write("                                                    <button type=\"reset\" class=\"btn btn-secondary\">Cancel</button>\n");
-      out.write("                                                    <button type=\"submit\" class=\"btn btn-primary\">Save changes</button>\n");
+      out.write("                                                    <button type=\"submit\" name=\"submit\" class=\"btn btn-primary\">Save changes</button>\n");
       out.write("                                                </div>\n");
       out.write("                                            </div>\n");
       out.write("                                        </form>\n");

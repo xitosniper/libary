@@ -27,7 +27,7 @@
     UserModel um = new UserModel(connection);
 
     um.deleteUser(Integer.parseInt(request.getParameter("id")));
-    response.sendRedirect("user-list.jsp?username="+ user_username + "trang=" + p + "&s=" + s);
+    response.sendRedirect("user-list.jsp?username="+ user_username + "&trang=" + p + "&s=" + s);
 %>
 <!DOCTYPE html>
 <html>

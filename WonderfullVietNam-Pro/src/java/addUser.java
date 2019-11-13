@@ -30,7 +30,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  */
 public class addUser extends HttpServlet {
 
-    private final String UPLOAD_DIRECTORY = "..\\img";
+    private final String UPLOAD_DIRECTORY = "C:\\Users\\ASUS\\Documents\\GitHub\\libary\\WonderfullVietNam-Pro\\web\\img";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -179,7 +179,7 @@ public class addUser extends HttpServlet {
                     "Sorry this Servlet only handles file upload request");
         }
 
-        request.getRequestDispatcher("/user-new-save.jsp?username" + username + "trang=" + pageNumber).forward(request, response);
+        request.getRequestDispatcher("/user-new-save.jsp?username=" + username + "&trang=" + pageNumber).forward(request, response);
     }
 
     /**

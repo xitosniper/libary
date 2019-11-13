@@ -80,7 +80,7 @@
                                         <li class="nav-item"><a class="nav-link" href="about-us.jsp">About</a></li>
                                         <li class="nav-item"><a class="nav-link" href="book-trip.jsp">Book trip</a></li>
                                         <li class="nav-item"><a class="nav-link" href="images.jsp">Images</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="elements.jsp">Elements</a></li>
+<!--                                        <li class="nav-item"><a class="nav-link" href="elements.jsp">Elements</a></li>-->
                                     </ul>
                                 </li>
                                 <li class="nav-item submenu dropdown">
@@ -88,12 +88,9 @@
                                        aria-expanded="false">Blog</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
-                                        <!--                                        <li class="nav-item"><a class="nav-link" href="single-blog.jsp">Blog Details</a></li>-->
-
                                     </ul>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
-                                <!--<li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>-->
                             </ul>
                             <ul class="nav navbar-nav ml-auto">
                                 <li class="nav-item">
@@ -129,7 +126,7 @@
                     <div class="row fullscreen d-flex align-items-center justify-content-center">
                         <div class="banner_content">
                             <!--<p>Our knowledge, your experiences</p>-->
-                            <h2>Wonderful Viet Nam</h2>
+                            <h2>Wonderful Việt Nam</h2>
                         </div>
                     </div>
                 </div>
@@ -192,7 +189,7 @@
                 </div>
             </div>
             <!--================ Kết thúc khu vực miền bắc =================-->
-            
+
             <!--================ Khu vực miền Trung  =================-->
             <div class="container">
                 <!-- Miền Bắc -->
@@ -243,7 +240,7 @@
                 </div>
             </div>
             <!--================ Kết thúc khu vực miền trung =================-->
-            
+
             <!--================ Khu vực miền nam  =================-->
             <div class="container">
                 <!-- Miền Bắc -->
@@ -302,7 +299,7 @@
             </div>
             <!--================ Kết thúc khu vực miền nam =================-->
         </section>
-                    
+
 
 
 
@@ -335,7 +332,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="ol-lg-12">
                         <div class="main_title">
-                            <p>We’re Offering these Good Places</p>
+                            <p>Những địa điểm tốt dành cho bạn</p>
                             <h1>TOP 3 địa điểm đẹp nổi tiếng</h1>
                             <span class="title-widget-bg"></span>
                         </div>
@@ -404,7 +401,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-12">
                         <div class="main_title">
-                            <p>We’re Offering these Popular Places</p>
+                            <p>Những địa điểm tốt dành cho bạn</p>
                             <h1>Những điểm nhấn vẻ đẹp Việt Nam</h1>
                             <span class="title-widget-bg"></span>
                         </div>
@@ -414,49 +411,45 @@
             <div class="popular-places-slider owl-carousel">
                 <a href="img/places/p1.jpg" class="single-popular-places d-block img-gal">
                     <div class="popular-places-img">
-                        <img src="img/places/p1.jpg" alt="">
+                        <img style="height: 570px;" src="img/places/halong.jpg" alt="">
                     </div>
                     <div class="popular-places-text">
-                        <p>Proper Guided Tour</p>
+                        <p>Vẻ đẹp thuần tinh tế các miền biển</p>
                         <h4>
-                            Santorini Island Dream Holiday
-                            and Fun package
+                            Vịnh Hạ Long - vẻ đẹp nguyên sơ đến thời điểm hiện tại. Một trong những nơi bạn nên đến 1 lần trong đời.
                         </h4>
                     </div>
                 </a>
                 <a href="img/places/p2.jpg" class="single-popular-places d-block img-gal">
                     <div class="popular-places-img">
-                        <img src="img/places/p2.jpg" alt="">
+                        <img style="height: 570px;" src="img/places/danang.jpg" alt="">
                     </div>
                     <div class="popular-places-text">
-                        <p>Proper Guided Tour</p>
+                        <p>Công trình mang vẻ đẹp hoang sơ</p>
                         <h4>
-                            Santorini Island Dream Holiday
-                            and Fun package
+                            Đà Nẵng - nơi được mệnh danh là “thành phố đáng đến nhất Việt Nam”.
                         </h4>
                     </div>
                 </a>
                 <a href="img/places/p3.jpg" class="single-popular-places d-block img-gal">
                     <div class="popular-places-img">
-                        <img src="img/places/p3.jpg" alt="">
+                        <img style="height: 570px;" src="img/places/hoian.jpg" alt="">
                     </div>
                     <div class="popular-places-text">
-                        <p>Proper Guided Tour</p>
+                        <p>Một bức tranh mộc mạc, giản dị và nên thơ</p>
                         <h4>
-                            Santorini Island Dream Holiday
-                            and Fun package
+                            Hội An - mang trong mình những vẻ đẹp lôi cuốn khác nhau.
                         </h4>
                     </div>
                 </a>
                 <a href="img/places/p4.jpg" class="single-popular-places d-block img-gal">
                     <div class="popular-places-img">
-                        <img src="img/places/p4.jpg" alt="">
+                        <img style="height: 570px;" src="img/places/cantho.jpg" alt="">
                     </div>
                     <div class="popular-places-text">
-                        <p>Proper Guided Tour</p>
+                        <p>Vẻ đẹp người Miền Tây</p>
                         <h4>
-                            Santorini Island Dream Holiday
-                            and Fun package
+                            Cần Thơ - trung tâm của vùng đồng bằng sông Cửu Long, du lịch Cần Thơ mang đến cho bạn nhiều trải nghiệm đặc trưng và thú vị của miền Tây. 
                         </h4>
                     </div>
                 </a>
@@ -470,8 +463,8 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-12">
                         <div class="main_title">
-                            <p>We’re Offering these Team Members</p>
-                            <h1>Fat Man Team Members</h1>
+                            <p>Thành viên nhóm phát triển</p>
+                            <h1>Nhóm FatMan</h1>
                             <span class="title-widget-bg"></span>
                         </div>
                     </div>
@@ -482,8 +475,8 @@
                             <div class="team_img">
                                 <img class="img-fluid w-100" src="img/team/hau.jpg" alt="">
                                 <div class="hover">
-                                    <h4>Mr. Hậu</h4>
-                                    <p>Leader</p>
+                                    <h4>Quốc Hậu</h4>
+                                    <p>Nhóm trưởng</p>
                                 </div>
                             </div>
                         </div>
@@ -493,8 +486,8 @@
                             <div class="team_img">
                                 <img class="img-fluid w-100" src="img/team/an.jpg" alt="">
                                 <div class="hover">
-                                    <h4>Mr. An</h4>
-                                    <p>Member</p>
+                                    <h4>Quốc An</h4>
+                                    <p>Thành viên</p>
                                 </div>
                             </div>
                         </div>
@@ -504,8 +497,8 @@
                             <div class="team_img">
                                 <img class="img-fluid w-100" src="img/team/tu.jpg" alt="">
                                 <div class="hover">
-                                    <h4>Mr. Tú</h4>
-                                    <p>Member</p>
+                                    <h4>Anh Tú</h4>
+                                    <p>Thành viên</p>
                                 </div>
                             </div>
                         </div>
@@ -515,8 +508,8 @@
                             <div class="team_img">
                                 <img class="img-fluid w-100" src="img/team/dinh.jpg" alt="">
                                 <div class="hover">
-                                    <h4>Mr. Đỉnh</h4>
-                                    <p>Member</p>
+                                    <h4>Hồng Đỉnh</h4>
+                                    <p>Thành viên</p>
                                 </div>
                             </div>
                         </div>
@@ -534,19 +527,18 @@
                         <img class="cta-img2 img-fluid" src="img/cta-img2.png" alt="">
                     </div>
                     <div class="offset-lg-2 col-lg-5">
-                        <h1>Subscribe <br>
-                            for our Newsletter</h1>
+                        <h1>Đăng ký <br>
+                            cho bản tin của chúng tôi</h1>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-                            tempor incididunt ut labore et dolore magna aliqua.
+                            Nhóm sinh viên phát triển website tại đại học FPT Cần Thơ - bản phát hành thử nghiệm.
                         </p>
                         <div class="" id="mc_embed_signup2">	
                             <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
                                   method="get" class="form-inline">
                                 <div class="d-flex flex-row">
-                                    <input class="form-control" name="EMAIL" placeholder="Enter Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email Address '"
+                                    <input class="form-control" name="EMAIL" placeholder="Địa chỉ email của bạn" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email Address '"
                                            required="" type="email">
-                                    <button class="click-btn btn text-uppercase">subscribe</button>
+                                    <button class="click-btn btn text-uppercase">đăng ký</button>
                                     <div style="position: absolute; left: -5000px;">
                                         <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
                                     </div>
@@ -677,7 +669,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-12">
                         <div class="main_title">
-                            <p>We’re Offering these Latest Posts</p>
+                            <p>Các bài viết mới nhất hiện tại</p>
                             <h1>Những bài đăng mới nhất</h1>
                             <span class="title-widget-bg"></span>
                         </div>
@@ -791,13 +783,13 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="single-footer-widget">
-                                <h5 class="footer_title">About Agency</h5>
-                                <p class="about-text">The world has become so fast paced that people don’t want to stand by reading a page of information, they would much rather look at a presentation and understand the message. It has come to a point where images and videos are used more to.</p>
+                                <h5 class="footer_title">Thông tin pháp lý</h5>
+                                <p class="about-text">Trang website phát triển trên nguyên tắc cộng đồng mở. Phục vụ cho sự phát triển cộng đồng và nổ lực vì Việt Nam.</p>
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-6 col-sm-6">
                             <div class="single-footer-widget">
-                                <h5 class="footer_title">Navigation Links</h5>
+                                <h5 class="footer_title">Các liên kết</h5>
                                 <div class="row">
                                     <div class="col-5">
                                         <ul class="list">
@@ -820,8 +812,8 @@
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="single-footer-widget">
-                                <h5>Newsletter</h5>
-                                <p>For business professionals caught between high OEM price and mediocre print and graphic output, </p>
+                                <h5>Bản tin</h5>
+                                <p>Đối với các chuyên gia kinh doanh bị bắt giữa giá OEM cao và sản lượng đồ họa và in ấn tầm thường, </p>
                                 <div class="footer-newsletter" id="mc_embed_signup">	
                                     <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
                                           method="get" class="form-inline">
