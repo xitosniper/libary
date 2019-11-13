@@ -63,6 +63,22 @@ public class PlaceModel {
         return places;
     }
 
+        /**
+     * Method get data from mysql into list places
+     *
+     * @return
+     * @throws SQLException
+     */
+    public ArrayList<PlaceInfo> getPlaceByLocation(int location_id) throws SQLException {
+        ArrayList<PlaceInfo> places = new ArrayList<>();
+        String sql = "SELECT * FROM `place` WHERE `status` = 1 AND `location_id` = " + location_id;
+        statement = connection.createStatement();
+        resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) {
+            places.add(new PlaceInfo(resultSet.getInt("place_id"), resultSet.getString("place_name"), resultSet.getString("place_description"), resultSet.getInt("status"), resultSet.getInt("location_id")));
+        }
+        return places;
+    }
     /**
      * Method get all data from mysql into list places
      *

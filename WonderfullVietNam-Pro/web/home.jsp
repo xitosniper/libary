@@ -17,7 +17,6 @@
     PlaceModel pm = new PlaceModel(con);
     ImageModel im = new ImageModel(con);
 
-    ArrayList<PlaceInfo> plist = pm.getPlace();
     ArrayList<ImageInfo> ilist = im.getListImage();
     session.removeAttribute("warning");
 %>
@@ -89,8 +88,8 @@
                                        aria-expanded="false">Blog</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
-<!--                                        <li class="nav-item"><a class="nav-link" href="single-blog.jsp">Blog Details</a></li>-->
-                                        
+                                        <!--                                        <li class="nav-item"><a class="nav-link" href="single-blog.jsp">Blog Details</a></li>-->
+
                                     </ul>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
@@ -138,7 +137,7 @@
         </section>
         <!--================ End Home Banner Area =================-->
 
-        <!--================ Start Feature Area =================-->
+        <!--================ Khu vực miền bắc  =================-->
         <section class="feature-area section_gap_top">
             <div class="container">
                 <!-- Miền Bắc -->
@@ -154,24 +153,30 @@
                 <div class="row">
                     <!-- single-feature -->
                     <%
+                        String place_name = "";
+                        String place_description = "";
+                        String image_name = "";
+                        ArrayList<PlaceInfo> plist = pm.getPlaceByLocation(2);
                         for (int i = 0; i < 3; i++) {
-                            String place_name = plist.get(i).getPlace_name();
-                            String place_description = pm.printWord(plist.get(i).getPlace_description(), 100);
-                            String image_name = "";
                             for (int j = 0; j < ilist.size(); j++) {
                                 if (plist.get(i).getPlace_id() == ilist.get(j).getPlace_id()) {
-                                    image_name = ilist.get(j).getImage_name();
-                                }
-                            }
+                                    if (ilist.get(j).getPlace_id() == ilist.get(j + 1).getPlace_id()) {
+                                        image_name = ilist.get(j).getImage_name();
+                                        j++;
+                                    }
+                                    place_name = plist.get(i).getPlace_name();
+                                    place_description = pm.printWord(plist.get(i).getPlace_description(), 100);
+
+
                     %>
                     <div class="col-lg-4 col-md-6">
                         <div class="single-feature">
                             <div class="feature-details">
                                 <h5><%=place_name%></h5>
                                 <div style="text-align: justify;">
-                                <p>
-                                    <%=place_description%>
-                                </p>
+                                    <p>
+                                        <%=place_description%>
+                                    </p>
                                 </div>
                                 <a href="#" class="primary-btn mb-40">Đọc Tiếp</a>
                             </div>
@@ -181,6 +186,110 @@
                         </div>
                     </div>
                     <%                        }
+                            }
+                        }
+                    %>
+                </div>
+            </div>
+            <!--================ Kết thúc khu vực miền bắc =================-->
+            
+            <!--================ Khu vực miền Trung  =================-->
+            <div class="container">
+                <!-- Miền Bắc -->
+                <div class="row align-items-end justify-content-left">
+                    <div class="col-lg-12">
+                        <div class="main_title">
+                            <h1>Miền Trung</h1>
+                            <span class="title-widget-bg"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- single-feature -->
+                    <%
+                        ArrayList<PlaceInfo> plist1 = pm.getPlaceByLocation(1);
+                        for (int i = 0; i < 3; i++) {
+                            for (int j = 0; j < ilist.size(); j++) {
+                                if (plist1.get(i).getPlace_id() == ilist.get(j).getPlace_id()) {
+                                    if (ilist.get(j).getPlace_id() == ilist.get(j + 1).getPlace_id()) {
+                                        image_name = ilist.get(j).getImage_name();
+                                        j++;
+                                    }
+                                    place_name = plist1.get(i).getPlace_name();
+                                    place_description = pm.printWord(plist1.get(i).getPlace_description(), 100);
+
+
+                    %>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-feature">
+                            <div class="feature-details">
+                                <h5><%=place_name%></h5>
+                                <div style="text-align: justify;">
+                                    <p>
+                                        <%=place_description%>
+                                    </p>
+                                </div>
+                                <a href="#" class="primary-btn mb-40">Đọc Tiếp</a>
+                            </div>
+                            <div class="feature-thumb">
+                                <img class="img-fluid" style="height: 128px; width: 256px;" src="img/<%=image_name%>" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <%                        }
+                            }
+                        }
+                    %>
+                </div>
+            </div>
+            <!--================ Kết thúc khu vực miền trung =================-->
+            
+            <!--================ Khu vực miền nam  =================-->
+            <div class="container">
+                <!-- Miền Bắc -->
+                <div class="row align-items-end justify-content-left">
+                    <div class="col-lg-12">
+                        <div class="main_title">
+                            <h1>Miền Nam</h1>
+                            <span class="title-widget-bg"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- single-feature -->
+                    <%
+                        ArrayList<PlaceInfo> plist2 = pm.getPlaceByLocation(0);
+                        for (int i = 0; i < 3; i++) {
+                            for (int j = 0; j < ilist.size(); j++) {
+                                if (plist2.get(i).getPlace_id() == ilist.get(j).getPlace_id()) {
+                                    if (ilist.get(j).getPlace_id() == ilist.get(j + 1).getPlace_id()) {
+                                        image_name = ilist.get(j).getImage_name();
+                                        j++;
+                                    }
+                                    place_name = plist2.get(i).getPlace_name();
+                                    place_description = pm.printWord(plist2.get(i).getPlace_description(), 100);
+
+
+                    %>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-feature">
+                            <div class="feature-details">
+                                <h5><%=place_name%></h5>
+                                <div style="text-align: justify;">
+                                    <p>
+                                        <%=place_description%>
+                                    </p>
+                                </div>
+                                <a href="#" class="primary-btn mb-40">Đọc Tiếp</a>
+                            </div>
+                            <div class="feature-thumb">
+                                <img class="img-fluid" style="height: 128px; width: 256px;" src="img/<%=image_name%>" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <%                        }
+                            }
+                        }
                     %>
                     <div row>
                         <form class="col-md-12 contact_form" action="#" method="post" id="contactForm" novalidate="novalidate">
@@ -191,8 +300,15 @@
                     </div>
                 </div>
             </div>
+            <!--================ Kết thúc khu vực miền nam =================-->
         </section>
-        <!--================ End Feature Area =================-->
+                    
+
+
+
+
+
+
 
         <!--================ Start CTA Area =================-->
         <div class="cta-area section_gap">
