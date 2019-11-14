@@ -4,6 +4,8 @@
     Author     : haumqce130436@fpt.edu.vn
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.sql.Date"%>
 <%@page import="Info.PlaceInfo"%>
 <%@page import="Model.PlaceModel"%>
 <%@page import="Info.RoleInfo"%>
@@ -23,7 +25,7 @@
     String username = "";
     String role_name = "";
     String user_img = "";
-    
+
     if (request.getParameter("username") != null) {
         user_username = request.getParameter("username");
     }
@@ -48,6 +50,7 @@
             role_name = elem.getRole_name();
         }
     }
+    ;
 %>
 <!DOCTYPE html>
 <html>
@@ -160,15 +163,13 @@
                                     </div>
                                     <div class="card-body">
                                         <form class="form-horizontal" name="upload" enctype="multipart/form-data" method="post" action="addPost">
-                                            
-                                            
+
+
                                             <input name="txtUser_id" value="<%=user_id%>" type="hidden">
-                                            
+
                                             <input name="txtEditor_id" value="<%=editor_id%>" type="hidden">
-                                            
+
                                             <input name="txtUsername" value="<%=user_username%>" type="hidden">
-                                            
-                                            
                                             <div class="input-group-icon mt-10">
                                                 <div class="form-select" id="default-select">
                                                     <label>Place name</label>
@@ -180,7 +181,7 @@
                                                         %>
                                                         <option value="<%=place_id%>"><%=pis.get(i).getPlace_name()%></option>
                                                         <%  }
-                                                        
+
                                                         %>
                                                     </select>
                                                 </div>
@@ -192,22 +193,22 @@
                                                     <textarea class="form-control" style="height:300px;" name="txtPost_text"></textarea>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="form-group row">
                                                 <label class="col-md-3 form-control-label">Image</label>
                                                 <div class="col-md-9">
                                                     <input type="file" name="image_name" multiple="multiple" class="form-control">
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="form-group row">
                                                 <div class="col-md-9 ml-auto">
                                                     <button type="reset" class="btn btn-secondary">Cancel</button>
                                                     <button type="submit" name="submit" value="upload" class="btn btn-primary">Save changes</button>
                                                 </div>
                                             </div>
-                                                    
-                                                    
+
+
                                         </form>
                                     </div>
                                 </div>

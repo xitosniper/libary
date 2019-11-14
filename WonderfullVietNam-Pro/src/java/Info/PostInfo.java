@@ -48,23 +48,23 @@ public class PostInfo {
         this.editor_id = editor_id;
     }
 
-    /**
-     * Constructor do not have post_id
-     * @param post_id
-     * @param post_text
-     * @param post_time
-     * @param status
-     * @param user_id
-     * @param editor_id 
-     */
-    public PostInfo(int place_id, String post_text, Date post_time, int status, int user_id, int editor_id) {
-        this.place_id = place_id;
-        this.post_text = post_text;
-        this.post_time = post_time;
-        this.status = status;
-        this.user_id = user_id;
-        this.editor_id = editor_id;
-    }
+//    /**
+//     * Constructor do not have post_id
+//     * @param post_id
+//     * @param post_text
+//     * @param post_time
+//     * @param status
+//     * @param user_id
+//     * @param editor_id 
+//     */
+//    public PostInfo(int place_id, String post_text, Date post_time, int status, int user_id, int editor_id) {
+//        this.place_id = place_id;
+//        this.post_text = post_text;
+//        this.post_time = post_time;
+//        this.status = status;
+//        this.user_id = user_id;
+//        this.editor_id = editor_id;
+//    }
 
     /**
      * Create constructor have only post_id

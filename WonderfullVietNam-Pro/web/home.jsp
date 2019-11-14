@@ -78,7 +78,7 @@
                                        aria-expanded="false">Pages</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item"><a class="nav-link" href="about-us.jsp">About</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="book-trip.jsp">Book trip</a></li>
+<!--                                        <li class="nav-item"><a class="nav-link" href="book-trip.jsp">Book trip</a></li>-->
                                         <li class="nav-item"><a class="nav-link" href="images.jsp">Images</a></li>
 <!--                                        <li class="nav-item"><a class="nav-link" href="elements.jsp">Elements</a></li>-->
                                     </ul>
@@ -175,7 +175,7 @@
                                         <%=place_description%>
                                     </p>
                                 </div>
-                                <a href="#" class="primary-btn mb-40">Đọc Tiếp</a>
+                                <a href="blog.jsp" class="primary-btn mb-40">Đọc Tiếp</a>
                             </div>
                             <div class="feature-thumb">
                                 <img class="img-fluid" style="height: 128px; width: 256px;" src="img/<%=image_name%>" alt="">
@@ -226,7 +226,7 @@
                                         <%=place_description%>
                                     </p>
                                 </div>
-                                <a href="#" class="primary-btn mb-40">Đọc Tiếp</a>
+                                <a href="blog.jsp" class="primary-btn mb-40">Đọc Tiếp</a>
                             </div>
                             <div class="feature-thumb">
                                 <img class="img-fluid" style="height: 128px; width: 256px;" src="img/<%=image_name%>" alt="">
@@ -277,7 +277,7 @@
                                         <%=place_description%>
                                     </p>
                                 </div>
-                                <a href="#" class="primary-btn mb-40">Đọc Tiếp</a>
+                                <a href="blog.jsp" class="primary-btn mb-40">Đọc Tiếp</a>
                             </div>
                             <div class="feature-thumb">
                                 <img class="img-fluid" style="height: 128px; width: 256px;" src="img/<%=image_name%>" alt="">
@@ -289,7 +289,7 @@
                         }
                     %>
                     <div row>
-                        <form class="col-md-12 contact_form" action="#" method="post" id="contactForm" novalidate="novalidate">
+                        <form class="col-md-12 contact_form" action="blog.jsp" method="post" id="contactForm" novalidate="novalidate">
                             <div class=" text-right">
                                 <button type="submit" value="submit" class="primary-btn text-uppercase">Xem thêm</button>
                             </div>

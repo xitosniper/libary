@@ -12,6 +12,10 @@
         <servlet-name>addPost</servlet-name>
         <servlet-class>addPost</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addComment</servlet-name>
+        <servlet-class>addComment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>addUser</servlet-name>
         <url-pattern>/addUser</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>addPost</servlet-name>
         <url-pattern>/addPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addComment</servlet-name>
+        <url-pattern>/addComment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

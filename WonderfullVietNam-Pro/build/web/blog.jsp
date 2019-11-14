@@ -4,6 +4,8 @@
     Author     : haumqce130436@fpt.edu.vn
 --%>
 
+<%@page import="Info.UserInfo"%>
+<%@page import="Model.UserModel"%>
 <%@page import="Info.PostInfo"%>
 <%@page import="Info.ImageInfo"%>
 <%@page import="Info.PlaceInfo"%>
@@ -28,6 +30,8 @@
     PlaceModel pm = new PlaceModel(con);
     ImageModel im = new ImageModel(con);
     PostModel pom = new PostModel(con);
+    UserModel um = new UserModel(con);
+    ArrayList<UserInfo> uis = um.getUser();
     ArrayList<PlaceInfo> plist = pm.getPlace();
     ArrayList<ImageInfo> ilist = im.getListImage();
     ArrayList<PostInfo> polist = pom.getPost();
@@ -93,9 +97,9 @@
                                        aria-expanded="false">Pages</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item"><a class="nav-link" href="about-us.jsp">About</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="book-trip.jsp">Book trip</a></li>
+<!--                                        <li class="nav-item"><a class="nav-link" href="book-trip.jsp">Book trip</a></li>-->
                                         <li class="nav-item"><a class="nav-link" href="images.jsp">Images</a></li>
-<!--                                        <li class="nav-item"><a class="nav-link" href="elements.jsp">Elements</a></li>-->
+                                        <!--                                        <li class="nav-item"><a class="nav-link" href="elements.jsp">Elements</a></li>-->
                                     </ul>
                                 </li>
                                 <li class="nav-item submenu dropdown active">
@@ -103,7 +107,7 @@
                                        aria-expanded="false">Blog</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
-<!--                                        <li class="nav-item"><a class="nav-link" href="single-blog.jsp">Blog Details</a></li>-->
+                                        <!--                                        <li class="nav-item"><a class="nav-link" href="single-blog.jsp">Blog Details</a></li>-->
 
                                     </ul>
                                 </li>
@@ -215,35 +219,44 @@
                                 String image = "";
                                 String post_text = "";
                                 int post_id = -1;
+                                String user_name = "";
                                 //loop of post list
                                 for (int i = 0; i < postInfos.size(); i++) {
                                     post_text = postInfos.get(i).getPost_text();
                                     
                                     for (int j = 0; j < plist.size(); j++) {
+                                        
                                         for (int k = 0; k < ilist.size(); k++) {
                                             if (postInfos.get(i).getPlace_id() == plist.get(j).getPlace_id() && postInfos.get(i).getPlace_id() == ilist.get(k).getPlace_id()) {
-                                                 post_id = postInfos.get(i).getPost_id();
+
                                                 if (ilist.get(k).getPlace_id() == ilist.get(k + 1).getPlace_id()) {
                                                     image = ilist.get(k).getImage_name();
+
                                                     k++;
                                                 }
-                                               
+                                                for (UserInfo ui : uis) {
+                                                    if (postInfos.get(i).getUser_id() == ui.getUser_id()) {
+                                                        user_name = ui.getUser_name();
+
+                                                    }
+                                                }
+                                                post_id = postInfos.get(i).getPost_id();
                                                 place_name = plist.get(j).getPlace_name();
 
-                                                
+
                             %>
                             <article class="row blog_item">
                                 <div class="col-md-3">
                                     <div class="blog_info text-right">
                                         <div class="post_tag">
-                                            <a href="#">Food,</a>
-                                            <a class="active" href="#">Technology,</a>
-                                            <a href="#">Politics,</a>
-                                            <a href="#">Lifestyle</a>
+                                            <a href="#">Du lịch,</a>
+                                            <a class="active" href="#">Ẩm thực,</a>
+                                            <a href="#">Trải nghiệm,</a>
+                                            <a href="#">Cuộc sống</a>
                                         </div>
                                         <ul class="blog_meta list">
-                                            <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                            <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
+                                            <li><a href="#"><%=user_name%><i class="lnr lnr-user"></i></a></li>
+                                            <li><a href="#"><%=postInfos.get(i).getPost_time()%><i class="lnr lnr-calendar-full"></i></a></li>
                                             <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
                                             <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
                                         </ul>
@@ -273,7 +286,7 @@
                                     <li class="page-item">
                                         <a href="#" class="page-link" aria-label="Previous">
                                             <span aria-hidden="true">
-<!--                                                <span class="lnr lnr-chevron-left"></span>-->
+                                                <!--                                                <span class="lnr lnr-chevron-left"></span>-->
                                             </span>
                                         </a>
                                     </li>
@@ -281,7 +294,7 @@
                                     <li class="page-item">
                                         <a href="#" class="page-link" aria-label="Next">
                                             <span aria-hidden="true">
-<!--                                                <span class="lnr lnr-chevron-right"></span>-->
+                                                <!--                                                <span class="lnr lnr-chevron-right"></span>-->
                                             </span>
                                         </a>
                                     </li>
@@ -293,12 +306,12 @@
                         <div class="blog_right_sidebar">
                             <aside class="single_sidebar_widget search_widget">
                                 <form class="form_search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" value="<%=s%>" name="s" placeholder="Search Posts">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="submit"><i class="lnr lnr-magnifier"></i></button>
-                                    </span>
-                                </div><!-- /input-group -->
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" value="<%=s%>" name="s" placeholder="Search Posts">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="submit"><i class="lnr lnr-magnifier"></i></button>
+                                        </span>
+                                    </div><!-- /input-group -->
                                 </form>
                                 <div class="br"></div>
                             </aside>
@@ -452,7 +465,7 @@
         </section>
         <!--================Blog Area =================-->
 
-<!--================  Start Footer Area =================-->
+        <!--================  Start Footer Area =================-->
         <footer class="footer-area">
             <div class="footer_top section_gap_top">
                 <div class="container">

@@ -62,9 +62,9 @@
                                        aria-expanded="false">Pages</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item"><a class="nav-link" href="about-us.jsp">About</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="book-trip.jsp">Book trip</a></li>
+<!--                                        <li class="nav-item"><a class="nav-link" href="book-trip.jsp">Book trip</a></li>-->
                                         <li class="nav-item"><a class="nav-link" href="images.jsp">Images</a></li>
-<!--                                        <li class="nav-item"><a class="nav-link" href="elements.jsp">Elements</a></li>-->
+                                        <!--                                        <li class="nav-item"><a class="nav-link" href="elements.jsp">Elements</a></li>-->
                                     </ul>
                                 </li>
                                 <li class="nav-item submenu dropdown">
@@ -128,15 +128,12 @@
                     <div class="col-lg-6 col-md-4 no-padding about-left">
                         <div class="about-content">
                             <h1>
-                                We Believe <br>
-                                that Interior beauty <br>
-                                Lasts Long
+                                Niềm tin <br>
+                                vào giá trị cốt lõi <br>
+                                của tập thể
                             </h1>
                             <p>
-                                Inappropriate behavior is often laughed off as “boys will be boys,” women face higher 
-                                conduct standards especially in the workplace. That’s why it’s crucial that as women. 
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
-                                incididunt ut labore et dolore magna aliqua.
+                                Nhóm phát triển trên nguyên tắt cộng đồng. Phục vụ nhu cầu thông tin miễn phí cho người dùng.
                             </p>
                         </div>
                     </div>
@@ -155,11 +152,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-5">
-                        <h1>Get Ready for
-                            Real time Adventure</h1>
+                        <h1>Trải nghiệm
+                            Khám phá thực tế</h1>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt 
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation.
+                            Lấy giá trị từ niềm tin và giá trị thực tế nhóm phát triển để phục vụ cộng đồng.
                         </p>
                         <a href="#" class="primary-btn">Book a Trip</a>
                     </div>
@@ -239,70 +235,58 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-12">
                         <div class="main_title">
-                            <p>We’re Offering these Trip Packages</p>
-                            <h1>Popular Places Around the World</h1>
+                            <p>Những địa điểm tốt dành cho bạn</p>
+                            <h1>Những điểm nhấn vẻ đẹp Việt Nam</h1>
                             <span class="title-widget-bg"></span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="popular-places-slider owl-carousel">
-                <div class="single-popular-places">
+                <a href="img/places/p1.jpg" class="single-popular-places d-block img-gal">
                     <div class="popular-places-img">
-                        <img src="img/places/p1.jpg" alt="">
+                        <img style="height: 570px;" src="img/places/halong.jpg" alt="">
                     </div>
                     <div class="popular-places-text">
-                        <a href="single-blog.jsp">
-                        </a>
-                        <p>Proper Guided Tour</p>
+                        <p>Vẻ đẹp thuần tinh tế các miền biển</p>
                         <h4>
-                            Santorini Island Dream Holiday
-                            and Fun package
+                            Vịnh Hạ Long - vẻ đẹp nguyên sơ đến thời điểm hiện tại. Một trong những nơi bạn nên đến 1 lần trong đời.
                         </h4>
                     </div>
-                </div>
-                <div class="single-popular-places">
+                </a>
+                <a href="img/places/p2.jpg" class="single-popular-places d-block img-gal">
                     <div class="popular-places-img">
-                        <img src="img/places/p2.jpg" alt="">
+                        <img style="height: 570px;" src="img/places/danang.jpg" alt="">
                     </div>
                     <div class="popular-places-text">
-                        <a href="single-blog.jsp">
-                        </a>
-                        <p>Proper Guided Tour</p>
+                        <p>Công trình mang vẻ đẹp hoang sơ</p>
                         <h4>
-                            Santorini Island Dream Holiday
-                            and Fun package
+                            Đà Nẵng - nơi được mệnh danh là “thành phố đáng đến nhất Việt Nam”.
                         </h4>
                     </div>
-                </div>
-                <div class="single-popular-places">
+                </a>
+                <a href="img/places/p3.jpg" class="single-popular-places d-block img-gal">
                     <div class="popular-places-img">
-                        <img src="img/places/p3.jpg" alt="">
+                        <img style="height: 570px;" src="img/places/hoian.jpg" alt="">
                     </div>
                     <div class="popular-places-text">
-                        <a href="single-blog.jsp">
-                        </a>
-                        <p>Proper Guided Tour</p>
+                        <p>Một bức tranh mộc mạc, giản dị và nên thơ</p>
                         <h4>
-                            Santorini Island Dream Holiday
-                            and Fun package
+                            Hội An - mang trong mình những vẻ đẹp lôi cuốn khác nhau.
                         </h4>
                     </div>
-                </div>
-                <div class="single-popular-places">
+                </a>
+                <a href="img/places/p4.jpg" class="single-popular-places d-block img-gal">
                     <div class="popular-places-img">
-                        <img src="img/places/p4.jpg" alt="">
+                        <img style="height: 570px;" src="img/places/cantho.jpg" alt="">
                     </div>
                     <div class="popular-places-text">
-                        <a href="single-blog.jsp">
-                        </a>
-                        <p>Proper Guided Tour</p>
+                        <p>Vẻ đẹp người Miền Tây</p>
                         <h4>
-                            Santorini Island Dream Holiday
-                            and Fun package
+                            Cần Thơ - trung tâm của vùng đồng bằng sông Cửu Long, du lịch Cần Thơ mang đến cho bạn nhiều trải nghiệm đặc trưng và thú vị của miền Tây. 
                         </h4>
                     </div>
-                </div>
+                </a>
             </div>
         </section>
         <!--================ End Popular Places Area =================-->

@@ -58,23 +58,39 @@ public class CommentModel {
         }
         return cl;
     }
+    /**
+     * 
+     * @return
+     * @throws SQLException 
+     */
+    public ArrayList<CommentInfo> getAllComment() throws SQLException {
+        ArrayList<CommentInfo> cl = new ArrayList<>();
+        String sql = "SELECT * FROM `comment`";
+        preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            cl.add(new CommentInfo(resultSet.getInt("comment_id"), resultSet.getString("comment_email"), resultSet.getDate("comment_time"),
+                    resultSet.getString("comment_description"), resultSet.getInt("status"), resultSet.getInt("user_id"), resultSet.getInt("post_id")));
+        }
+        return cl;
+    }
 
     /**
-     * Create UpdatePost method to modify information of the post
-     *
-     * @param commentInfo
-     * @throws SQLException
+     * 
+     * @param comment_email
+     * @param comment_description
+     * @param post_id
+     * @throws SQLException 
      */
-    public void insertComment(CommentInfo commentInfo) throws SQLException {
-        String sql = "INSERT INTO `comment`(`comment_email`, `comment_time`, `comment_description`, `status`, `user_id`, `post_id`) "
-                + "VALUES (?,?,?,?,?,?)";
+    public void insertComment(String comment_email, String comment_description, int post_id) throws SQLException {
+        String sql = "INSERT INTO `comment`(`comment_id`, `comment_email`, `comment_description`, `status`, `user_id`, `post_id`) VALUES (?,?,?,?,?,?)";
         preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        preparedStatement.setString(1, commentInfo.getComment_email());
-        preparedStatement.setDate(2, commentInfo.getComment_time());
-        preparedStatement.setString(3, commentInfo.getComment_description());
-        preparedStatement.setInt(4, commentInfo.getStatus());
-        preparedStatement.setInt(5, commentInfo.getUser_id());
-        preparedStatement.setInt(6, commentInfo.getPost_id());
+        preparedStatement.setInt(1, getAllComment().size());
+        preparedStatement.setString(2, comment_email);
+        preparedStatement.setString(3, comment_description);
+        preparedStatement.setInt(4, 1);
+        preparedStatement.setInt(5, 1);
+        preparedStatement.setInt(6, post_id);
 
         preparedStatement.executeUpdate();
     }

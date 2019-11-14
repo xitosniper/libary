@@ -81,16 +81,15 @@ public class PostModel {
      * @param editor_id
      * @throws SQLException 
      */
-    public void insertPost(int place_id, String post_text, String post_time, int status, int user_id, int editor_id) throws SQLException {
-        String sql = "INSERT INTO `post`(`post_id`,`place_id`, `post_text`, `post_time`, `status`, `user_id`, `editor_id`) VALUES (?,?,?,?,?,?,?)";
+    public void insertPost(int place_id, String post_text, int status, int user_id, int editor_id) throws SQLException {
+        String sql = "INSERT INTO `post`(`post_id`,`place_id`, `post_text`, `status`, `user_id`, `editor_id`) VALUES (?,?,?,?,?,?)";
         preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setInt(1, getAllPost().size());
         preparedStatement.setInt(2, place_id);
         preparedStatement.setString(3, post_text);
-        preparedStatement.setString(4, post_time);
-        preparedStatement.setInt(5, status);
-        preparedStatement.setInt(6, user_id);
-        preparedStatement.setInt(7, editor_id);
+        preparedStatement.setInt(4, status);
+        preparedStatement.setInt(5, user_id);
+        preparedStatement.setInt(6, editor_id);
 
         preparedStatement.executeUpdate();
     }
@@ -144,7 +143,7 @@ public class PostModel {
         preparedStatement.setInt(1, id);
         resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            pl.add(new PostInfo(resultSet.getInt("place_id"), resultSet.getString("post_text"),
+            pl.add(new PostInfo(resultSet.getInt("post_id"), resultSet.getInt("place_id"), resultSet.getString("post_text"),
                     resultSet.getDate("post_time"), resultSet.getInt("status"), resultSet.getInt("user_id"), resultSet.getInt("editor_id")));
         }
 
@@ -155,7 +154,7 @@ public class PostModel {
         try {
             String sqlStr = "";
             sqlStr += " SELECT *";
-            sqlStr += " FROM `post`";
+            sqlStr += " FROM `post` WHERE `status` = 1 ORDER BY `post_time` DESC ";
 
             if (search != "") {
 //                sqlStr += " WHERE (`place_name` like '%" + search + "%')";
@@ -176,7 +175,7 @@ public class PostModel {
             this.resultSet = this.statement.executeQuery(sqlStr);
             list = new ArrayList<PostInfo>();
             while (resultSet.next()) {
-                list.add(new PostInfo(resultSet.getInt("place_id"), resultSet.getString("post_text"),
+                list.add(new PostInfo(resultSet.getInt("post_id"), resultSet.getInt("place_id"), resultSet.getString("post_text"),
                     resultSet.getDate("post_time"), resultSet.getInt("status"), resultSet.getInt("user_id"), resultSet.getInt("editor_id")));
             }
         } catch (SQLException ex) {

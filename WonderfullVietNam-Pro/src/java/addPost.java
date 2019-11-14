@@ -47,7 +47,8 @@ public class addPost extends HttpServlet {
         String post_text = "";
         String post_img = "";
         String username = "";
-        String post_time = "2019-11-10 10:00:00";
+
+        String post_time = "";
         Connection connection = ConnectionLib.getConnection();
         PostModel um = new PostModel(connection);
 
@@ -89,7 +90,7 @@ public class addPost extends HttpServlet {
                     }
                 }
                 //Insert new producst
-                um.insertPost(place_id, post_text, post_time, 1, user_id, editor_id);
+                um.insertPost(place_id, post_text, 1, user_id, editor_id);
                 //File uploaded successfully
                 request.setAttribute("message", "File Uploaded Successfully");
             } catch (Exception ex) {

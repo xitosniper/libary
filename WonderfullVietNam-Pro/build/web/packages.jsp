@@ -51,9 +51,9 @@
                                        aria-expanded="false">Pages</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item"><a class="nav-link" href="about-us.jsp">About</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="book-trip.jsp">Book trip</a></li>
+<!--                                        <li class="nav-item"><a class="nav-link" href="book-trip.jsp">Book trip</a></li>-->
                                         <li class="nav-item"><a class="nav-link" href="images.jsp">Images</a></li>
-<!--                                        <li class="nav-item"><a class="nav-link" href="elements.jsp">Elements</a></li>-->
+                                        <!--                                        <li class="nav-item"><a class="nav-link" href="elements.jsp">Elements</a></li>-->
                                     </ul>
                                 </li>
                                 <li class="nav-item submenu dropdown">
@@ -61,11 +61,11 @@
                                        aria-expanded="false">Blog</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
-                                        
+
                                     </ul>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
-<!--                                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>-->
+                                <!--                                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>-->
                             </ul>
                             <ul class="nav navbar-nav ml-auto">
                                 <li class="nav-item">
@@ -116,8 +116,8 @@
                 <div class="row d-flex justify-content-center">
                     <div class="ol-lg-12">
                         <div class="main_title">
-                            <p>We’re Offering these Trip Packages</p>
-                            <h1>Famous Trips Packages</h1>
+                            <p>Những địa điểm tốt dành cho bạn</p>
+                            <h1>TOP 3 địa điểm đẹp nổi tiếng</h1>
                             <span class="title-widget-bg"></span>
                         </div>
                     </div>
@@ -126,55 +126,52 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="single-package">
                             <div class="thumb">
-                                <img class="img-fluid" src="img/package/p1.jpg" alt="">								
+                                <img class="img-fluid" style="height: 200px;" src="img/PhanThiet01.jpg" alt="">								
                             </div>
-                            <p class="date"><span>18</span> <br> December</p>
+                            <p class="date"><span>1 ST</span> <br> </p>
                             <div class="meta-top d-flex">
-                                <p><span class="fa fa-location-arrow"></span> Stockholmes</p>
-                                <p class="ml-20"><span class="fa fa-calendar"></span> 5 days 6 nights</p>
+                                <p><span class="fa fa-location-arrow"></span> Miền Nam</p>
+                                <p class="ml-20"><span class="fa fa-calendar"></span> 2 April</p>
                             </div>
-                            <h4>Desert Riding Turning So <br>
-                                much Flowery</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consecter adipisicing elit, sed do eiusmod tempor incididunt.
+                            <h4>Phan Thiết</h4>
+                            <p style="text-align: justify;">
+                                Phan Thiết là một thành phố trẻ, thành phố công nghiệp mới và là tỉnh lỵ, trung tâm chính trị, kinh tế, văn hóa và khoa học kỹ thuật của tỉnh Bình Thuận, Việt Nam.
                             </p>
-                            <a href="#" class="primary-btn">Read More</a>
+                            <a href="#" class="primary-btn">Đọc Tiếp</a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="single-package">
                             <div class="thumb">
-                                <img class="img-fluid" src="img/package/p2.jpg" alt="">								
+                                <img class="img-fluid" style="height: 200px;" src="img/LangSon_SaPa.jpg" alt="">								
                             </div>
-                            <p class="date"><span>18</span> <br> December</p>
+                            <p class="date"><span>2 ND</span> <br> </p>
                             <div class="meta-top d-flex">
-                                <p><span class="fa fa-location-arrow"></span> Stockholmes</p>
-                                <p class="ml-20"><span class="fa fa-calendar"></span> 5 days 6 nights</p>
+                                <p><span class="fa fa-location-arrow"></span> Miền Bắc</p>
+                                <p class="ml-20"><span class="fa fa-calendar"></span> 10 Oct</p>
                             </div>
-                            <h4>Desert Riding Turning So <br>
-                                much Flowery</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consecter adipisicing elit, sed do eiusmod tempor incididunt.
+                            <h4>Lạng Sơn</h4>
+                            <p style="text-align: justify;">
+                                Cảnh thiên nhiên tuyệt mĩ của Sa Pa. - Tháng 9 đến tháng 11: là thời điểm đẹp nhất trong năm ở Sapa, đây là lúc những cánh đồng lúa chín vàng rực. Vào thời ...
                             </p>
-                            <a href="#" class="primary-btn">Read More</a>
+                            <a href="#" class="primary-btn">Đọc Tiếp</a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="single-package">
                             <div class="thumb">
-                                <img class="img-fluid" src="img/package/p3.jpg" alt="">								
+                                <img class="img-fluid" style="height: 200px;" src="img/HaiPhong_DoSon.jpg" alt="">								
                             </div>
-                            <p class="date"><span>18</span> <br> December</p>
+                            <p class="date"><span>3 RD</span> <br> </p>
                             <div class="meta-top d-flex">
-                                <p><span class="fa fa-location-arrow"></span> Stockholmes</p>
-                                <p class="ml-20"><span class="fa fa-calendar"></span> 5 days 6 nights</p>
+                                <p><span class="fa fa-location-arrow"></span> Miền Trung</p>
+                                <p class="ml-20"><span class="fa fa-calendar"></span> 5 Dec</p>
                             </div>
-                            <h4>Desert Riding Turning So <br>
-                                much Flowery</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consecter adipisicing elit, sed do eiusmod tempor incididunt.
+                            <h4>Đồ Sơn</h4>
+                            <p style="text-align: justify;">
+                                Đồ Sơn là một quận thuộc thành phố Hải Phòng, cách trung tâm thành phố khoảng 22 km về hướng đông nam. Đây là địa điểm đẹp thu hút hàng trăm nghàn lượt...
                             </p>
-                            <a href="#" class="primary-btn">Read More</a>
+                            <a href="#" class="primary-btn">Đọc Tiếp</a>
                         </div>
                     </div>
                 </div>
@@ -188,73 +185,62 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-12">
                         <div class="main_title">
-                            <p>We’re Offering these Trip Packages</p>
-                            <h1>Popular Places Around the World</h1>
+                            <p>Những địa điểm tốt dành cho bạn</p>
+                            <h1>Những điểm nhấn vẻ đẹp Việt Nam</h1>
                             <span class="title-widget-bg"></span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="popular-places-slider owl-carousel">
-                <div class="single-popular-places">
+                <a href="img/places/p1.jpg" class="single-popular-places d-block img-gal">
                     <div class="popular-places-img">
-                        <img src="img/places/p1.jpg" alt="">
+                        <img style="height: 570px;" src="img/places/halong.jpg" alt="">
                     </div>
                     <div class="popular-places-text">
-                        <a href="single-blog.jsp">
-                        </a>
-                        <p>Proper Guided Tour</p>
+                        <p>Vẻ đẹp thuần tinh tế các miền biển</p>
                         <h4>
-                            Santorini Island Dream Holiday
-                            and Fun package
+                            Vịnh Hạ Long - vẻ đẹp nguyên sơ đến thời điểm hiện tại. Một trong những nơi bạn nên đến 1 lần trong đời.
                         </h4>
                     </div>
-                </div>
-                <div class="single-popular-places">
+                </a>
+                <a href="img/places/p2.jpg" class="single-popular-places d-block img-gal">
                     <div class="popular-places-img">
-                        <img src="img/places/p2.jpg" alt="">
+                        <img style="height: 570px;" src="img/places/danang.jpg" alt="">
                     </div>
                     <div class="popular-places-text">
-                        <a href="single-blog.jsp">
-                        </a>
-                        <p>Proper Guided Tour</p>
+                        <p>Công trình mang vẻ đẹp hoang sơ</p>
                         <h4>
-                            Santorini Island Dream Holiday
-                            and Fun package
+                            Đà Nẵng - nơi được mệnh danh là “thành phố đáng đến nhất Việt Nam”.
                         </h4>
                     </div>
-                </div>
-                <div class="single-popular-places">
+                </a>
+                <a href="img/places/p3.jpg" class="single-popular-places d-block img-gal">
                     <div class="popular-places-img">
-                        <img src="img/places/p3.jpg" alt="">
+                        <img style="height: 570px;" src="img/places/hoian.jpg" alt="">
                     </div>
                     <div class="popular-places-text">
-                        <a href="single-blog.jsp">
-                        </a>
-                        <p>Proper Guided Tour</p>
+                        <p>Một bức tranh mộc mạc, giản dị và nên thơ</p>
                         <h4>
-                            Santorini Island Dream Holiday
-                            and Fun package
+                            Hội An - mang trong mình những vẻ đẹp lôi cuốn khác nhau.
                         </h4>
                     </div>
-                </div>
-                <div class="single-popular-places">
+                </a>
+                <a href="img/places/p4.jpg" class="single-popular-places d-block img-gal">
                     <div class="popular-places-img">
-                        <img src="img/places/p4.jpg" alt="">
+                        <img style="height: 570px;" src="img/places/cantho.jpg" alt="">
                     </div>
                     <div class="popular-places-text">
-                        <a href="single-blog.jsp">
-                        </a>
-                        <p>Proper Guided Tour</p>
+                        <p>Vẻ đẹp người Miền Tây</p>
                         <h4>
-                            Santorini Island Dream Holiday
-                            and Fun package
+                            Cần Thơ - trung tâm của vùng đồng bằng sông Cửu Long, du lịch Cần Thơ mang đến cho bạn nhiều trải nghiệm đặc trưng và thú vị của miền Tây. 
                         </h4>
                     </div>
-                </div>
+                </a>
             </div>
         </section>
         <!--================ End Popular Places Area =================-->
+
 
         <!--================ Start Feature Area =================-->
         <section class="feature-area section_gap_bottom">
@@ -262,8 +248,8 @@
                 <div class="row align-items-end justify-content-left">
                     <div class="col-lg-12">
                         <div class="main_title">
-                            <p>We’re Offering these Popular Services</p>
-                            <h1>Getting Adventure with Services</h1>
+                            <p>Chia sẽ dành cho bạn</p>
+                            <h1>Lựa chọn dịch vụ cá nhân</h1>
                             <span class="title-widget-bg"></span>
                         </div>
                     </div>
@@ -273,12 +259,12 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="single-feature">
                             <div class="feature-details">
-                                <h5>Desert Riding Turning <br>
-                                    So much Flowery</h5>
+                                <h5>Các tour du lịch <br>
+                                    nổi bật trong năm</h5>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consecter adipisicing elit, sed do eiusmod tempor incididunt.
+                                    Cung cấp các thông tin dịch vụ về du lịch cho bạn.
                                 </p>
-                                <a href="#" class="primary-btn mb-40">Read More</a>
+                                <a href="#" class="primary-btn mb-40">Đọc tiếp</a>
                             </div>
                             <div class="feature-thumb">
                                 <img class="img-fluid" src="img/service/s1.png" alt="">
@@ -289,12 +275,12 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="single-feature">
                             <div class="feature-details">
-                                <h5>Relaxation in the <br>
-                                    Local Beach Campfire</h5>
+                                <h5>Các dịch vụ vui chơi, giải trị <br>
+                                    cắm trại, bãi biển</h5>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consecter adipisicing elit, sed do eiusmod tempor incididunt.
+                                    Cung cấp các gói dịch vụ du lịch cho bạn.
                                 </p>
-                                <a href="#" class="primary-btn mb-40">Read More</a>
+                                <a href="#" class="primary-btn mb-40">Đọc tiếp</a>
                             </div>
                             <div class="feature-thumb">
                                 <img class="img-fluid" src="img/service/s2.png" alt="">
@@ -305,12 +291,12 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="single-feature">
                             <div class="feature-details">
-                                <h5>Forest Exploration <br>
-                                    with Energy Package</h5>
+                                <h5>Các chuyến dã ngoại <br>
+                                    khám phá - trải nghiệm</h5>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consecter adipisicing elit, sed do eiusmod tempor incididunt.
+                                    Cung cấp các trải nghiệm thực tế, khám phá các địa điểm trên đất nước hình chữ S.
                                 </p>
-                                <a href="#" class="primary-btn mb-40">Read More</a>
+                                <a href="#" class="primary-btn mb-40">Đọc tiếp</a>
                             </div>
                             <div class="feature-thumb">
                                 <img class="img-fluid" src="img/service/s3.png" alt="">
@@ -330,19 +316,18 @@
                         <img class="cta-img2 img-fluid" src="img/cta-img2.png" alt="">
                     </div>
                     <div class="offset-lg-2 col-lg-5">
-                        <h1>Subscribe <br>
-                            for our Newsletter</h1>
+                        <h1>Đăng ký <br>
+                            cho bản tin của chúng tôi</h1>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-                            tempor incididunt ut labore et dolore magna aliqua.
+                            Nhóm sinh viên phát triển website tại đại học FPT Cần Thơ - bản phát hành thử nghiệm.
                         </p>
                         <div class="" id="mc_embed_signup2">	
                             <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
                                   method="get" class="form-inline">
                                 <div class="d-flex flex-row">
-                                    <input class="form-control" name="EMAIL" placeholder="Enter Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email Address '"
+                                    <input class="form-control" name="EMAIL" placeholder="Địa chỉ email của bạn" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email Address '"
                                            required="" type="email">
-                                    <button class="click-btn btn text-uppercase">subscribe</button>
+                                    <button class="click-btn btn text-uppercase">đăng ký</button>
                                     <div style="position: absolute; left: -5000px;">
                                         <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
                                     </div>

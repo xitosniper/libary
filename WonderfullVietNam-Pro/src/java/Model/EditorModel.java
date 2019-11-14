@@ -81,14 +81,13 @@ public class EditorModel {
      * @return
      * @throws SQLException
      */
-    public boolean addEditor(int Editor_id, String Editor_time, int Status, int user_id) throws SQLException {
+    public boolean addEditor(int Editor_id, int Status, int user_id) throws SQLException {
         try {
             sqlStr = "INSERT INTO `editor`(`editor_id`,`editor_time`,`status`,`user_id`) VALUES (?,?,?,?)";
             pst = conn.prepareStatement(sqlStr);
             pst.setInt(1, Editor_id);
-            pst.setString(2, Editor_time);
-            pst.setInt(3, Status);
-            pst.setInt(4, user_id);
+            pst.setInt(2, Status);
+            pst.setInt(3, user_id);
             pst.executeUpdate();
             ListEditor.add(new EditorInfo(rs.getInt("editor_id"), rs.getDate("editor_time"), rs.getInt("status"), rs.getInt("user_id")));
             System.out.println("TRUE");
